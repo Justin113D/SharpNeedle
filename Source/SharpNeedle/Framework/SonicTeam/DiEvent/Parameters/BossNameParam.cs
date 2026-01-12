@@ -13,8 +13,8 @@ public class BossNameParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        NameType = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        NameType = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

@@ -16,11 +16,11 @@ public class AttachmentData : BaseNodeData
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
+        Field00 = reader.ReadInt32();
         NodeName = reader.ReadDiString(64);
-        Field44 = reader.Read<int>();
-        Field48 = reader.Read<int>();
-        Field4C = reader.Read<int>();
+        Field44 = reader.ReadInt32();
+        Field48 = reader.ReadInt32();
+        Field4C = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

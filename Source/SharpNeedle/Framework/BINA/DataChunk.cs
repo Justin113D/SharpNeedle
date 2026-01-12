@@ -22,11 +22,11 @@ public class DataChunk<T> : DataChunk, IChunk where T : IBinarySerializable
         Signature = options.Header.Value.Signature;
         BinaryHelper.EnsureSignature(Signature, true, BinSignature, AltBinSignature);
 
-        uint strTableOffset = reader.Read<uint>();
-        uint strTableSize = reader.Read<uint>();
-        int offTableSize = reader.Read<int>();
+        uint strTableOffset = reader.ReadUInt32();
+        uint strTableSize = reader.ReadUInt32();
+        int offTableSize = reader.ReadInt32();
 
-        ushort dataOffset = reader.Read<ushort>();
+        ushort dataOffset = reader.ReadUInt16();
         reader.Skip(2);
 
         reader.Skip(dataOffset);

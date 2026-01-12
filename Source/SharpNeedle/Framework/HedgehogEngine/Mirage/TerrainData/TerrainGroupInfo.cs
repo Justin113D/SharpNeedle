@@ -15,7 +15,7 @@ public class TerrainGroupInfo : IBinarySerializable
     {
         Bounds = reader.ReadValueOffset<Sphere>();
         Name = reader.ReadStringOffset();
-        MemorySize = reader.Read<uint>();
+        MemorySize = reader.ReadUInt32();
 
         reader.Read(out int instancesCount);
         Instances = new List<Sphere>(instancesCount);
@@ -27,7 +27,7 @@ public class TerrainGroupInfo : IBinarySerializable
             }
         });
 
-        SubsetID = reader.Read<int>();
+        SubsetID = reader.ReadInt32();
     }
 
     public void Write(BinaryObjectWriter writer)

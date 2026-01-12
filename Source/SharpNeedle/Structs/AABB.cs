@@ -160,14 +160,14 @@ public struct AABB : IBinarySerializable, IIntersectable<Vector3>, IIntersectabl
 
     public void Read(BinaryObjectReader reader)
     {
-        Min.X = reader.Read<float>();
-        Max.X = reader.Read<float>();
+        Min.X = reader.ReadSingle();
+        Max.X = reader.ReadSingle();
 
-        Min.Y = reader.Read<float>();
-        Max.Y = reader.Read<float>();
+        Min.Y = reader.ReadSingle();
+        Max.Y = reader.ReadSingle();
 
-        Min.Z = reader.Read<float>();
-        Max.Z = reader.Read<float>();
+        Min.Z = reader.ReadSingle();
+        Max.Z = reader.ReadSingle();
     }
 
     public void Write(BinaryObjectWriter writer)

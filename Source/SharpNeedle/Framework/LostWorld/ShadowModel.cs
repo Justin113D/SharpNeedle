@@ -65,11 +65,11 @@ public class ShadowMesh : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        Indices = reader.ReadArrayOffset<ushort>(reader.Read<int>());
+        Indices = reader.ReadArrayOffset<ushort>(reader.ReadInt32());
         reader.Skip(4);
-        Vertices = reader.ReadArrayOffset<ShadowVertex>(reader.Read<int>());
+        Vertices = reader.ReadArrayOffset<ShadowVertex>(reader.ReadInt32());
         reader.Skip(4);
-        int bufferCount = reader.Read<int>();
+        int bufferCount = reader.ReadInt32();
         reader.ReadOffset(() =>
         {
             for (int i = 0; i < bufferCount; i++)
@@ -116,7 +116,7 @@ public class ShadowPrimitiveBuffer : IBinarySerializable
         IndexCount = reader.ReadInt32();
         VertexOffset = reader.ReadInt32();
         VertexStride = reader.ReadInt32();
-        BonePalette = reader.ReadArrayOffset<byte>(reader.Read<int>());
+        BonePalette = reader.ReadArrayOffset<byte>(reader.ReadInt32());
     }
 
     public void Write(BinaryObjectWriter writer)

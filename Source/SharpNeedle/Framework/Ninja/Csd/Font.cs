@@ -5,7 +5,7 @@ public class Font : List<CharacterMapping>, IBinarySerializable
     public void Read(BinaryObjectReader reader)
     {
         Clear();
-        Capacity = reader.Read<int>();
+        Capacity = reader.ReadInt32();
         AddRange(reader.ReadArrayOffset<CharacterMapping>(Capacity));
     }
 

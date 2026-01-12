@@ -19,14 +19,14 @@ public class CameraShakeParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        Field08 = reader.Read<float>();
-        Field0C = reader.Read<float>();
-        Field10 = reader.Read<int>();
-        Field14 = reader.Read<int>();
-        Field18 = reader.Read<int>();
-        Field1C = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        Field08 = reader.ReadSingle();
+        Field0C = reader.ReadSingle();
+        Field10 = reader.ReadInt32();
+        Field14 = reader.ReadInt32();
+        Field18 = reader.ReadInt32();
+        Field1C = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

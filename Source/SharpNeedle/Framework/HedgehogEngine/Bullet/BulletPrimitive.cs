@@ -26,9 +26,9 @@ public struct BulletPrimitive : IBinarySerializable
         SurfaceType = (byte)(typeFlag >> 24);
         SurfaceFlags = typeFlag & 0xFFFFFF;
 
-        Position = reader.Read<Vector3>();
-        Rotation = reader.Read<Quaternion>();
-        Dimensions = reader.Read<Vector3>();
+        Position = reader.ReadVector3();
+        Rotation = reader.ReadQuaternion();
+        Dimensions = reader.ReadVector3();
     }
 
     public void Write(BinaryObjectWriter writer)

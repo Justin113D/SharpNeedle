@@ -18,7 +18,7 @@ public class Texture : SampleChunkResource
     public override void Read(BinaryObjectReader reader)
     {
         PictureName = reader.ReadStringOffset();
-        TexCoordIndex = reader.Read<byte>();
+        TexCoordIndex = reader.ReadByte();
         WrapModeU = reader.Read<WrapMode>();
         WrapModeV = reader.Read<WrapMode>();
         reader.Skip(1); // Padding

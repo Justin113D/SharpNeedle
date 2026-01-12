@@ -19,12 +19,12 @@ public class GITextureGroup : IBinarySerializable
         {
             for (int i = 0; i < indexCount; i++)
             {
-                Indices.Add(reader.Read<int>());
+                Indices.Add(reader.ReadInt32());
             }
         });
 
         Bounds = reader.ReadValueOffset<Sphere>();
-        MemorySize = reader.Read<uint>();
+        MemorySize = reader.ReadUInt32();
     }
 
     public void Write(BinaryObjectWriter writer)

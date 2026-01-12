@@ -16,11 +16,11 @@ public class PathData : BaseNodeData
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Transform = reader.Read<Matrix4x4>();
-        Field40 = reader.Read<int>();
-        Field44 = reader.Read<int>();
-        Field48 = reader.Read<int>();
-        Field4C = reader.Read<int>();
+        Transform = reader.ReadMatrix4x4();
+        Field40 = reader.ReadInt32();
+        Field44 = reader.ReadInt32();
+        Field48 = reader.ReadInt32();
+        Field4C = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

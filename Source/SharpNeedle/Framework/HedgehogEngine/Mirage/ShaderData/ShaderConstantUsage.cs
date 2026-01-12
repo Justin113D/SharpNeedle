@@ -10,8 +10,8 @@ public class ShaderConstantUsage : IBinarySerializable
     public void Read(BinaryObjectReader reader)
     {
         Name = reader.ReadStringOffset();
-        Index = reader.Read<byte>();
-        Size = reader.Read<byte>();
+        Index = reader.ReadByte();
+        Size = reader.ReadByte();
 
         reader.Align(reader.GetOffsetSize());
     }

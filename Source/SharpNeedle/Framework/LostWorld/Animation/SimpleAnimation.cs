@@ -20,9 +20,9 @@ public class SimpleAnimation : AnimationDef
     {
         base.Read(reader);
         ResourceName = reader.ReadStringOffset();
-        StartFrame = reader.Read<float>();
-        EndFrame = reader.Read<float>();
-        Speed = reader.Read<float>();
+        StartFrame = reader.ReadSingle();
+        EndFrame = reader.ReadSingle();
+        Speed = reader.ReadSingle();
         PlayMode = reader.Read<PlayModeInfo>();
         Options = reader.Read<AnimOptions>();
         Interpolations = reader.ReadObject<BinaryList<InterpolateInfo>>();

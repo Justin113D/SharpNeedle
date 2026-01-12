@@ -17,12 +17,12 @@ public class ModelMotionData : BaseNodeData
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        Field08 = reader.Read<int>();
-        Field0C = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        Field08 = reader.ReadInt32();
+        Field0C = reader.ReadInt32();
         Field10 = reader.ReadDiString(8);
-        Field18 = reader.Read<float>();
+        Field18 = reader.ReadSingle();
 
         reader.Skip(20);
     }

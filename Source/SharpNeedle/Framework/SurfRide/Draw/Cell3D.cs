@@ -20,29 +20,29 @@ public class Cell3D : ICell
     {
         MaterialColor = reader.Read<Color<byte>>();
         IlluminationColor = reader.Read<Color<byte>>();
-        Field08 = reader.Read<byte>();
-        Field09 = reader.Read<byte>();
-        Field0A = reader.Read<byte>();
-        Field0B = reader.Read<byte>();
+        Field08 = reader.ReadByte();
+        Field09 = reader.ReadByte();
+        Field0A = reader.ReadByte();
+        Field0B = reader.ReadByte();
         if (options.Version >= 4)
         {
             reader.Align(16);
-            Position = reader.Read<Vector3>();
+            Position = reader.ReadVector3();
             reader.Align(16);
-            RotationX = reader.Read<int>();
-            RotationY = reader.Read<int>();
-            RotationZ = reader.Read<int>();
+            RotationX = reader.ReadInt32();
+            RotationY = reader.ReadInt32();
+            RotationZ = reader.ReadInt32();
             reader.Align(16);
-            Scale = reader.Read<Vector3>();
+            Scale = reader.ReadVector3();
             reader.Align(16);
         }
         else
         {
-            Position = reader.Read<Vector3>();
-            RotationX = reader.Read<int>();
-            RotationY = reader.Read<int>();
-            RotationZ = reader.Read<int>();
-            Scale = reader.Read<Vector3>();
+            Position = reader.ReadVector3();
+            RotationX = reader.ReadInt32();
+            RotationY = reader.ReadInt32();
+            RotationZ = reader.ReadInt32();
+            Scale = reader.ReadVector3();
         }
     }
 

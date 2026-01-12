@@ -53,20 +53,20 @@ public class Cast : IBinarySerializable<Family>, IList<Cast>
 
     public void Read(BinaryObjectReader reader, Family family)
     {
-        Field00 = reader.Read<uint>();
+        Field00 = reader.ReadUInt32();
         Type = reader.Read<EType>();
-        Enabled = reader.Read<uint>() != 0;
+        Enabled = reader.ReadUInt32() != 0;
 
-        TopLeft = reader.Read<Vector2>();
-        BottomLeft = reader.Read<Vector2>();
-        TopRight = reader.Read<Vector2>();
-        BottomRight = reader.Read<Vector2>();
+        TopLeft = reader.ReadVector2();
+        BottomLeft = reader.ReadVector2();
+        TopRight = reader.ReadVector2();
+        BottomRight = reader.ReadVector2();
 
         Field2C = reader.Read<BitSet<uint>>();
         Info = reader.ReadObjectOffset<CastInfo>();
         InheritanceFlags = reader.Read<BitSet<uint>>();
         MaterialFlags = reader.Read<BitSet<uint>>();
-        SpriteIndices = reader.ReadArrayOffset<int>(reader.Read<int>());
+        SpriteIndices = reader.ReadArrayOffset<int>(reader.ReadInt32());
 
         Text = reader.ReadStringOffset();
         FontName = reader.ReadStringOffset();
@@ -79,14 +79,14 @@ public class Cast : IBinarySerializable<Family>, IList<Cast>
 
         if (family.Scene.Version >= 3)
         {
-            Width = reader.Read<uint>();
-            Height = reader.Read<uint>();
-            Field58 = reader.Read<uint>();
-            Field5C = reader.Read<uint>();
+            Width = reader.ReadUInt32();
+            Height = reader.ReadUInt32();
+            Field58 = reader.ReadUInt32();
+            Field5C = reader.ReadUInt32();
 
-            Origin = reader.Read<Vector2>();
-            Position = reader.Read<Vector2>();
-            Field70 = reader.Read<uint>();
+            Origin = reader.ReadVector2();
+            Position = reader.ReadVector2();
+            Field70 = reader.ReadUInt32();
         }
     }
 

@@ -18,14 +18,14 @@ public class BlurEffectData : IEffectData
 
     public void Read(BinaryObjectReader reader, ChunkBinaryOptions context)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        CropCount = reader.Read<int>();
-        Step = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        CropCount = reader.ReadInt32();
+        Step = reader.ReadInt32();
         Blend = reader.Read<BlendMode>();
         Color = reader.Read<Color<byte>>();
-        Field18 = reader.Read<int>();
-        Field1C = reader.Read<int>();
+        Field18 = reader.ReadInt32();
+        Field1C = reader.ReadInt32();
     }
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions context)

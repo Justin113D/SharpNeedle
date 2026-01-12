@@ -301,7 +301,7 @@ public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
         Flags flags = (Flags)header & Flags.Mask;
         uint size = header & (uint)Flags.SizeMask;
 
-        Value = reader.Read<uint>();
+        Value = reader.ReadUInt32();
         Name = reader.ReadString(StringBinaryFormat.FixedLength, 8);
 
         int spaceIdx = Name.IndexOf(' ');

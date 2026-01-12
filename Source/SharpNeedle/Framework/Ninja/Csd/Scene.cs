@@ -16,15 +16,15 @@ public class Scene : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        Version = reader.Read<int>();
-        Priority = reader.Read<float>();
-        FrameRate = reader.Read<float>();
-        float motionBegin = reader.Read<float>();
-        float motionEnd = reader.Read<float>();
-        Textures = new List<Vector2>(reader.ReadArrayOffset<Vector2>(reader.Read<int>()));
-        Sprites = new List<Sprite>(reader.ReadArrayOffset<Sprite>(reader.Read<int>()));
+        Version = reader.ReadInt32();
+        Priority = reader.ReadSingle();
+        FrameRate = reader.ReadSingle();
+        float motionBegin = reader.ReadSingle();
+        float motionEnd = reader.ReadSingle();
+        Textures = new List<Vector2>(reader.ReadArrayOffset<Vector2>(reader.ReadInt32()));
+        Sprites = new List<Sprite>(reader.ReadArrayOffset<Sprite>(reader.ReadInt32()));
 
-        int familyCount = reader.Read<int>();
+        int familyCount = reader.ReadInt32();
         Families = new List<Family>(familyCount);
         reader.ReadOffset(() =>
         {
@@ -50,7 +50,7 @@ public class Scene : IBinarySerializable
 
         if (Version >= 1)
         {
-            AspectRatio = reader.Read<float>();
+            AspectRatio = reader.ReadSingle();
         }
 
         if (Version >= 2)

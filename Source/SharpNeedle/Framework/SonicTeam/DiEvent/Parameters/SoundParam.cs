@@ -16,8 +16,8 @@ public class SoundParam : BaseParam
     public override void Read(BinaryObjectReader reader, GameType game)
     {
         CueName = reader.ReadDiString(64);
-        Field40 = reader.Read<int>();
-        Field44 = reader.Read<int>();
+        Field40 = reader.ReadInt32();
+        Field44 = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

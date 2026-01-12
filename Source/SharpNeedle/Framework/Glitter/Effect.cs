@@ -13,7 +13,7 @@ public class Effect : BinaryResource
     {
         reader.EnsureSignature(Signature);
 
-        Version = reader.Read<uint>();
+        Version = reader.ReadUInt32();
         if (Version != 0x01060000)
         {
             throw new NotSupportedException();

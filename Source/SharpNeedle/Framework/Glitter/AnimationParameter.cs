@@ -9,7 +9,7 @@ public class AnimationParameter : IBinarySerializable
     public void Read(BinaryObjectReader reader)
     {
         long keyframeOffset = reader.ReadOffsetValue();
-        int keyframeCount = reader.Read<int>();
+        int keyframeCount = reader.ReadInt32();
 
         reader.ReadAtOffset(keyframeOffset, () =>
         {
@@ -19,8 +19,8 @@ public class AnimationParameter : IBinarySerializable
             }
         });
 
-        Field08 = reader.Read<int>();
-        Field0C = reader.Read<int>();
+        Field08 = reader.ReadInt32();
+        Field0C = reader.ReadInt32();
     }
 
     public void Write(BinaryObjectWriter writer)

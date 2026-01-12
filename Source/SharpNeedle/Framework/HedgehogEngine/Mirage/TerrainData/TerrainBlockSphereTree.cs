@@ -136,8 +136,8 @@ public class TerrainBlockSphereTree : SampleChunkResource
         public void Read(BinaryObjectReader reader)
         {
             Type = reader.Read<NodeType>();
-            LeftIndex = reader.Read<int>();
-            RightIndex = reader.Read<int>();
+            LeftIndex = reader.ReadInt32();
+            RightIndex = reader.ReadInt32();
             Bounds = reader.ReadValueOffset<Sphere>();
         }
 

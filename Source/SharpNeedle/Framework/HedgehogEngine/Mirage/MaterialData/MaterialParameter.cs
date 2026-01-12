@@ -1,4 +1,6 @@
 ﻿namespace SharpNeedle.Framework.HedgehogEngine.Mirage.MaterialData;
+
+using SharpNeedle.Structs;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -39,7 +41,7 @@ public class MaterialParameter<T> : IBinarySerializable where T : unmanaged
     public void Read(BinaryObjectReader reader)
     {
         reader.Skip(2);
-        byte valueCount = reader.Read<byte>();
+        byte valueCount = reader.ReadByte();
         reader.Skip(1);
 
         Name = reader.ReadStringOffsetOrEmpty();
@@ -51,7 +53,15 @@ public class MaterialParameter<T> : IBinarySerializable where T : unmanaged
                 // Handle booleans
                 if (typeof(T) == typeof(bool))
                 {
-                    Unsafe.As<List<bool>>(Values)!.Add(reader.Read<int>() != 0);
+                    Unsafe.As<List<bool>>(Values)!.Add(reader.ReadInt32() != 0);
+                }
+                else if(typeof(T) == typeof(Vector4))
+                {
+                    Unsafe.As<List<Vector4>>(Values)!.Add(reader.ReadVector4());
+                }
+                else if (typeof(T) == typeof(Vector4Int))
+                {
+                    Unsafe.As<List<Vector4Int>>(Values)!.Add(reader.ReadObject<Vector4Int>());
                 }
                 else
                 {

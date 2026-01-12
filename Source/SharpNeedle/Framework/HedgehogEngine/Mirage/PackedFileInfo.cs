@@ -41,8 +41,8 @@ public class PackedFileInfo : SampleChunkResource
         public void Read(BinaryObjectReader reader)
         {
             Name = reader.ReadStringOffset();
-            Offset = reader.Read<uint>();
-            Size = reader.Read<uint>();
+            Offset = reader.ReadUInt32();
+            Size = reader.ReadUInt32();
         }
 
         public readonly void Write(BinaryObjectWriter writer)

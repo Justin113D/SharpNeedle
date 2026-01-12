@@ -14,9 +14,9 @@ public class TimeStopParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<float>();
-        Field08 = reader.Read<float>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadSingle();
+        Field08 = reader.ReadSingle();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

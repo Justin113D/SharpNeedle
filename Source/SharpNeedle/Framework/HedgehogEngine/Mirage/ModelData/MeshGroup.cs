@@ -26,7 +26,7 @@ public class MeshGroup : List<Mesh>, IBinarySerializable<uint>, IDisposable, ICl
             return;
         }
 
-        int specialMeshCount = reader.Read<int>();
+        int specialMeshCount = reader.ReadInt32();
         Capacity += specialMeshCount;
 
         (string Name, int Count)[] slots = new (string Name, int Count)[specialMeshCount];

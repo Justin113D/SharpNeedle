@@ -41,16 +41,16 @@ public class Node : IBinarySerializable<GameType>
     public void Read(BinaryObjectReader reader, GameType game)
     {
         GUID = reader.Read<Guid>();
-        Type = reader.Read<int>();
-        int dataSize = reader.Read<int>();
+        Type = reader.ReadInt32();
+        int dataSize = reader.ReadInt32();
 
-        int childCount = reader.Read<int>();
-        Flags = reader.Read<uint>();
+        int childCount = reader.ReadInt32();
+        Flags = reader.ReadUInt32();
 
-        Priority = reader.Read<int>();
-        Field24 = reader.Read<int>();
-        Field28 = reader.Read<int>();
-        Field2C = reader.Read<int>();
+        Priority = reader.ReadInt32();
+        Field24 = reader.ReadInt32();
+        Field28 = reader.ReadInt32();
+        Field2C = reader.ReadInt32();
 
         Name = reader.ReadDiString(64);
 

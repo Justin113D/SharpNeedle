@@ -11,10 +11,10 @@ public class Track : List<KeyFrame>, IBinarySerializable<ChunkBinaryOptions>
     {
         Clear();
         CurveType = reader.Read<FCurveType>();
-        Capacity = reader.Read<ushort>();
-        Flags = reader.Read<uint>();
-        StartFrame = reader.Read<uint>();
-        EndFrame = reader.Read<uint>();
+        Capacity = reader.ReadUInt16();
+        Flags = reader.ReadUInt32();
+        StartFrame = reader.ReadUInt32();
+        EndFrame = reader.ReadUInt32();
         if (options.Version >= 3)
         {
             reader.Align(8);

@@ -14,7 +14,7 @@ public class MorphModel : IBinarySerializable<uint>
         reader.Read(out uint vertexCount);
         long vertexOffset = reader.ReadOffsetValue();
 
-        uint flags = reader.Read<uint>();
+        uint flags = reader.ReadUInt32();
         if (flags != 1)
         {
             throw new Exception($"{flags} is not 1! Report this model!");

@@ -25,24 +25,24 @@ public class MaterialParameter : IBinarySerializable
             TextureDatas.Insert(i, reader.ReadObject<TextureData>());
         }
 
-        int textureCount = reader.Read<int>();
-        TextureAddresMode = reader.Read<int>();
+        int textureCount = reader.ReadInt32();
+        TextureAddresMode = reader.ReadInt32();
 
-        Field2C = reader.Read<int>();
-        Field30 = reader.Read<float>();
-        Field34 = reader.Read<int>();
-        Field38 = reader.Read<int>();
+        Field2C = reader.ReadInt32();
+        Field30 = reader.ReadSingle();
+        Field34 = reader.ReadInt32();
+        Field38 = reader.ReadInt32();
 
         ShaderName = reader.ReadStringOffset();
 
         reader.Skip(reader.GetOffsetSize()); // VertexShaderDataOffset
         reader.Skip(reader.GetOffsetSize()); // PixelShaderDataOffset
 
-        Field48 = reader.Read<float>();
-        Field4C = reader.Read<int>();
-        Field50 = reader.Read<int>();
-        Field54 = reader.Read<int>();
-        Field58 = reader.Read<int>();
+        Field48 = reader.ReadSingle();
+        Field4C = reader.ReadInt32();
+        Field50 = reader.ReadInt32();
+        Field54 = reader.ReadInt32();
+        Field58 = reader.ReadInt32();
     }
 
     public void Write(BinaryObjectWriter writer)
@@ -85,10 +85,10 @@ public class MaterialParameter : IBinarySerializable
         {
             Name = reader.ReadStringOffset();
 
-            Field04 = reader.Read<float>();
+            Field04 = reader.ReadSingle();
 
-            Field08 = reader.Read<int>();
-            Field0C = reader.Read<int>();
+            Field08 = reader.ReadInt32();
+            Field0C = reader.ReadInt32();
         }
 
         public readonly void Write(BinaryObjectWriter writer)

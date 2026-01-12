@@ -65,7 +65,7 @@ public class CsdPackage : ResourceBase, IBinarySerializable
         reader.Endianness = Endianness;
         while (reader.Position < reader.Length)
         {
-            Files.Add(reader.ReadArray<byte>(reader.Read<int>()));
+            Files.Add(reader.ReadArray<byte>(reader.ReadInt32()));
         }
     }
 

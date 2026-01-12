@@ -18,7 +18,7 @@ public class ChromaAberrationParam : BaseParam
     public override void Read(BinaryObjectReader reader, GameType game)
     {
         EndpointA = reader.ReadObject<Endpoint>();
-        Field20 = reader.Read<float>();
+        Field20 = reader.ReadSingle();
         EndpointB = reader.ReadObject<Endpoint>();
 
         reader.ReadArray<float>(32, CurveData);
@@ -64,10 +64,10 @@ public class ChromaAberrationParam : BaseParam
 
         public void Read(BinaryObjectReader reader)
         {
-            ColorOffset = new Color<float>(reader.Read<float>(), reader.Read<float>(), reader.Read<float>(), 1.0f);
-            SphereCurve = reader.Read<float>();
-            Scale = reader.Read<Vector2>();
-            Position = reader.Read<Vector2>();
+            ColorOffset = new Color<float>(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle(), 1.0f);
+            SphereCurve = reader.ReadSingle();
+            Scale = reader.ReadVector2();
+            Position = reader.ReadVector2();
         }
 
         public void Write(BinaryObjectWriter writer)

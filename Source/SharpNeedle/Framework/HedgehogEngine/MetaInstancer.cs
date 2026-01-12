@@ -33,10 +33,10 @@ public class MetaInstancer : ResourceBase, IBinarySerializable
     public void Read(BinaryObjectReader reader)
     {
         reader.EnsureSignatureNative(Signature);
-        FormatVersion = reader.Read<uint>();
+        FormatVersion = reader.ReadUInt32();
 
-        int instanceCount = reader.Read<int>();
-        int instanceSize = reader.Read<int>();
+        int instanceCount = reader.ReadInt32();
+        int instanceSize = reader.ReadInt32();
 
         if (instanceSize != InstanceSize)
         {
@@ -78,18 +78,18 @@ public class MetaInstancer : ResourceBase, IBinarySerializable
 
         public void Read(BinaryObjectReader reader)
         {
-            Position = reader.Read<Vector3>();
-            Type = reader.Read<byte>();
-            Sway = reader.Read<byte>();
+            Position = reader.ReadVector3();
+            Type = reader.ReadByte();
+            Sway = reader.ReadByte();
 
-            PitchAfterSway = reader.Read<byte>();
-            YawAfterSway = reader.Read<byte>();
+            PitchAfterSway = reader.ReadByte();
+            YawAfterSway = reader.ReadByte();
 
-            PitchBeforeSway = reader.Read<short>();
-            YawBeforeSway = reader.Read<short>();
+            PitchBeforeSway = reader.ReadInt16();
+            YawBeforeSway = reader.ReadInt16();
 
-            byte colorA = reader.Read<byte>();
-            Color = new Color<byte>(reader.Read<byte>(), reader.Read<byte>(), reader.Read<byte>(), colorA);
+            byte colorA = reader.ReadByte();
+            Color = new Color<byte>(reader.ReadByte(), reader.ReadByte(), reader.ReadByte(), colorA);
         }
 
         public void Write(BinaryObjectWriter writer)

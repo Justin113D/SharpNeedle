@@ -11,8 +11,8 @@ public class TextureListChunk : List<TextureList>, IChunk
         SeekToken start = reader.At();
         options.Header ??= reader.ReadObject<ChunkHeader>();
         Signature = options.Header.Value.Signature;
-        int listOffset = reader.Read<int>();
-        Capacity = reader.Read<int>();
+        int listOffset = reader.ReadInt32();
+        Capacity = reader.ReadInt32();
         reader.ReadAtOffset((int)start - 8 + listOffset, () => AddRange(reader.ReadObjectArray<TextureList, ChunkBinaryOptions>(options, Capacity)));
     }
 
@@ -62,10 +62,10 @@ public class TextureList : List<Texture>, IBinarySerializable<ChunkBinaryOptions
         Name = reader.ReadStringOffset();
         if (options.Version >= 4)
         {
-            Field08 = reader.Read<uint>();
+            Field08 = reader.ReadUInt32();
         }
 
-        Capacity = reader.Read<int>();
+        Capacity = reader.ReadInt32();
         if (options.Version >= 3)
         {
             reader.Align(8);
@@ -80,7 +80,7 @@ public class TextureList : List<Texture>, IBinarySerializable<ChunkBinaryOptions
 
         if (options.Version == 0)
         {
-            Field14 = reader.Read<uint>();
+            Field14 = reader.ReadUInt32();
         }
     }
 

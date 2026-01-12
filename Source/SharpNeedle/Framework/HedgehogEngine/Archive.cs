@@ -91,16 +91,16 @@ public class Archive : ResourceBase, IDirectory, IStreamable
         BaseStream = file.Open();
         BinaryValueReader reader = new(file.Open(), StreamOwnership.Retain, Endianness.Little);
         reader.Skip(0xC);
-        DataAlignment = reader.Read<int>();
+        DataAlignment = reader.ReadInt32();
 
         while (reader.Position < reader.Length)
         {
             long baseOffset = reader.Position;
 
-            int dataEnd = reader.Read<int>();
-            uint dataLength = reader.Read<uint>();
-            int dataStart = reader.Read<int>();
-            long lastModifiedBinary = reader.Read<long>();
+            int dataEnd = reader.ReadInt32();
+            uint dataLength = reader.ReadUInt32();
+            int dataStart = reader.ReadInt32();
+            long lastModifiedBinary = reader.ReadInt64();
             DateTime lastModified = lastModifiedBinary != 0 ? new DateTime(lastModifiedBinary) : DateTime.Now;
             string name = reader.ReadString(StringBinaryFormat.NullTerminated);
 

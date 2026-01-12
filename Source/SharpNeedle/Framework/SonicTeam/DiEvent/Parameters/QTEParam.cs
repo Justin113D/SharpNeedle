@@ -48,38 +48,38 @@ public class QTEParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        Field08 = reader.Read<float>();
-        Field0C = reader.Read<float>();
-        Field10 = reader.Read<float>();
-        Field14 = reader.Read<float>();
-        Field18 = reader.Read<float>();
-        Field1C = reader.Read<int>();
-        Field20 = reader.Read<int>();
-        Field24 = reader.Read<int>();
-        Field28 = reader.Read<int>();
-        Field2C = reader.Read<int>();
-        Field30 = reader.Read<int>();
-        Field34 = reader.Read<int>();
-        Field38 = reader.Read<int>();
-        Field3C = reader.Read<int>();
-        Field40 = reader.Read<int>();
-        Field44 = reader.Read<int>();
-        Field48 = reader.Read<int>();
-        Field4C = reader.Read<int>();
-        Field50 = reader.Read<int>();
-        Field54 = reader.Read<int>();
-        Field58 = reader.Read<int>();
-        Field5C = reader.Read<int>();
-        Field60 = reader.Read<int>();
-        Field64 = reader.Read<int>();
-        Field68 = reader.Read<int>();
-        Field6C = reader.Read<int>();
-        Field70 = reader.Read<float>();
-        Field74 = reader.Read<float>();
-        Field78 = reader.Read<float>();
-        Field7C = reader.Read<float>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        Field08 = reader.ReadSingle();
+        Field0C = reader.ReadSingle();
+        Field10 = reader.ReadSingle();
+        Field14 = reader.ReadSingle();
+        Field18 = reader.ReadSingle();
+        Field1C = reader.ReadInt32();
+        Field20 = reader.ReadInt32();
+        Field24 = reader.ReadInt32();
+        Field28 = reader.ReadInt32();
+        Field2C = reader.ReadInt32();
+        Field30 = reader.ReadInt32();
+        Field34 = reader.ReadInt32();
+        Field38 = reader.ReadInt32();
+        Field3C = reader.ReadInt32();
+        Field40 = reader.ReadInt32();
+        Field44 = reader.ReadInt32();
+        Field48 = reader.ReadInt32();
+        Field4C = reader.ReadInt32();
+        Field50 = reader.ReadInt32();
+        Field54 = reader.ReadInt32();
+        Field58 = reader.ReadInt32();
+        Field5C = reader.ReadInt32();
+        Field60 = reader.ReadInt32();
+        Field64 = reader.ReadInt32();
+        Field68 = reader.ReadInt32();
+        Field6C = reader.ReadInt32();
+        Field70 = reader.ReadSingle();
+        Field74 = reader.ReadSingle();
+        Field78 = reader.ReadSingle();
+        Field7C = reader.ReadSingle();
         reader.ReadArray<int>(32, Field80);
 
         Field100 = reader.ReadString(StringBinaryFormat.FixedLength, 64);
@@ -88,7 +88,7 @@ public class QTEParam : BaseParam
         if (game == GameType.ShadowGenerations)
         {
             Field180 = reader.ReadString(StringBinaryFormat.FixedLength, 64);
-            Field1C0 = reader.Read<uint>();
+            Field1C0 = reader.ReadUInt32();
         }
     }
 

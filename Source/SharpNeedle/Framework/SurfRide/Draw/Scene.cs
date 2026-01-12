@@ -24,22 +24,22 @@ public class Scene : IBinarySerializable<ChunkBinaryOptions>
         }
 
         Name = reader.ReadStringOffset();
-        ID = reader.Read<int>();
-        Flags = reader.Read<uint>();
+        ID = reader.ReadInt32();
+        Flags = reader.ReadUInt32();
         if (options.Version >= 4)
         {
-            Field10 = reader.Read<uint>();
+            Field10 = reader.ReadUInt32();
         }
 
-        int layerCount = reader.Read<int>();
+        int layerCount = reader.ReadInt32();
         if (options.Version >= 3)
         {
             reader.Align(8);
         }
 
         Layers.AddRange(reader.ReadObjectArrayOffset<Layer, ChunkBinaryOptions>(options, layerCount));
-        ushort camCount = reader.Read<ushort>();
-        CurrentCameraIndex = reader.Read<short>();
+        ushort camCount = reader.ReadUInt16();
+        CurrentCameraIndex = reader.ReadInt16();
         if (options.Version >= 3)
         {
             reader.Align(8);
@@ -47,7 +47,7 @@ public class Scene : IBinarySerializable<ChunkBinaryOptions>
 
         Cameras.AddRange(reader.ReadObjectArrayOffset<Camera, ChunkBinaryOptions>(options, camCount));
         BackgroundColor = reader.Read<Color<byte>>();
-        Resolution = reader.Read<Vector2>();
+        Resolution = reader.ReadVector2();
         if (options.Version >= 3)
         {
             reader.Align(8);

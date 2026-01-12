@@ -8,7 +8,7 @@ public class LightIndexMesh : List<LightIndexData>, IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        int dataCount = reader.Read<int>();
+        int dataCount = reader.ReadInt32();
         Capacity = dataCount;
         reader.ReadOffset(() =>
         {

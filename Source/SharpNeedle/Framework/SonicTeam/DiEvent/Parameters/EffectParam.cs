@@ -23,17 +23,17 @@ public class EffectParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        LocalTransform = reader.Read<Matrix4x4>();
-        Field40 = reader.Read<int>();
+        LocalTransform = reader.ReadMatrix4x4();
+        Field40 = reader.ReadInt32();
         Name = reader.ReadDiString(64);
-        Field84 = reader.Read<int>();
-        Field88 = reader.Read<int>();
-        Field8C = reader.Read<int>();
-        Field90 = reader.Read<int>();
-        Field94 = reader.Read<int>();
-        Field98 = reader.Read<int>();
-        Field9C = reader.Read<int>();
-        FieldA0 = reader.Read<int>();
+        Field84 = reader.ReadInt32();
+        Field88 = reader.ReadInt32();
+        Field8C = reader.ReadInt32();
+        Field90 = reader.ReadInt32();
+        Field94 = reader.ReadInt32();
+        Field98 = reader.ReadInt32();
+        Field9C = reader.ReadInt32();
+        FieldA0 = reader.ReadInt32();
         reader.ReadArray<float>(128, AnimationData);
     }
 

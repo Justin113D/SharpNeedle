@@ -14,11 +14,11 @@ public class InfoChunk : IChunk
         options.Header ??= reader.ReadObject<ChunkHeader>();
         reader.Endianness = (options.Header.Value.Size & 0xFFFF0000) != 0 ? Endianness.Big : Endianness.Little;
         Signature = options.Header.Value.Signature;
-        int chunkCount = reader.Read<int>();
+        int chunkCount = reader.ReadInt32();
 
         SeekToken beforeChunk = reader.At();
         reader.Skip(12);
-        Version = reader.Read<int>();
+        Version = reader.ReadInt32();
         if (options.Version <= 2)
         {
             switch (Version)

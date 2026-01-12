@@ -35,8 +35,8 @@ public abstract class BinaryResource : ResourceBase, IBinarySerializable
 
             reader.Endianness = Version.Endianness;
 
-            Size = reader.Read<uint>();
-            ushort chunkCount = reader.Read<ushort>();
+            Size = reader.ReadUInt32();
+            ushort chunkCount = reader.ReadUInt16();
             reader.Skip(2);
 
             ChunkParseOptions options = new()

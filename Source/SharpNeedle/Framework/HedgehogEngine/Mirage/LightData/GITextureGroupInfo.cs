@@ -52,7 +52,7 @@ public class GITextureGroupInfo : SampleChunkResource
         {
             for (int i = 0; i < lowCount; i++)
             {
-                LowQualityGroups.Add(reader.Read<int>());
+                LowQualityGroups.Add(reader.ReadInt32());
             }
         });
     }

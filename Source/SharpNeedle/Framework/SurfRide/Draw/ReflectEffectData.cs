@@ -18,12 +18,12 @@ public class ReflectEffectData : IEffectData
 
     public void Read(BinaryObjectReader reader, ChunkBinaryOptions context)
     {
-        Field00 = reader.Read<Vector2>();
-        Field08 = reader.Read<Vector2>();
-        Field10 = reader.Read<Vector2>();
+        Field00 = reader.ReadVector2();
+        Field08 = reader.ReadVector2();
+        Field10 = reader.ReadVector2();
         Flags = reader.Read<BitSet<uint>>();
         Color = reader.Read<Color<byte>>();
-        Field20 = reader.Read<float>();
+        Field20 = reader.ReadSingle();
     }
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions context)

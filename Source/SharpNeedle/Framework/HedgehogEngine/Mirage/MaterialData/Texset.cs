@@ -6,7 +6,7 @@ public class Texset : SampleChunkResource
 
     public override void Read(BinaryObjectReader reader)
     {
-        int textureCount = reader.Read<int>();
+        int textureCount = reader.ReadInt32();
         reader.ReadOffset(() =>
         {
             for (int i = 0; i < textureCount; i++)

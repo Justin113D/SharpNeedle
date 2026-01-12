@@ -221,14 +221,14 @@ public class ParameterData : BaseNodeData
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        int type = reader.Read<int>();
-        StartTime = reader.Read<float>();
-        EndTime = reader.Read<float>();
-        Field0C = reader.Read<int>();
-        Field10 = reader.Read<int>();
-        Field14 = reader.Read<int>();
-        Field18 = reader.Read<int>();
-        Field1C = reader.Read<int>();
+        int type = reader.ReadInt32();
+        StartTime = reader.ReadSingle();
+        EndTime = reader.ReadSingle();
+        Field0C = reader.ReadInt32();
+        Field10 = reader.ReadInt32();
+        Field14 = reader.ReadInt32();
+        Field18 = reader.ReadInt32();
+        Field1C = reader.ReadInt32();
 
         if (type < 1000)
         {

@@ -16,10 +16,10 @@ public class CompositeAnimParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
+        Field00 = reader.ReadInt32();
         StateName = reader.ReadString(StringBinaryFormat.FixedLength, 12);
         Animations = reader.ReadObjectArray<Animation>(16);
-        ActiveAnimCount = reader.Read<int>();
+        ActiveAnimCount = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)
@@ -45,7 +45,7 @@ public class CompositeAnimParam : BaseParam
 
         public void Read(BinaryObjectReader reader)
         {
-            Type = reader.Read<int>();
+            Type = reader.ReadInt32();
             Name = reader.ReadString(StringBinaryFormat.FixedLength, 64);
         }
 

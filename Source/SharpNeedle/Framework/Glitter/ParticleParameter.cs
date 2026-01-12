@@ -97,101 +97,101 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
 
         ParticleType = reader.Read<EParticleType>();
 
-        LifeTime = reader.Read<float>();
+        LifeTime = reader.ReadSingle();
 
-        ZOffset = reader.Read<int>();
+        ZOffset = reader.ReadInt32();
 
         DirectionType = reader.Read<EDirectionType>();
 
-        Field14 = reader.Read<float>();
+        Field14 = reader.ReadSingle();
 
-        InitialSpeed = reader.Read<float>();
-        InitialSpeedRandomMargin = reader.Read<float>();
-        Deceleration = reader.Read<float>();
-        DecelerationRandomMargin = reader.Read<float>();
-        FollowEmitterTranslationRatio = reader.Read<float>();
-        FollowEmitterTranslationYRatio = reader.Read<float>();
+        InitialSpeed = reader.ReadSingle();
+        InitialSpeedRandomMargin = reader.ReadSingle();
+        Deceleration = reader.ReadSingle();
+        DecelerationRandomMargin = reader.ReadSingle();
+        FollowEmitterTranslationRatio = reader.ReadSingle();
+        FollowEmitterTranslationYRatio = reader.ReadSingle();
 
-        BaseColor = reader.Read<Vector4>().AsColor();
-        MultiPurposeColor = reader.Read<Vector4>().AsColor();
+        BaseColor = reader.ReadVector4().AsColor();
+        MultiPurposeColor = reader.ReadVector4().AsColor();
 
         long colorTableOffset = reader.ReadOffsetValue();
         if (colorTableOffset != 0)
         {
-            ColorTables.AddRange(reader.ReadArrayAtOffset<Color<float>>(colorTableOffset, reader.Read<int>()));
+            ColorTables.AddRange(reader.ReadArrayAtOffset<Color<float>>(colorTableOffset, reader.ReadInt32()));
         }
 
         long colorTable2Offset = reader.ReadOffsetValue();
         if (colorTable2Offset != 0)
         {
-            ColorTable2s.AddRange(reader.ReadArrayAtOffset<Color<float>>(colorTable2Offset, reader.Read<int>()));
+            ColorTable2s.AddRange(reader.ReadArrayAtOffset<Color<float>>(colorTable2Offset, reader.ReadInt32()));
         }
 
         reader.Align(16);
-        InitialSize = reader.Read<Vector3>();
+        InitialSize = reader.ReadVector3();
         reader.Align(16);
-        InitialSizeRandomMargin = reader.Read<Vector3>();
+        InitialSizeRandomMargin = reader.ReadVector3();
         reader.Align(16);
-        InitialRotation = reader.Read<Vector3>().ToDegrees();
+        InitialRotation = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        InitialRotationRandomMargin = reader.Read<Vector3>().ToDegrees();
+        InitialRotationRandomMargin = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        Rotation = reader.Read<Vector3>().ToDegrees();
+        Rotation = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        RotationRandomMargin = reader.Read<Vector3>().ToDegrees();
+        RotationRandomMargin = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        InitialDirection = reader.Read<Vector3>();
+        InitialDirection = reader.ReadVector3();
         reader.Align(16);
-        InitialDirectionRandomMargin = reader.Read<Vector3>();
+        InitialDirectionRandomMargin = reader.ReadVector3();
         reader.Align(16);
-        GravitionalAcceleration = reader.Read<Vector3>();
+        GravitionalAcceleration = reader.ReadVector3();
         reader.Align(16);
-        ExternalAcceleration = reader.Read<Vector3>();
+        ExternalAcceleration = reader.ReadVector3();
         reader.Align(16);
-        ExternalAccelerationRandomMargin = reader.Read<Vector3>();
+        ExternalAccelerationRandomMargin = reader.ReadVector3();
         reader.Align(16);
 
-        EmitterTranslationEffectRatio = reader.Read<float>();
+        EmitterTranslationEffectRatio = reader.ReadSingle();
 
-        LocusInterval = reader.Read<float>();
+        LocusInterval = reader.ReadSingle();
 
-        Field118 = reader.Read<int>();
-        Field11C = reader.Read<int>();
-        Field120 = reader.Read<int>();
-        Field124 = reader.Read<int>();
-        Field128 = reader.Read<int>();
-        Field12C = reader.Read<int>();
-        Field130 = reader.Read<int>();
-        Field134 = reader.Read<int>();
-        Field138 = reader.Read<int>();
-        Field13C = reader.Read<int>();
+        Field118 = reader.ReadInt32();
+        Field11C = reader.ReadInt32();
+        Field120 = reader.ReadInt32();
+        Field124 = reader.ReadInt32();
+        Field128 = reader.ReadInt32();
+        Field12C = reader.ReadInt32();
+        Field130 = reader.ReadInt32();
+        Field134 = reader.ReadInt32();
+        Field138 = reader.ReadInt32();
+        Field13C = reader.ReadInt32();
 
         TextureIndexType = reader.Read<ETextureIndexType>();
-        TextureIndex = reader.Read<int>();
-        TextureIndexRangeStart = reader.Read<int>();
-        TextureIndexRangeEnd = reader.Read<int>();
+        TextureIndex = reader.ReadInt32();
+        TextureIndexRangeStart = reader.ReadInt32();
+        TextureIndexRangeEnd = reader.ReadInt32();
 
-        Field150 = reader.Read<int>();
-        Field154 = reader.Read<int>();
-        Field158 = reader.Read<int>();
-        Field15C = reader.Read<int>();
-        Field160 = reader.Read<int>();
-        Field164 = reader.Read<float>();
-        Field168 = reader.Read<int>();
-        Field16C = reader.Read<int>();
-        Field170 = reader.Read<int>();
-        Field174 = reader.Read<int>();
-        Field178 = reader.Read<int>();
-        Field17C = reader.Read<int>();
-        Field180 = reader.Read<int>();
-        Field184 = reader.Read<int>();
-        Field188 = reader.Read<int>();
-        Field18C = reader.Read<int>();
-        Field190 = reader.Read<int>();
-        Field194 = reader.Read<int>();
-        Field198 = reader.Read<int>();
-        Field19C = reader.Read<int>();
-        Field1A0 = reader.Read<int>();
+        Field150 = reader.ReadInt32();
+        Field154 = reader.ReadInt32();
+        Field158 = reader.ReadInt32();
+        Field15C = reader.ReadInt32();
+        Field160 = reader.ReadInt32();
+        Field164 = reader.ReadSingle();
+        Field168 = reader.ReadInt32();
+        Field16C = reader.ReadInt32();
+        Field170 = reader.ReadInt32();
+        Field174 = reader.ReadInt32();
+        Field178 = reader.ReadInt32();
+        Field17C = reader.ReadInt32();
+        Field180 = reader.ReadInt32();
+        Field184 = reader.ReadInt32();
+        Field188 = reader.ReadInt32();
+        Field18C = reader.ReadInt32();
+        Field190 = reader.ReadInt32();
+        Field194 = reader.ReadInt32();
+        Field198 = reader.ReadInt32();
+        Field19C = reader.ReadInt32();
+        Field1A0 = reader.ReadInt32();
 
         long materialOffset = reader.ReadOffsetValue();
         if (materialOffset != 0)
@@ -202,7 +202,7 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
         BlendMode = reader.Read<EBlendMode>();
         CompositeMode = reader.Read<ECompositeMode>();
         SecondaryBlendMode = reader.Read<ESecondaryBlendMode>();
-        SecondaryBlend = reader.Read<int>();
+        SecondaryBlend = reader.ReadInt32();
         TextureAddressMode = reader.Read<ETextureAddressMode>();
 
         Field1BC = (int)reader.ReadOffsetValue();
@@ -211,20 +211,20 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
             Mesh = reader.ReadObjectAtOffset<MeshParameter>(Field1BC);
         }
 
-        Field1C0 = reader.Read<int>();
-        Field1C4 = reader.Read<int>();
-        Field1C8 = reader.Read<int>();
-        Field1CC = reader.Read<float>();
-        Field1D0 = reader.Read<float>();
-        Field1D4 = reader.Read<int>();
-        Field1D8 = reader.Read<float>();
-        Field1DC = reader.Read<int>();
-        Field1E0 = reader.Read<int>();
-        Field1E4 = reader.Read<int>();
-        Field1E8 = reader.Read<int>();
-        Field1EC = reader.Read<int>();
+        Field1C0 = reader.ReadInt32();
+        Field1C4 = reader.ReadInt32();
+        Field1C8 = reader.ReadInt32();
+        Field1CC = reader.ReadSingle();
+        Field1D0 = reader.ReadSingle();
+        Field1D4 = reader.ReadInt32();
+        Field1D8 = reader.ReadSingle();
+        Field1DC = reader.ReadInt32();
+        Field1E0 = reader.ReadInt32();
+        Field1E4 = reader.ReadInt32();
+        Field1E8 = reader.ReadInt32();
+        Field1EC = reader.ReadInt32();
 
-        Flags = reader.Read<int>();
+        Flags = reader.ReadInt32();
 
         for (int i = 0; i < Animations.Capacity; i++)
         {

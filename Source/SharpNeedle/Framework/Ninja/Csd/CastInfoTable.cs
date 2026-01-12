@@ -4,7 +4,7 @@ public class CastInfoTable : List<(string? Name, int FamilyIdx, int CastIdx)>, I
 {
     public void Read(BinaryObjectReader reader)
     {
-        int count = reader.Read<int>();
+        int count = reader.ReadInt32();
         if (count == 0)
         {
             reader.Skip(reader.GetOffsetSize());
@@ -15,7 +15,7 @@ public class CastInfoTable : List<(string? Name, int FamilyIdx, int CastIdx)>, I
         {
             for (int i = 0; i < count; i++)
             {
-                Add(new(reader.ReadStringOffset(), reader.Read<int>(), reader.Read<int>()));
+                Add(new(reader.ReadStringOffset(), reader.ReadInt32(), reader.ReadInt32()));
             }
         });
     }

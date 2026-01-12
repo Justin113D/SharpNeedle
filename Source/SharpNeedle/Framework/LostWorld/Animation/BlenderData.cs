@@ -9,7 +9,7 @@ public class BlenderData : List<Blender>, IComplexData
             reader.EnsureSignatureNative(1);
         }
 
-        int nodeCount = reader.Read<int>();
+        int nodeCount = reader.ReadInt32();
         reader.ReadOffset(() =>
         {
             for (int i = 0; i < nodeCount; i++)
@@ -47,7 +47,7 @@ public class Blender : IBinarySerializable
     {
         reader.EnsureSignatureNative(0);
         Name = reader.ReadStringOffset();
-        Weight = reader.Read<float>();
+        Weight = reader.ReadSingle();
         Nodes = reader.ReadObject<BinaryList<Node>>();
     }
 
@@ -68,8 +68,8 @@ public class Blender : IBinarySerializable
         public void Read(BinaryObjectReader reader)
         {
             Name = reader.ReadStringOffset();
-            Weight = reader.Read<float>();
-            Priority = reader.Read<int>();
+            Weight = reader.ReadSingle();
+            Priority = reader.ReadInt32();
         }
 
         public readonly void Write(BinaryObjectWriter writer)

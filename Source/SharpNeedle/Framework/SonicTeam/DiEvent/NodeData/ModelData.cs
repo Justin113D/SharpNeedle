@@ -15,7 +15,7 @@ public class ModelData : BaseNodeData
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
+        Field00 = reader.ReadInt32();
         ModelName = reader.ReadDiString(64);
         SkeletonName = reader.ReadDiString(64);
         Field84 = reader.ReadDiString(64);

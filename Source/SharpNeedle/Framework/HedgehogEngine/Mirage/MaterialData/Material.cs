@@ -53,15 +53,15 @@ public class Material : SampleChunkResource
             texturesOffset = reader.ReadOffsetValue();
         }
 
-        AlphaThreshold = reader.Read<byte>();
+        AlphaThreshold = reader.ReadByte();
         NoBackFaceCulling = reader.Read<bool>();
         BlendMode = (MaterialBlendMode)reader.ReadByte();
         reader.Skip(1); // Alignment padding
 
-        byte floatParamsCount = reader.Read<byte>();
-        byte intParamsCount = reader.Read<byte>();
-        byte boolParamsCount = reader.Read<byte>();
-        byte textureCount = reader.Read<byte>(); // Reserved in version 1
+        byte floatParamsCount = reader.ReadByte();
+        byte intParamsCount = reader.ReadByte();
+        byte boolParamsCount = reader.ReadByte();
+        byte textureCount = reader.ReadByte(); // Reserved in version 1
 
         long floatParamOffset = reader.ReadOffsetValue();
         long intParamOffset = reader.ReadOffsetValue();

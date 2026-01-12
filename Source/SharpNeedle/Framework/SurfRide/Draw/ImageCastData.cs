@@ -19,16 +19,16 @@ public class ImageCastData : IImageDataBase
     public void Read(BinaryObjectReader reader, ChunkBinaryOptions options)
     {
         Flags = reader.Read<CastAttribute>();
-        Size = reader.Read<Vector2>();
-        PivotPoint = reader.Read<Vector2>();
+        Size = reader.ReadVector2();
+        PivotPoint = reader.ReadVector2();
         VertexColorTopLeft = reader.Read<Color<byte>>();
         VertexColorBottomLeft = reader.Read<Color<byte>>();
         VertexColorTopRight = reader.Read<Color<byte>>();
         VertexColorBottomRight = reader.Read<Color<byte>>();
-        Surface.CropIndex = reader.Read<short>();
-        Surface1.CropIndex = reader.Read<short>();
-        Surface.CropRefs.Capacity = reader.Read<short>();
-        Surface1.CropRefs.Capacity = reader.Read<short>();
+        Surface.CropIndex = reader.ReadInt16();
+        Surface1.CropIndex = reader.ReadInt16();
+        Surface.CropRefs.Capacity = reader.ReadInt16();
+        Surface1.CropRefs.Capacity = reader.ReadInt16();
         if (options.Version >= 3)
         {
             reader.Align(8);
@@ -139,19 +139,19 @@ public class FontData : IBinarySerializable<ChunkBinaryOptions>
 
     public void Read(BinaryObjectReader reader, ChunkBinaryOptions options)
     {
-        Field00 = reader.Read<uint>();
-        FontListIndex = reader.Read<uint>();
+        Field00 = reader.ReadUInt32();
+        FontListIndex = reader.ReadUInt32();
         if (options.Version >= 3)
         {
             reader.Align(8);
         }
 
         Characters = reader.ReadStringOffset();
-        Scale = reader.Read<Vector2>();
-        Field14 = reader.Read<uint>();
-        Field18 = reader.Read<uint>();
-        SpaceCorrection = reader.Read<short>();
-        Field1E = reader.Read<ushort>();
+        Scale = reader.ReadVector2();
+        Field14 = reader.ReadUInt32();
+        Field18 = reader.ReadUInt32();
+        SpaceCorrection = reader.ReadInt16();
+        Field1E = reader.ReadUInt16();
         if (options.Version >= 3)
         {
             reader.Align(8);

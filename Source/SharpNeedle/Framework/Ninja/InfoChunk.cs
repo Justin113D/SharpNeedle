@@ -13,7 +13,7 @@ public class InfoChunk : IChunk
     {
         options.Header ??= reader.ReadLittle<ChunkHeader>();
         Signature = options.Header.Value.Signature;
-        int chunkCount = reader.Read<int>();
+        int chunkCount = reader.ReadInt32();
 
         // Check if Signature ends with IF
         if (((Signature >> 16) & 0xFFFF) != 0x4649)
@@ -59,7 +59,7 @@ public class InfoChunk : IChunk
         Offsets = reader.ReadObjectOffset<OffsetChunk>();
         reader.Skip(4); // Offsets.BinarySize
 
-        Field1C = reader.Read<uint>();
+        Field1C = reader.ReadUInt32();
     }
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions options)

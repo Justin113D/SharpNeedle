@@ -17,7 +17,7 @@ public class PointCloud : BinaryResource
     public override void Read(BinaryObjectReader reader)
     {
         reader.EnsureSignature(Signature);
-        FormatVersion = reader.Read<uint>();
+        FormatVersion = reader.ReadUInt32();
 
         long instancesOffset = reader.ReadOffsetValue();
         long instanceCount = reader.ReadOffsetValue();
@@ -60,10 +60,10 @@ public class PointCloud : BinaryResource
         {
             Name = reader.ReadStringOffset(StringBinaryFormat.NullTerminated);
             ResourceName = reader.ReadStringOffset(StringBinaryFormat.NullTerminated);
-            Position = reader.Read<Vector3>();
-            Rotation = reader.Read<Vector3>();
-            Field28 = reader.Read<int>();
-            Scale = reader.Read<Vector3>();
+            Position = reader.ReadVector3();
+            Rotation = reader.ReadVector3();
+            Field28 = reader.ReadInt32();
+            Scale = reader.ReadVector3();
 
             reader.Skip(4);
 

@@ -5,7 +5,7 @@ public class TransitionTable : Dictionary<string, string>, IBinarySerializable
     public void Read(BinaryObjectReader reader)
     {
         Clear();
-        int count = reader.Read<int>();
+        int count = reader.ReadInt32();
         reader.ReadOffset(() =>
         {
             for (int i = 0; i < count; i++)

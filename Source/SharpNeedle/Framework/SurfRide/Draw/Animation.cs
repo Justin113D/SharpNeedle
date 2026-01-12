@@ -17,9 +17,9 @@ public class Animation : List<Motion>, IBinarySerializable<ChunkBinaryOptions>
         }
 
         Name = reader.ReadStringOffset();
-        ID = reader.Read<int>();
-        Capacity = reader.Read<int>();
-        EndFrame = reader.Read<uint>();
+        ID = reader.ReadInt32();
+        Capacity = reader.ReadInt32();
+        EndFrame = reader.ReadUInt32();
         if (options.Version >= 3)
         {
             reader.Align(8);

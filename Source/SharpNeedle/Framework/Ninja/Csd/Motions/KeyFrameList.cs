@@ -11,8 +11,8 @@ public class KeyFrameList : IBinarySerializable, IList<KeyFrame>
 
     public void Read(BinaryObjectReader reader)
     {
-        Field00 = reader.Read<uint>();
-        Frames = new List<KeyFrame>(reader.ReadObjectArrayOffset<KeyFrame>(reader.Read<int>()));
+        Field00 = reader.ReadUInt32();
+        Frames = new List<KeyFrame>(reader.ReadObjectArrayOffset<KeyFrame>(reader.ReadInt32()));
     }
 
     public void Write(BinaryObjectWriter writer)

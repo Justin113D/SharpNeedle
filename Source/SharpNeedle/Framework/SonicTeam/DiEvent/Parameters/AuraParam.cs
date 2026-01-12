@@ -31,25 +31,25 @@ public class AuraParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        Field08 = reader.Read<int>();
-        Field0C = reader.Read<int>();
-        Field10 = reader.Read<float>();
-        Field14 = reader.Read<float>();
-        Field18 = reader.Read<float>();
-        Field1C = reader.Read<float>();
-        Field20 = reader.Read<float>();
-        Field24 = reader.Read<int>();
-        Field28 = reader.Read<int>();
-        Field2C = reader.Read<int>();
-        Field30 = reader.Read<int>();
-        Field34 = reader.Read<float>();
-        Field38 = reader.Read<float>();
-        Field3C = reader.Read<float>();
-        Field40 = reader.Read<float>();
-        Field44 = reader.Read<float>();
-        Field48 = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        Field08 = reader.ReadInt32();
+        Field0C = reader.ReadInt32();
+        Field10 = reader.ReadSingle();
+        Field14 = reader.ReadSingle();
+        Field18 = reader.ReadSingle();
+        Field1C = reader.ReadSingle();
+        Field20 = reader.ReadSingle();
+        Field24 = reader.ReadInt32();
+        Field28 = reader.ReadInt32();
+        Field2C = reader.ReadInt32();
+        Field30 = reader.ReadInt32();
+        Field34 = reader.ReadSingle();
+        Field38 = reader.ReadSingle();
+        Field3C = reader.ReadSingle();
+        Field40 = reader.ReadSingle();
+        Field44 = reader.ReadSingle();
+        Field48 = reader.ReadInt32();
         reader.ReadArray<float>(32, ValuesTimeline);
     }
 

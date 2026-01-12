@@ -20,17 +20,17 @@ public class SubtitleParam : BaseParam
         if (game == GameType.ShadowGenerations)
         {
             CellName = reader.ReadDiString(32);
-            Language = (SubtitleLanguage)reader.Read<int>();
-            Field14 = reader.Read<int>();
-            Field24 = reader.Read<int>();
-            Field28 = reader.Read<int>();
+            Language = (SubtitleLanguage)reader.ReadInt32();
+            Field14 = reader.ReadInt32();
+            Field24 = reader.ReadInt32();
+            Field28 = reader.ReadInt32();
             CellName2 = reader.ReadDiString(32);
         }
         else
         {
             CellName = reader.ReadDiString(16);
-            Language = (SubtitleLanguage)reader.Read<int>();
-            Field14 = reader.Read<int>();
+            Language = (SubtitleLanguage)reader.ReadInt32();
+            Field14 = reader.ReadInt32();
         }
     }
 

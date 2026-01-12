@@ -14,12 +14,12 @@ public class KeyFrame : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        Frame = reader.Read<int>();
-        Value = reader.Read<uint>();
+        Frame = reader.ReadInt32();
+        Value = reader.ReadUInt32();
         Interpolation = reader.Read<InterpolationType>();
-        InTangent = reader.Read<float>();
-        OutTangent = reader.Read<float>();
-        Field14 = reader.Read<uint>();
+        InTangent = reader.ReadSingle();
+        OutTangent = reader.ReadSingle();
+        Field14 = reader.ReadUInt32();
     }
 
     public void Write(BinaryObjectWriter writer)

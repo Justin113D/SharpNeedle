@@ -15,10 +15,10 @@ class DrawOffParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        Field08 = reader.Read<int>();
-        Field0C = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        Field08 = reader.ReadInt32();
+        Field0C = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

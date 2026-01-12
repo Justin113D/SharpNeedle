@@ -26,32 +26,32 @@ public class EffectParameter : IBinarySerializable<Effect>
     {
         Name = reader.ReadStringOffset();
 
-        StartTime = reader.Read<float>();
-        LifeTime = reader.Read<float>();
+        StartTime = reader.ReadSingle();
+        LifeTime = reader.ReadSingle();
 
-        PreprocessFrame = reader.Read<int>();
+        PreprocessFrame = reader.ReadInt32();
 
-        EffectScale = reader.Read<float>();
-        EmittingScale = reader.Read<float>();
-        Opacity = reader.Read<float>();
+        EffectScale = reader.ReadSingle();
+        EmittingScale = reader.ReadSingle();
+        Opacity = reader.ReadSingle();
 
-        Field1C = reader.Read<float>();
+        Field1C = reader.ReadSingle();
 
         reader.Align(16);
-        Position = reader.Read<Vector3>();
+        Position = reader.ReadVector3();
         reader.Align(16);
-        Rotation = reader.Read<Vector3>().ToDegrees();
+        Rotation = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        Scale = reader.Read<Vector3>();
+        Scale = reader.ReadVector3();
         reader.Align(16);
 
-        Field50 = reader.Read<int>();
-        Field54 = reader.Read<int>();
-        Field58 = reader.Read<int>();
-        Field5C = reader.Read<int>();
-        Field60 = reader.Read<int>();
+        Field50 = reader.ReadInt32();
+        Field54 = reader.ReadInt32();
+        Field58 = reader.ReadInt32();
+        Field5C = reader.ReadInt32();
+        Field60 = reader.ReadInt32();
 
-        Loop = Convert.ToBoolean(reader.Read<int>());
+        Loop = Convert.ToBoolean(reader.ReadInt32());
 
         for (int i = 0; i < Animations.Capacity; i++)
         {

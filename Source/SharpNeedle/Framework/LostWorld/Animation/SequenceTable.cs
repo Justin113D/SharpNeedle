@@ -13,7 +13,7 @@ public class SequenceTable : List<string?>, IComplexData
 
         Clear();
         PlayMode = reader.Read<PlayModeInfo>();
-        int seqCount = reader.Read<int>();
+        int seqCount = reader.ReadInt32();
         if (seqCount == 0)
         {
             return;

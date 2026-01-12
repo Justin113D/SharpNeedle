@@ -36,40 +36,40 @@ public class EmitterParameter : IBinarySerializable<EffectParameter>
 
         EmitterType = reader.Read<EEmitterType>();
 
-        StartTime = reader.Read<float>();
-        LifeTime = reader.Read<float>();
+        StartTime = reader.ReadSingle();
+        LifeTime = reader.ReadSingle();
 
         reader.Align(16);
-        InitialPosition = reader.Read<Vector3>();
+        InitialPosition = reader.ReadVector3();
         reader.Align(16);
-        InitialRotation = reader.Read<Vector3>().ToDegrees();
+        InitialRotation = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        Rotation = reader.Read<Vector3>().ToDegrees();
+        Rotation = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        RotationRandomMargin = reader.Read<Vector3>().ToDegrees();
+        RotationRandomMargin = reader.ReadVector3().ToDegrees();
         reader.Align(16);
-        InitialScale = reader.Read<Vector3>();
+        InitialScale = reader.ReadVector3();
         reader.Align(16);
 
-        LoopStartPosition = reader.Read<float>();
-        LoopEndPosition = reader.Read<float>();
+        LoopStartPosition = reader.ReadSingle();
+        LoopEndPosition = reader.ReadSingle();
 
         EmitCondition = reader.Read<EEmitCondition>();
         DirectionType = reader.Read<EDirectionType>();
 
-        EmissionInterval = reader.Read<float>();
-        ParticlePerEmission = reader.Read<float>();
+        EmissionInterval = reader.ReadSingle();
+        ParticlePerEmission = reader.ReadSingle();
 
-        Field78 = reader.Read<int>();
-        Field7C = reader.Read<int>();
+        Field78 = reader.ReadInt32();
+        Field7C = reader.ReadInt32();
 
         ShapeParameter = reader.Read<ShapeParameterUnion>();
 
-        Field94 = reader.Read<int>();
-        Field98 = reader.Read<int>();
-        Field9C = reader.Read<int>();
-        Field100 = reader.Read<int>();
-        Field104 = reader.Read<int>();
+        Field94 = reader.ReadInt32();
+        Field98 = reader.ReadInt32();
+        Field9C = reader.ReadInt32();
+        Field100 = reader.ReadInt32();
+        Field104 = reader.ReadInt32();
 
         for (int i = 0; i < Animations.Capacity; i++)
         {

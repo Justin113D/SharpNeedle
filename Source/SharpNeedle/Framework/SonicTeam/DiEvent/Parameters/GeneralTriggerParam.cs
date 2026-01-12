@@ -14,7 +14,7 @@ public class GeneralTriggerParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<uint>();
+        Field00 = reader.ReadUInt32();
         TriggerName = reader.ReadString(StringBinaryFormat.FixedLength, 64);
     }
 

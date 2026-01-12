@@ -16,7 +16,7 @@ public class TextureListNN : ITextureList
 
         Textures.Clear();
         reader.ReadOffset(() => Textures.AddRange(reader.ReadObject<BinaryList<TextureNN>>()));
-        FieldC = reader.Read<uint>();
+        FieldC = reader.ReadUInt32();
     }
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions context)

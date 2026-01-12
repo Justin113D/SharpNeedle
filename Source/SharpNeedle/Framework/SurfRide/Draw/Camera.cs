@@ -23,27 +23,27 @@ public class Camera : IBinarySerializable<ChunkBinaryOptions>
             }
 
             Name = reader.ReadStringOffset();
-            ID = reader.Read<int>();
+            ID = reader.ReadInt32();
         }
 
         if (options.Version >= 4)
         {
             reader.Align(16);
-            Position = reader.Read<Vector3>();
+            Position = reader.ReadVector3();
             reader.Align(16);
-            Target = reader.Read<Vector3>();
+            Target = reader.ReadVector3();
             reader.Align(16);
-            Field30 = reader.Read<int>();
+            Field30 = reader.ReadInt32();
         }
         else
         {
-            Position = reader.Read<Vector3>();
-            Target = reader.Read<Vector3>();
+            Position = reader.ReadVector3();
+            Target = reader.ReadVector3();
         }
 
-        FieldOfView = reader.Read<uint>();
-        NearPlane = reader.Read<float>();
-        FarPlane = reader.Read<float>();
+        FieldOfView = reader.ReadUInt32();
+        NearPlane = reader.ReadSingle();
+        FarPlane = reader.ReadSingle();
         if (options.Version >= 1)
         {
             Field48 = reader.ReadOffsetValue();

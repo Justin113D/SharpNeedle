@@ -16,11 +16,11 @@ public class CameraBlurParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<uint>();
-        Field04 = reader.Read<uint>();
-        Field08 = reader.Read<float>();
+        Field00 = reader.ReadUInt32();
+        Field04 = reader.ReadUInt32();
+        Field08 = reader.ReadSingle();
         reader.ReadArray<float>(32, CurveData);
-        Flags = reader.Read<uint>();
+        Flags = reader.ReadUInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

@@ -12,7 +12,7 @@ public class TimeStopObjectBehaviorParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Mode = reader.Read<int>();
+        Mode = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

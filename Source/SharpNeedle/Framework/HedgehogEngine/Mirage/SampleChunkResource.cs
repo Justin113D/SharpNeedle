@@ -67,9 +67,9 @@ public abstract class SampleChunkResource : ResourceBase, IBinarySerializable
     private void ReadResourceV1(BinaryObjectReader reader)
     {
         reader.Skip(4); // filesize
-        DataVersion = reader.Read<uint>();
+        DataVersion = reader.ReadUInt32();
 
-        uint dataSize = reader.Read<uint>();
+        uint dataSize = reader.ReadUInt32();
         long dataOffset = reader.ReadOffsetValue();
 
         using (SeekToken token = reader.At())

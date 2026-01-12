@@ -17,8 +17,8 @@ public class ProjectChunk : IChunk
     {
         options.Header ??= reader.ReadLittle<ChunkHeader>();
         Signature = options.Header.Value.Signature;
-        Field08 = reader.Read<uint>();
-        Field0C = reader.Read<uint>();
+        Field08 = reader.ReadUInt32();
+        Field0C = reader.ReadUInt32();
         Root = reader.ReadObjectOffset<SceneNode>();
         Name = reader.ReadStringOffset();
 

@@ -20,14 +20,14 @@ public class ColorCorrectionParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<uint>();
-        Field04 = reader.Read<float>();
-        Field08 = reader.Read<float>();
-        Field0C = reader.Read<float>();
-        Field10 = reader.Read<float>();
-        Field14 = reader.Read<uint>();
-        Field18 = reader.Read<float>();
-        Field1C = reader.Read<uint>();
+        Field00 = reader.ReadUInt32();
+        Field04 = reader.ReadSingle();
+        Field08 = reader.ReadSingle();
+        Field0C = reader.ReadSingle();
+        Field10 = reader.ReadSingle();
+        Field14 = reader.ReadUInt32();
+        Field18 = reader.ReadSingle();
+        Field1C = reader.ReadUInt32();
         reader.ReadArray<float>(32, CurveData);
     }
 

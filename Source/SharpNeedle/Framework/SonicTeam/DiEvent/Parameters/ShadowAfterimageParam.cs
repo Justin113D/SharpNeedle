@@ -23,14 +23,14 @@ public class ShadowAfterimageParam : BaseParam
     public override void Read(BinaryObjectReader reader, GameType game)
     {
         Color = reader.Read<Color<int>>();
-        Field10 = reader.Read<int>();
-        Field14 = reader.Read<int>();
-        Field18 = reader.Read<int>();
-        Field1C = reader.Read<int>();
-        Field20 = reader.Read<int>();
-        Field24 = reader.Read<float>();
-        Field28 = reader.Read<float>();
-        Field2C = reader.Read<int>();
+        Field10 = reader.ReadInt32();
+        Field14 = reader.ReadInt32();
+        Field18 = reader.ReadInt32();
+        Field1C = reader.ReadInt32();
+        Field20 = reader.ReadInt32();
+        Field24 = reader.ReadSingle();
+        Field28 = reader.ReadSingle();
+        Field2C = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

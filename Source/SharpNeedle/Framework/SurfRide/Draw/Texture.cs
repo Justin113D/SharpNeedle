@@ -24,11 +24,11 @@ public class Texture : List<Crop>, IBinarySerializable<ChunkBinaryOptions>
             TextureFileName = reader.ReadStringOffset();
         }
 
-        ID = reader.Read<int>();
-        Width = reader.Read<ushort>();
-        Height = reader.Read<ushort>();
-        Flags = reader.Read<uint>();
-        Capacity = reader.Read<int>();
+        ID = reader.ReadInt32();
+        Width = reader.ReadUInt16();
+        Height = reader.ReadUInt16();
+        Flags = reader.ReadUInt32();
+        Capacity = reader.ReadInt32();
         if (Capacity != 0)
         {
             AddRange(reader.ReadObjectArrayOffset<Crop>(Capacity));

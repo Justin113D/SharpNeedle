@@ -15,10 +15,10 @@ public class TimescaleParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Scale = reader.Read<float>();
-        Field08 = reader.Read<int>();
-        Field0C = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Scale = reader.ReadSingle();
+        Field08 = reader.ReadInt32();
+        Field0C = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

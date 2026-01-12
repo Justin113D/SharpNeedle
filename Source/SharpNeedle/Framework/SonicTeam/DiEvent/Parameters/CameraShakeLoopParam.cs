@@ -20,14 +20,14 @@ public class CameraShakeLoopParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        Field08 = reader.Read<float>();
-        Field0C = reader.Read<float>();
-        Field10 = reader.Read<float>();
-        Field14 = reader.Read<float>();
-        Field18 = reader.Read<float>();
-        Field1C = reader.Read<float>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        Field08 = reader.ReadSingle();
+        Field0C = reader.ReadSingle();
+        Field10 = reader.ReadSingle();
+        Field14 = reader.ReadSingle();
+        Field18 = reader.ReadSingle();
+        Field1C = reader.ReadSingle();
         reader.ReadArray<float>(64, CurveData);
     }
 

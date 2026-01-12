@@ -7,10 +7,10 @@ public class LightIndexData : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        int lightsCount = reader.Read<int>();
+        int lightsCount = reader.ReadInt32();
         reader.ReadOffset(() => LightIndices = reader.ReadArray<uint>(lightsCount));
 
-        int verticesCount = reader.Read<int>();
+        int verticesCount = reader.ReadInt32();
         reader.ReadOffset(() => VertexIndices = reader.ReadArray<ushort>(verticesCount));
     }
 

@@ -21,12 +21,12 @@ public class TextureNN : ITexture, IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        Field00 = reader.Read<uint>();
+        Field00 = reader.ReadUInt32();
         Name = reader.ReadStringOffset();
-        Field08 = reader.Read<ushort>();
-        Field0A = reader.Read<ushort>();
-        Field0C = reader.Read<uint>();
-        Field10 = reader.Read<uint>();
+        Field08 = reader.ReadUInt16();
+        Field0A = reader.ReadUInt16();
+        Field0C = reader.ReadUInt32();
+        Field10 = reader.ReadUInt32();
     }
 
     public void Write(BinaryObjectWriter writer)

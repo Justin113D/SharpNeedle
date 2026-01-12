@@ -75,8 +75,8 @@ public class MasterLevel : BinaryResource
 
             Name = reader.ReadStringOffset(StringBinaryFormat.NullTerminated);
 
-            int fileCount = reader.Read<int>();
-            int dependencyCount = reader.Read<int>();
+            int fileCount = reader.ReadInt32();
+            int dependencyCount = reader.ReadInt32();
 
             reader.ReadOffset(() =>
             {

@@ -18,7 +18,7 @@ public class MaterialParameterParam : BaseParam
     {
         MaterialName = reader.ReadString(StringBinaryFormat.FixedLength, 64);
         ParamName = reader.ReadString(StringBinaryFormat.FixedLength, 64);
-        Type = reader.Read<uint>();
+        Type = reader.ReadUInt32();
         reader.ReadArray<uint>(40, UnknownData);
     }
 

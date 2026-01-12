@@ -18,25 +18,25 @@ public class Cell2D : ICell
     {
         MaterialColor = reader.Read<Color<byte>>();
         IlluminationColor = reader.Read<Color<byte>>();
-        Field08 = reader.Read<byte>();
-        Field09 = reader.Read<byte>();
-        Field0A = reader.Read<byte>();
-        Field0B = reader.Read<byte>();
-        Translation = reader.Read<Vector2>();
+        Field08 = reader.ReadByte();
+        Field09 = reader.ReadByte();
+        Field0A = reader.ReadByte();
+        Field0B = reader.ReadByte();
+        Translation = reader.ReadVector2();
         if (options.Version >= 4)
         {
             reader.Align(16);
-            Translation = reader.Read<Vector2>();
+            Translation = reader.ReadVector2();
             reader.Align(16);
-            Scale = reader.Read<Vector2>();
-            RotationZ = reader.Read<uint>();
+            Scale = reader.ReadVector2();
+            RotationZ = reader.ReadUInt32();
             reader.Align(16);
         }
         else
         {
-            Translation = reader.Read<Vector2>();
-            Scale = reader.Read<Vector2>();
-            RotationZ = reader.Read<uint>();
+            Translation = reader.ReadVector2();
+            Scale = reader.ReadVector2();
+            RotationZ = reader.ReadUInt32();
         }
     }
 

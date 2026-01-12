@@ -7,8 +7,8 @@ public class Motion : IBinarySerializable<ChunkBinaryOptions>
 
     public void Read(BinaryObjectReader reader, ChunkBinaryOptions options)
     {
-        CastID = reader.Read<ushort>();
-        ushort trackCount = reader.Read<ushort>();
+        CastID = reader.ReadUInt16();
+        ushort trackCount = reader.ReadUInt16();
         if (options.Version >= 3)
         {
             reader.Align(8);

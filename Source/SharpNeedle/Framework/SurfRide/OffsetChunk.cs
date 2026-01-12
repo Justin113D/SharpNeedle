@@ -15,7 +15,7 @@ public class OffsetChunk : IChunk, IList<int>
         options.Header ??= reader.ReadObject<ChunkHeader>();
         Signature = options.Header.Value.Signature;
 
-        int count = reader.Read<int>();
+        int count = reader.ReadInt32();
         reader.Skip(4); // Runtime flags
         Offsets.AddRange(reader.ReadArray<int>(count));
     }

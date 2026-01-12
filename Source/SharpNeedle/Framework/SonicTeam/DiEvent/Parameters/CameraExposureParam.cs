@@ -20,14 +20,14 @@ public class CameraExposureParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<uint>();
-        Field04 = reader.Read<float>();
-        Field08 = reader.Read<uint>();
-        Field0C = reader.Read<uint>();
-        Field10 = reader.Read<uint>();
-        Field14 = reader.Read<uint>();
-        Field18 = reader.Read<uint>();
-        Field1C = reader.Read<uint>();
+        Field00 = reader.ReadUInt32();
+        Field04 = reader.ReadSingle();
+        Field08 = reader.ReadUInt32();
+        Field0C = reader.ReadUInt32();
+        Field10 = reader.ReadUInt32();
+        Field14 = reader.ReadUInt32();
+        Field18 = reader.ReadUInt32();
+        Field1C = reader.ReadUInt32();
         reader.ReadArray<float>(32, CurveData);
     }
 

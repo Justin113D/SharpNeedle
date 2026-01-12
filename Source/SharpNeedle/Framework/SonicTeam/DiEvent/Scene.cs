@@ -80,14 +80,14 @@ public class Scene : ResourceBase, IBinarySerializable<GameType>
         {
             reader.Skip(8);
 
-            StartFrame = reader.Read<float>();
-            EndFrame = reader.Read<float>();
-            NodeDrawCount = reader.Read<int>();
+            StartFrame = reader.ReadSingle();
+            EndFrame = reader.ReadSingle();
+            NodeDrawCount = reader.ReadInt32();
 
             reader.ReadOffset(() =>
             {
-                int cutCount = reader.Read<int>();
-                int allocSize = reader.Read<int>();
+                int cutCount = reader.ReadInt32();
+                int allocSize = reader.ReadInt32();
                 reader.Skip(8);
 
                 reader.ReadCollection(cutCount, Cuts);
@@ -95,8 +95,8 @@ public class Scene : ResourceBase, IBinarySerializable<GameType>
 
             reader.ReadOffset(() =>
             {
-                int pageCount = reader.Read<int>();
-                int allocSize = reader.Read<int>();
+                int pageCount = reader.ReadInt32();
+                int allocSize = reader.ReadInt32();
                 reader.Skip(8);
 
                 Pages.AddRange(reader.ReadObjectArray<Page>(pageCount));
@@ -104,15 +104,15 @@ public class Scene : ResourceBase, IBinarySerializable<GameType>
 
             reader.ReadOffset(() =>
             {
-                int unknownCount = reader.Read<int>();
-                int allocSize = reader.Read<int>();
+                int unknownCount = reader.ReadInt32();
+                int allocSize = reader.ReadInt32();
                 reader.Skip(8);
             });
 
             reader.ReadOffset(() =>
             {
-                int resourceCutCount = reader.Read<int>();
-                int allocSize = reader.Read<int>();
+                int resourceCutCount = reader.ReadInt32();
+                int allocSize = reader.ReadInt32();
                 reader.Skip(8);
 
                 reader.ReadCollection(resourceCutCount, ResourceCuts);
@@ -120,25 +120,25 @@ public class Scene : ResourceBase, IBinarySerializable<GameType>
 
             reader.ReadOffset(() =>
             {
-                int unknownCount = reader.Read<int>();
-                int allocSize = reader.Read<int>();
+                int unknownCount = reader.ReadInt32();
+                int allocSize = reader.ReadInt32();
                 reader.Skip(8);
             });
 
             reader.ReadOffset(() => RootNode.Read(reader, game));
 
-            ChainCameraIn = reader.Read<float>();
-            ChainCameraOut = reader.Read<float>();
-            Type = reader.Read<int>();
-            SkipPointTick = reader.Read<int>();
+            ChainCameraIn = reader.ReadSingle();
+            ChainCameraOut = reader.ReadSingle();
+            Type = reader.ReadInt32();
+            SkipPointTick = reader.ReadInt32();
 
             reader.Skip(4);
         }
 
         reader.ReadAtOffset(resourcesOffset, () =>
         {
-            int resourceCount = reader.Read<int>();
-            int allocSize = reader.Read<int>();
+            int resourceCount = reader.ReadInt32();
+            int allocSize = reader.ReadInt32();
             reader.Skip(8);
 
             Resources.AddRange(reader.ReadObjectArray<Resource>(resourceCount));

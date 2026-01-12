@@ -17,10 +17,10 @@ public class TerrainMaterial : BinaryResource
     public override void Read(BinaryObjectReader reader)
     {
         reader.EnsureSignature(Signature);
-        FormatVersion = reader.Read<uint>();
+        FormatVersion = reader.ReadUInt32();
 
         long instancesOffset = reader.ReadOffsetValue();
-        int instanceCount = (int)reader.Read<long>();
+        int instanceCount = (int)reader.ReadInt64();
 
         reader.ReadAtOffset(instancesOffset, () => Layers.AddRange(reader.ReadObjectArray<TerrainLayer>(instanceCount)));
     }
@@ -53,10 +53,10 @@ public class TerrainMaterial : BinaryResource
         {
             Type = reader.ReadStringOffset(StringBinaryFormat.NullTerminated);
 
-            SplatIndex = reader.Read<int>();
-            Field0C = reader.Read<int>();
-            Field10 = reader.Read<int>();
-            Field14 = reader.Read<int>();
+            SplatIndex = reader.ReadInt32();
+            Field0C = reader.ReadInt32();
+            Field10 = reader.ReadInt32();
+            Field14 = reader.ReadInt32();
 
             DetailAlbedoMap = reader.ReadStringOffset(StringBinaryFormat.NullTerminated);
             DetailNormalMap = reader.ReadStringOffset(StringBinaryFormat.NullTerminated);

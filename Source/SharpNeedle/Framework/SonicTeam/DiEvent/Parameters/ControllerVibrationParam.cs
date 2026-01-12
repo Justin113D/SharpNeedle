@@ -18,12 +18,12 @@ public class ControllerVibrationParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
+        Field00 = reader.ReadInt32();
         Group = reader.ReadString(StringBinaryFormat.FixedLength, 64);
         Mode = reader.ReadString(StringBinaryFormat.FixedLength, 64);
-        Field84 = reader.Read<uint>();
-        Field88 = reader.Read<uint>();
-        Field8C = reader.Read<uint>();
+        Field84 = reader.ReadUInt32();
+        Field88 = reader.ReadUInt32();
+        Field8C = reader.ReadUInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

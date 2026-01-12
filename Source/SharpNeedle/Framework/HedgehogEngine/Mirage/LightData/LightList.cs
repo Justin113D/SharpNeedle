@@ -6,7 +6,7 @@ public class LightList : SampleChunkResource
 
     public override void Read(BinaryObjectReader reader)
     {
-        int count = reader.Read<int>();
+        int count = reader.ReadInt32();
         Lights = new(count);
         reader.ReadOffset(() =>
         {

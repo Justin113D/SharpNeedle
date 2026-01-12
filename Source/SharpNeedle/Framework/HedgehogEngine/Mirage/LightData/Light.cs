@@ -21,16 +21,16 @@ public class Light : SampleChunkResource
     public override void Read(BinaryObjectReader reader)
     {
         Type = reader.Read<LightType>();
-        Position = reader.Read<Vector3>();
-        Color = reader.Read<Vector3>();
+        Position = reader.ReadVector3();
+        Color = reader.ReadVector3();
 
         if (Type != LightType.Point)
         {
             return;
         }
 
-        Attribute = reader.Read<int>();
-        Range = reader.Read<Vector4>();
+        Attribute = reader.ReadInt32();
+        Range = reader.ReadVector4();
     }
 
     public override void Write(BinaryObjectWriter writer)

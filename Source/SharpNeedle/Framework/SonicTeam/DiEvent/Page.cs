@@ -22,18 +22,18 @@ public class Page : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        Version = reader.Read<uint>();
-        Flag = reader.Read<uint>();
-        StartFrame = reader.Read<uint>();
-        EndFrame = reader.Read<uint>();
-        Field10 = reader.Read<int>();
-        int dataSize = reader.Read<int>();
-        SceneEndFrame = reader.Read<int>();
-        Field1C = reader.Read<int>();
-        int unknownCount = reader.Read<int>();
-        Field24 = reader.Read<int>();
-        Field28 = reader.Read<int>();
-        Field2C = reader.Read<int>();
+        Version = reader.ReadUInt32();
+        Flag = reader.ReadUInt32();
+        StartFrame = reader.ReadUInt32();
+        EndFrame = reader.ReadUInt32();
+        Field10 = reader.ReadInt32();
+        int dataSize = reader.ReadInt32();
+        SceneEndFrame = reader.ReadInt32();
+        Field1C = reader.ReadInt32();
+        int unknownCount = reader.ReadInt32();
+        Field24 = reader.ReadInt32();
+        Field28 = reader.ReadInt32();
+        Field2C = reader.ReadInt32();
         Name = reader.ReadString(StringBinaryFormat.FixedLength, 32);
 
         UnknownArray = new int[unknownCount];

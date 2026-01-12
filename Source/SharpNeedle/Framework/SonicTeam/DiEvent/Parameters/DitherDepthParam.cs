@@ -12,8 +12,8 @@ public class DitherDepthParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<uint>();
-        Field04 = reader.Read<float>();
+        Field00 = reader.ReadUInt32();
+        Field04 = reader.ReadSingle();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

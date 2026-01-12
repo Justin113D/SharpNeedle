@@ -9,10 +9,10 @@ public class Crop : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        Left = reader.Read<float>();
-        Top = reader.Read<float>();
-        Right = reader.Read<float>();
-        Bottom = reader.Read<float>();
+        Left = reader.ReadSingle();
+        Top = reader.ReadSingle();
+        Right = reader.ReadSingle();
+        Bottom = reader.ReadSingle();
     }
 
     public void Write(BinaryObjectWriter writer)

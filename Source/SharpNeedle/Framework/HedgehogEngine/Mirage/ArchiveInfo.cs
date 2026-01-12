@@ -12,14 +12,14 @@ public class ArchiveInfo : SampleChunkResource
 
     public override void Read(BinaryObjectReader reader)
     {
-        int entryCount = reader.Read<int>();
+        int entryCount = reader.ReadInt32();
         Entries.AddRange(reader.ReadObjectArrayOffset<Entry>(entryCount));
 
         reader.ReadOffset(() =>
         {
             for (int i = 0; i < entryCount; i++)
             {
-                Entries[i].Field04 = reader.Read<byte>();
+                Entries[i].Field04 = reader.ReadByte();
             }
         });
     }

@@ -20,15 +20,15 @@ public struct Version : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        byte ma = reader.Read<byte>();
-        byte mi = reader.Read<byte>();
-        byte r = reader.Read<byte>();
+        byte ma = reader.ReadByte();
+        byte mi = reader.ReadByte();
+        byte r = reader.ReadByte();
 
         Major = ma < 0x30 ? ma : (byte)(ma - 0x30);
         Minor = mi < 0x30 ? mi : (byte)(mi - 0x30);
         Revision = r < 0x30 ? r : (byte)(r - 0x30);
 
-        byte e = reader.Read<byte>();
+        byte e = reader.ReadByte();
         switch (e)
         {
             case 0x4C:

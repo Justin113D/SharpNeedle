@@ -38,7 +38,7 @@ public class Model : ModelBase
                 }
 
                 Node node = Nodes[i];
-                node.Transform = Matrix4x4.Transpose(reader.Read<Matrix4x4>());
+                node.Transform = Matrix4x4.Transpose(reader.ReadMatrix4x4());
                 Nodes[i] = node;
             }
         });
@@ -126,7 +126,7 @@ public class Model : ModelBase
 
         public void Read(BinaryObjectReader reader)
         {
-            ParentIndex = reader.Read<int>();
+            ParentIndex = reader.ReadInt32();
             Name = reader.ReadStringOffset();
             Transform = Matrix4x4.Identity;
         }

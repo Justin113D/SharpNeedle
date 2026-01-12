@@ -14,8 +14,8 @@ public class TheEndCableParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
         reader.ReadArray<float>(1024, Field08);
     }
 

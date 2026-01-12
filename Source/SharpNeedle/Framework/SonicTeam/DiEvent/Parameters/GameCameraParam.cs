@@ -37,32 +37,32 @@ public class GameCameraParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<int>();
-        Field04 = reader.Read<int>();
-        Field08 = reader.Read<int>();
-        Field0C = reader.Read<int>();
-        Field10 = reader.Read<float>();
-        Field14 = reader.Read<float>();
-        Field18 = reader.Read<float>();
-        Field1C = reader.Read<int>();
-        Field20 = reader.Read<int>();
-        Field24 = reader.Read<int>();
-        Field28 = reader.Read<float>();
-        Field2C = reader.Read<float>();
-        Field30 = reader.Read<float>();
-        Field34 = reader.Read<int>();
-        Field38 = reader.Read<int>();
-        Field3C = reader.Read<int>();
-        Field40 = reader.Read<int>();
-        Field44 = reader.Read<float>();
-        Field48 = reader.Read<int>();
-        Field4C = reader.Read<int>();
-        NearCullingPlane = reader.Read<float>();
-        FarCullingPlane = reader.Read<float>();
-        Field58 = reader.Read<float>();
-        Field5C = reader.Read<int>();
-        Field60 = reader.Read<int>();
-        Field64 = reader.Read<int>();
+        Field00 = reader.ReadInt32();
+        Field04 = reader.ReadInt32();
+        Field08 = reader.ReadInt32();
+        Field0C = reader.ReadInt32();
+        Field10 = reader.ReadSingle();
+        Field14 = reader.ReadSingle();
+        Field18 = reader.ReadSingle();
+        Field1C = reader.ReadInt32();
+        Field20 = reader.ReadInt32();
+        Field24 = reader.ReadInt32();
+        Field28 = reader.ReadSingle();
+        Field2C = reader.ReadSingle();
+        Field30 = reader.ReadSingle();
+        Field34 = reader.ReadInt32();
+        Field38 = reader.ReadInt32();
+        Field3C = reader.ReadInt32();
+        Field40 = reader.ReadInt32();
+        Field44 = reader.ReadSingle();
+        Field48 = reader.ReadInt32();
+        Field4C = reader.ReadInt32();
+        NearCullingPlane = reader.ReadSingle();
+        FarCullingPlane = reader.ReadSingle();
+        Field58 = reader.ReadSingle();
+        Field5C = reader.ReadInt32();
+        Field60 = reader.ReadInt32();
+        Field64 = reader.ReadInt32();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

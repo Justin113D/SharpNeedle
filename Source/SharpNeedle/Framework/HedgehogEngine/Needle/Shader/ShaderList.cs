@@ -39,7 +39,7 @@ public class ShaderList : BinaryResource
         public void Read(BinaryObjectReader reader)
         {
             Name = reader.ReadStringOffset();
-            UVIndex = reader.Read<int>();
+            UVIndex = reader.ReadInt32();
             reader.Align(8);
         }
 

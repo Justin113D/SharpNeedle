@@ -24,9 +24,9 @@ public class Resource : IBinarySerializable
     public void Read(BinaryObjectReader reader)
     {
         GUID = reader.Read<Guid>();
-        ResType = (ResourceType)reader.Read<int>();
-        Flags = reader.Read<uint>();
-        Field18 = reader.Read<int>();
+        ResType = (ResourceType)reader.ReadInt32();
+        Flags = reader.ReadUInt32();
+        Field18 = reader.ReadInt32();
         Name = reader.ReadString(StringBinaryFormat.FixedLength, 788);
     }
 

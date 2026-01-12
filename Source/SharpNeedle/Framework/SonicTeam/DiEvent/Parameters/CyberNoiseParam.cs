@@ -13,7 +13,7 @@ public class CyberNoiseParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Field00 = reader.Read<uint>();
+        Field00 = reader.ReadUInt32();
         reader.ReadArray<float>(32, CurveData);
     }
 

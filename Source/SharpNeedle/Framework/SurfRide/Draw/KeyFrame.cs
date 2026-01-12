@@ -14,17 +14,17 @@ public class KeyFrame : IBinarySerializable<uint>
     {
         InterpolationType interpolation = (InterpolationType)(flags & 3);
 
-        Frame = reader.Read<int>();
+        Frame = reader.ReadInt32();
         Value = reader.ReadObject<KeyFrameUnion, uint>(flags);
         if (interpolation >= InterpolationType.Hermite)
         {
-            InParam = reader.Read<float>();
-            OutParam = reader.Read<float>();
+            InParam = reader.ReadSingle();
+            OutParam = reader.ReadSingle();
         }
 
         if (interpolation == InterpolationType.Individual)
         {
-            Field10 = reader.Read<int>();
+            Field10 = reader.ReadInt32();
         }
     }
 
@@ -211,22 +211,22 @@ public struct KeyFrameUnion : IBinarySerializable<uint>
         switch (flags & 0xF0)
         {
             case 0x10:
-                Float = reader.Read<float>();
+                Float = reader.ReadSingle();
                 break;
             case 0x20:
-                Integer = reader.Read<int>();
+                Integer = reader.ReadInt32();
                 break;
             case 0x30:
                 Boolean = reader.Read<bool>();
                 break;
             case 0x40:
-                Integer = reader.Read<int>();
+                Integer = reader.ReadInt32();
                 break;
             case 0x50:
                 Color = reader.Read<Color<byte>>();
                 break;
             case 0x60:
-                UnsignedInteger = reader.Read<uint>();
+                UnsignedInteger = reader.ReadUInt32();
                 break;
             case 0x70:
                 Double = reader.Read<double>();

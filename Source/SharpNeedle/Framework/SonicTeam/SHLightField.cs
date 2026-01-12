@@ -18,10 +18,10 @@ public class SHLightField : BinaryResource
     {
         bool inMeters = Path.GetExtension(BaseFile?.Name) == ".lf";
 
-        FormatVersion = reader.Read<uint>();
+        FormatVersion = reader.ReadUInt32();
         reader.ReadArray<float>(36, DefaultProbeLightingData);
 
-        int probeCount = reader.Read<int>();
+        int probeCount = reader.ReadInt32();
         Nodes.AddRange(reader.ReadObjectArrayOffset<Node, bool>(inMeters, probeCount));
     }
 
@@ -52,13 +52,13 @@ public class SHLightField : BinaryResource
         {
             Name = reader.ReadStringOffset(StringBinaryFormat.NullTerminated);
 
-            ProbeCountX = reader.Read<int>();
-            ProbeCountY = reader.Read<int>();
-            ProbeCountZ = reader.Read<int>();
+            ProbeCountX = reader.ReadInt32();
+            ProbeCountY = reader.ReadInt32();
+            ProbeCountZ = reader.ReadInt32();
 
-            Position = inMeters ? reader.Read<Vector3>() : reader.Read<Vector3>() / 10;
-            Rotation = reader.Read<Vector3>();
-            Scale = inMeters ? reader.Read<Vector3>() : reader.Read<Vector3>() / 10;
+            Position = inMeters ? reader.ReadVector3() : reader.ReadVector3() / 10;
+            Rotation = reader.ReadVector3();
+            Scale = inMeters ? reader.ReadVector3() : reader.ReadVector3() / 10;
         }
 
         public void Write(BinaryObjectWriter writer, bool inMeters = false)

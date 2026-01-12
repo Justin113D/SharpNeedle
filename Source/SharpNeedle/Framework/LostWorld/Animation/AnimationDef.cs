@@ -17,7 +17,7 @@ public class AnimationDef : IBinarySerializable
     {
         Name = reader.ReadStringOffset();
         reader.EnsureSignatureNative(Type);
-        Layer = reader.Read<short>();
+        Layer = reader.ReadInt16();
     }
 
     public virtual void Write(BinaryObjectWriter writer)

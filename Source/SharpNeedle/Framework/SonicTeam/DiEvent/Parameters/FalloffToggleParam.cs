@@ -12,7 +12,7 @@ public class FalloffToggleParam : BaseParam
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Intensity = reader.Read<float>();
+        Intensity = reader.ReadSingle();
     }
 
     public override void Write(BinaryObjectWriter writer, GameType game)

@@ -19,16 +19,16 @@ public class Mesh : IBinarySerializable<uint>, IDisposable, ICloneable<Mesh>
         Elements = [];
         Material = reader.ReadStringOffsetOrEmpty();
 
-        Faces = reader.ReadArrayOffset<ushort>(reader.Read<int>());
-        VertexCount = reader.Read<uint>();
-        VertexSize = reader.Read<uint>();
+        Faces = reader.ReadArrayOffset<ushort>(reader.ReadInt32());
+        VertexCount = reader.ReadUInt32();
+        VertexSize = reader.ReadUInt32();
         Vertices = reader.ReadArrayOffset<byte>((int)(VertexCount * VertexSize));
 
         reader.ReadOffset(() =>
         {
             while (true)
             {
-                VertexElement element = reader.Read<VertexElement>();
+                VertexElement element = reader.ReadObject<VertexElement>();
                 if (element.Format == VertexFormat.Invalid)
                 {
                     break;

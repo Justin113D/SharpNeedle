@@ -47,7 +47,7 @@ public class TextureListMirage : ITextureList
                 }
             }
         });
-        FieldC = reader.Read<uint>();
+        FieldC = reader.ReadUInt32();
     }
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions context)
