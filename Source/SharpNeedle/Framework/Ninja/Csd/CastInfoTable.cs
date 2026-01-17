@@ -22,7 +22,7 @@ public class CastInfoTable : List<(string? Name, int FamilyIdx, int CastIdx)>, I
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Count);
+        writer.WriteInt32(Count);
 
         if (Count == 0)
         {
@@ -38,10 +38,10 @@ public class CastInfoTable : List<(string? Name, int FamilyIdx, int CastIdx)>, I
                 writer.WriteOffset(() => 
                 {
                     writer.WriteString(StringBinaryFormat.NullTerminated, Name);
-                    writer.Write<byte>(0);
+                    writer.WriteByte(0);
                 });
-                writer.Write(FamilyIdx);
-                writer.Write(CastIdx);
+                writer.WriteInt32(FamilyIdx);
+                writer.WriteInt32(CastIdx);
             }
         });
     }

@@ -36,9 +36,12 @@ public struct BulletPrimitive : IBinarySerializable
         writer.WriteByte((byte)ShapeType);
         writer.WriteByte(SurfaceLayer);
         writer.Align(4);
-        writer.WriteUInt32(SurfaceFlags);
-        writer.Write(Position);
-        writer.Write(Rotation);
-        writer.Write(Dimensions);
+
+        uint typeFlag = (SurfaceFlags & 0xFFFFFF) | ((uint)SurfaceType << 24);
+        writer.WriteUInt32(typeFlag);
+
+        writer.WriteVector3(Position);
+        writer.WriteQuaternion(Rotation);
+        writer.WriteVector3(Dimensions);
     }
 }

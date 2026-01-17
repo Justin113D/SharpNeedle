@@ -10,10 +10,6 @@ public class SubtitleParam : BaseParam
     public string CellName2 { get; set; } = string.Empty;
 
     public SubtitleParam() { }
-    public SubtitleParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -39,17 +35,17 @@ public class SubtitleParam : BaseParam
         if (game == GameType.ShadowGenerations)
         {
             writer.WriteDiString(CellName, 32);
-            writer.Write((int)Language);
-            writer.Write(Field14);
-            writer.Write(Field24);
-            writer.Write(Field28);
+            writer.WriteInt32((int)Language);
+            writer.WriteInt32(Field14);
+            writer.WriteInt32(Field24);
+            writer.WriteInt32(Field28);
             writer.WriteDiString(CellName2, 32);
         }
         else
         {
             writer.WriteDiString(CellName, 16);
-            writer.Write((int)Language);
-            writer.Write(Field14);
+            writer.WriteInt32((int)Language);
+            writer.WriteInt32(Field14);
         }
     }
 

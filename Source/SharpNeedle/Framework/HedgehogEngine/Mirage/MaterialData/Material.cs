@@ -130,7 +130,7 @@ public class Material : SampleChunkResource
         if (DataVersion <= 1)
         {
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Texset.Name);
-            writer.Write(0); // Reserved
+            writer.WriteInt32(0); // Reserved
         }
         else if (DataVersion == 2)
         {
@@ -149,15 +149,15 @@ public class Material : SampleChunkResource
             });
         }
 
-        writer.Write(AlphaThreshold);
+        writer.WriteByte(AlphaThreshold);
         writer.Write(NoBackFaceCulling);
-        writer.Write(BlendMode);
+        writer.WriteByte((byte)BlendMode);
         writer.Align(4);
 
-        writer.Write((byte)FloatParameters.Count);
-        writer.Write((byte)IntParameters.Count);
-        writer.Write((byte)BoolParameters.Count);
-        writer.Write((byte)Texset.Textures.Count);
+        writer.WriteByte((byte)FloatParameters.Count);
+        writer.WriteByte((byte)IntParameters.Count);
+        writer.WriteByte((byte)BoolParameters.Count);
+        writer.WriteByte((byte)Texset.Textures.Count);
 
         WriteParameters(FloatParameters);
         WriteParameters(IntParameters);
@@ -178,7 +178,7 @@ public class Material : SampleChunkResource
         {
             if (parameters.Count == 0)
             {
-                writer.Write(0);
+                writer.WriteInt32(0);
                 return;
             }
 

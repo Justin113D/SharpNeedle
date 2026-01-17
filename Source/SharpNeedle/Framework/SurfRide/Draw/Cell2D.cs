@@ -16,8 +16,8 @@ public class Cell2D : ICell
 
     public void Read(BinaryObjectReader reader, ChunkBinaryOptions options)
     {
-        MaterialColor = reader.Read<Color<byte>>();
-        IlluminationColor = reader.Read<Color<byte>>();
+        MaterialColor = reader.ReadObject<Color<byte>>();
+        IlluminationColor = reader.ReadObject<Color<byte>>();
         Field08 = reader.ReadByte();
         Field09 = reader.ReadByte();
         Field0A = reader.ReadByte();
@@ -42,26 +42,26 @@ public class Cell2D : ICell
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions options)
     {
-        writer.Write(MaterialColor);
-        writer.Write(IlluminationColor);
-        writer.Write(Field08);
-        writer.Write(Field09);
-        writer.Write(Field0A);
-        writer.Write(Field0B);
+        writer.WriteObject(MaterialColor);
+        writer.WriteObject(IlluminationColor);
+        writer.WriteByte(Field08);
+        writer.WriteByte(Field09);
+        writer.WriteByte(Field0A);
+        writer.WriteByte(Field0B);
         if (options.Version >= 4)
         {
             writer.Align(16);
-            writer.Write(Translation);
+            writer.WriteVector2(Translation);
             writer.Align(16);
-            writer.Write(Scale);
-            writer.Write(RotationZ);
+            writer.WriteVector2(Scale);
+            writer.WriteUInt32(RotationZ);
             writer.Align(16);
         }
         else
         {
-            writer.Write(Translation);
-            writer.Write(Scale);
-            writer.Write(RotationZ);
+            writer.WriteVector2(Translation);
+            writer.WriteVector2(Scale);
+            writer.WriteUInt32(RotationZ);
         }
     }
 }

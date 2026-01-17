@@ -172,14 +172,14 @@ public struct AABB : IBinarySerializable, IIntersectable<Vector3>, IIntersectabl
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(ref Min.X);
-        writer.Write(ref Max.X);
+        writer.WriteSingle(Min.X);
+        writer.WriteSingle(Max.X);
 
-        writer.Write(ref Min.Y);
-        writer.Write(ref Max.Y);
+        writer.WriteSingle(Min.Y);
+        writer.WriteSingle(Max.Y);
 
-        writer.Write(ref Min.Z);
-        writer.Write(ref Max.Z);
+        writer.WriteSingle(Min.Z);
+        writer.WriteSingle(Max.Z);
     }
 
     public override readonly string ToString()

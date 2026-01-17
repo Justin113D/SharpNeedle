@@ -1,5 +1,7 @@
 ﻿namespace SharpNeedle.Framework.Glitter;
 
+using System.Net;
+
 public class EffectParameter : IBinarySerializable<Effect>
 {
     public string? Name { get; set; }
@@ -81,31 +83,31 @@ public class EffectParameter : IBinarySerializable<Effect>
     {
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
 
-        writer.Write(StartTime);
-        writer.Write(LifeTime);
+        writer.WriteSingle(StartTime);
+        writer.WriteSingle(LifeTime);
 
-        writer.Write(PreprocessFrame);
+        writer.WriteInt32(PreprocessFrame);
 
-        writer.Write(EffectScale);
-        writer.Write(EmittingScale);
-        writer.Write(Opacity);
-        writer.Write(Field1C);
+        writer.WriteSingle(EffectScale);
+        writer.WriteSingle(EmittingScale);
+        writer.WriteSingle(Opacity);
+        writer.WriteSingle(Field1C);
 
         writer.Align(16);
-        writer.Write(Position);
+        writer.WriteVector3(Position);
         writer.Align(16);
-        writer.Write(Rotation.ToRadians());
+        writer.WriteVector3(Rotation.ToRadians());
         writer.Align(16);
-        writer.Write(Scale);
+        writer.WriteVector3(Scale);
         writer.Align(16);
 
-        writer.Write(Field50);
-        writer.Write(Field54);
-        writer.Write(Field58);
-        writer.Write(Field5C);
-        writer.Write(Field60);
+        writer.WriteInt32(Field50);
+        writer.WriteInt32(Field54);
+        writer.WriteInt32(Field58);
+        writer.WriteInt32(Field5C);
+        writer.WriteInt32(Field60);
 
-        writer.Write(Convert.ToInt32(Loop));
+        writer.WriteInt32(Convert.ToInt32(Loop));
 
         foreach (AnimationParameter animation in Animations)
         {

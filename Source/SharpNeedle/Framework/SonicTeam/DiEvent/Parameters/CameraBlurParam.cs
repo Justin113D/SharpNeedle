@@ -9,10 +9,6 @@ public class CameraBlurParam : BaseParam
     public uint Flags { get; set; }
 
     public CameraBlurParam() { }
-    public CameraBlurParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -25,11 +21,11 @@ public class CameraBlurParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
+        writer.WriteUInt32(Field00);
+        writer.WriteUInt32(Field04);
+        writer.WriteSingle(Field08);
         writer.WriteArrayFixedLength(CurveData, 32);
-        writer.Write(Flags);
+        writer.WriteUInt32(Flags);
     }
 
     public override int GetTypeID(GameType game)

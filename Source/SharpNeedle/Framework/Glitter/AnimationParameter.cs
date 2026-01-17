@@ -33,9 +33,9 @@ public class AnimationParameter : IBinarySerializable
             }
         });
 
-        writer.Write(Keyframes.Count);
+        writer.WriteInt32(Keyframes.Count);
 
-        writer.Write(Field08);
-        writer.Write(Field0C);
+        writer.WriteInt32(Field08);
+        writer.WriteInt32(Field0C);
     }
 }

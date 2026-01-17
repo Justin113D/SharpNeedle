@@ -9,11 +9,6 @@ public class CompositeAnimParam : BaseParam
 
     public CompositeAnimParam() { }
 
-    public CompositeAnimParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
-
     public override void Read(BinaryObjectReader reader, GameType game)
     {
         Field00 = reader.ReadInt32();
@@ -24,10 +19,10 @@ public class CompositeAnimParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
+        writer.WriteInt32(Field00);
         writer.WriteString(StringBinaryFormat.FixedLength, StateName, 12);
         writer.WriteObjectCollection(Animations);
-        writer.Write(ActiveAnimCount);
+        writer.WriteInt32(ActiveAnimCount);
     }
 
     public override int GetTypeID(GameType game) { return (int)ParameterType.CompositeAnimation; }
@@ -51,7 +46,7 @@ public class CompositeAnimParam : BaseParam
 
         public void Write(BinaryObjectWriter writer)
         {
-            writer.Write(Type);
+            writer.WriteInt32(Type);
             writer.WriteString(StringBinaryFormat.FixedLength, Name, 64);
         }
     }

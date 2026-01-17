@@ -45,25 +45,25 @@ public struct Version : IBinarySerializable
     {
         if (Major == 0)
         {
-            writer.Write(Major);
-            writer.Write(Minor);
-            writer.Write((byte)(Revision + 0x30));
+            writer.WriteByte(Major);
+            writer.WriteByte(Minor);
+            writer.WriteByte((byte)(Revision + 0x30));
         }
         else
         {
-            writer.Write((byte)(Major + 0x30));
-            writer.Write((byte)(Minor + 0x30));
-            writer.Write((byte)(Revision + 0x30));
+            writer.WriteByte((byte)(Major + 0x30));
+            writer.WriteByte((byte)(Minor + 0x30));
+            writer.WriteByte((byte)(Revision + 0x30));
         }
 
         switch (Endianness)
         {
             case Endianness.Little:
-                writer.Write((byte)0x4C);
+                writer.WriteByte(0x4C);
                 break;
 
             case Endianness.Big:
-                writer.Write((byte)0x42);
+                writer.WriteByte(0x42);
                 break;
         }
     }

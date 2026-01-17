@@ -27,11 +27,11 @@ public class TerrainMaterial : BinaryResource
 
     public override void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Signature);
-        writer.Write(FormatVersion);
+        writer.WriteUInt32(Signature);
+        writer.WriteUInt32(FormatVersion);
 
         writer.WriteObjectCollectionOffset(Layers);
-        writer.Write<long>(Layers.Count);
+        writer.WriteInt64(Layers.Count);
     }
 
     public class TerrainLayer : IBinarySerializable
@@ -70,10 +70,10 @@ public class TerrainMaterial : BinaryResource
         {
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Type, -1, 1);
 
-            writer.Write(SplatIndex);
-            writer.Write(Field0C);
-            writer.Write(Field10);
-            writer.Write(Field14);
+            writer.WriteInt32(SplatIndex);
+            writer.WriteInt32(Field0C);
+            writer.WriteInt32(Field10);
+            writer.WriteInt32(Field14);
 
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, DetailAlbedoMap, -1, 1);
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, DetailNormalMap, -1, 1);

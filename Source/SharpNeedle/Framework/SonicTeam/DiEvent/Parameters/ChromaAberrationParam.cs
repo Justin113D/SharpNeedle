@@ -10,10 +10,6 @@ public class ChromaAberrationParam : BaseParam
     public float[] CurveData { get; set; } = new float[32];
 
     public ChromaAberrationParam() { }
-    public ChromaAberrationParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -27,7 +23,7 @@ public class ChromaAberrationParam : BaseParam
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
         writer.WriteObject(EndpointA);
-        writer.Write(Field20);
+        writer.WriteSingle(Field20);
         writer.WriteObject(EndpointB);
 
         writer.WriteArrayFixedLength(CurveData, 32);
@@ -57,11 +53,6 @@ public class ChromaAberrationParam : BaseParam
 
         public Endpoint() { }
 
-        public Endpoint(BinaryObjectReader reader)
-        {
-            Read(reader);
-        }
-
         public void Read(BinaryObjectReader reader)
         {
             ColorOffset = new Color<float>(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle(), 1.0f);
@@ -72,10 +63,10 @@ public class ChromaAberrationParam : BaseParam
 
         public void Write(BinaryObjectWriter writer)
         {
-            writer.Write(new Vector3(ColorOffset.R, ColorOffset.G, ColorOffset.B));
-            writer.Write(SphereCurve);
-            writer.Write(Scale);
-            writer.Write(Position);
+            writer.WriteVector3(new Vector3(ColorOffset.R, ColorOffset.G, ColorOffset.B));
+            writer.WriteSingle(SphereCurve);
+            writer.WriteVector2(Scale);
+            writer.WriteVector2(Position);
         }
     }
 }

@@ -55,10 +55,6 @@ public class VignetteParam : BaseParam
     public float[] ValuesTimeline { get; set; } = new float[32];
 
     public VignetteParam() { }
-    public VignetteParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -118,56 +114,56 @@ public class VignetteParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
-        writer.Write(Field0C);
-        writer.Write(Field10);
-        writer.Write(Field14);
-        writer.Write(Field18);
-        writer.Write(Field1C);
-        writer.Write(Field20);
-        writer.Write(Field24);
-        writer.Write(Field28);
-        writer.Write(Field2C);
-        writer.Write(Field30);
-        writer.Write(Field34);
-        writer.Write(Field38);
-        writer.Write(Field3C);
-        writer.Write(Field40);
-        writer.Write(Field44);
-        writer.Write(Field48);
-        writer.Write(Field4C);
-        writer.Write(Field50);
-        writer.Write(Field54);
-        writer.Write(Field58);
-        writer.Write(Field5C);
-        writer.Write(Field60);
-        writer.Write(Field64);
-        writer.Write(Field68);
-        writer.Write(Field6C);
-        writer.Write(Field70);
-        writer.Write(Field74);
-        writer.Write(Field78);
-        writer.Write(Field7C);
-        writer.Write(Field80);
-        writer.Write(Field84);
-        writer.Write(Field88);
-        writer.Write(Field8C);
-        writer.Write(Field90);
-        writer.Write(Field94);
-        writer.Write(Field98);
-        writer.Write(Field9C);
-        writer.Write(FieldA0);
-        writer.Write(FieldA4);
-        writer.Write(FieldA8);
-        writer.Write(FieldAC);
-        writer.Write(FieldB0);
-        writer.Write(FieldB4);
-        writer.Write(FieldB8);
-        writer.Write(FieldBC);
-        writer.Write(FieldC0);
-        writer.Write(FieldC4);
+        writer.WriteInt32(Field00);
+        writer.WriteInt32(Field04);
+        writer.WriteSingle(Field08);
+        writer.WriteSingle(Field0C);
+        writer.WriteSingle(Field10);
+        writer.WriteSingle(Field14);
+        writer.WriteSingle(Field18);
+        writer.WriteSingle(Field1C);
+        writer.WriteSingle(Field20);
+        writer.WriteSingle(Field24);
+        writer.WriteSingle(Field28);
+        writer.WriteSingle(Field2C);
+        writer.WriteSingle(Field30);
+        writer.WriteSingle(Field34);
+        writer.WriteSingle(Field38);
+        writer.WriteSingle(Field3C);
+        writer.WriteSingle(Field40);
+        writer.WriteSingle(Field44);
+        writer.WriteSingle(Field48);
+        writer.WriteSingle(Field4C);
+        writer.WriteSingle(Field50);
+        writer.WriteSingle(Field54);
+        writer.WriteSingle(Field58);
+        writer.WriteSingle(Field5C);
+        writer.WriteSingle(Field60);
+        writer.WriteSingle(Field64);
+        writer.WriteSingle(Field68);
+        writer.WriteSingle(Field6C);
+        writer.WriteSingle(Field70);
+        writer.WriteSingle(Field74);
+        writer.WriteSingle(Field78);
+        writer.WriteSingle(Field7C);
+        writer.WriteSingle(Field80);
+        writer.WriteSingle(Field84);
+        writer.WriteInt32(Field88);
+        writer.WriteSingle(Field8C);
+        writer.WriteSingle(Field90);
+        writer.WriteSingle(Field94);
+        writer.WriteSingle(Field98);
+        writer.WriteSingle(Field9C);
+        writer.WriteSingle(FieldA0);
+        writer.WriteSingle(FieldA4);
+        writer.WriteSingle(FieldA8);
+        writer.WriteSingle(FieldAC);
+        writer.WriteSingle(FieldB0);
+        writer.WriteSingle(FieldB4);
+        writer.WriteSingle(FieldB8);
+        writer.WriteSingle(FieldBC);
+        writer.WriteSingle(FieldC0);
+        writer.WriteSingle(FieldC4);
 
         writer.WriteArrayFixedLength(ValuesTimeline, 32);
     }

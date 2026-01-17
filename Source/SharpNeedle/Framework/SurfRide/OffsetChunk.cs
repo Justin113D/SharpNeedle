@@ -23,10 +23,10 @@ public class OffsetChunk : IChunk, IList<int>
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions context)
     {
         writer.WriteLittle(Signature);
-        writer.Write(BinarySize - 8); // Size excluding header
+        writer.WriteInt32(BinarySize - 8); // Size excluding header
 
-        writer.Write(Offsets.Count);
-        writer.Write(0); // Runtime flags, make this 0 to kill the game
+        writer.WriteInt32(Offsets.Count);
+        writer.WriteInt32(0); // Runtime flags, make this 0 to kill the game
         writer.WriteCollection(Offsets);
         writer.Align(16);
     }

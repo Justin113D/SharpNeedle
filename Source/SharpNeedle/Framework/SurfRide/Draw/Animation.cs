@@ -57,9 +57,9 @@ public class Animation : List<Motion>, IBinarySerializable<ChunkBinaryOptions>
         }
 
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(ID);
-        writer.Write(Count);
-        writer.Write(EndFrame);
+        writer.WriteInt32(ID);
+        writer.WriteInt32(Count);
+        writer.WriteUInt32(EndFrame);
         if (options.Version >= 3)
         {
             writer.Align(8);

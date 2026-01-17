@@ -54,15 +54,15 @@ public class Font : List<CharData>, IBinarySerializable<ChunkBinaryOptions>
         }
 
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(ID);
-        writer.Write(Field0C);
+        writer.WriteInt32(ID);
+        writer.WriteUInt32(Field0C);
         if (options.Version >= 4)
         {
-            writer.Write(Field10);
+            writer.WriteInt16(Field10);
         }
 
-        writer.Write((ushort)Count);
-        writer.Write(Field14);
+        writer.WriteUInt16((ushort)Count);
+        writer.WriteUInt16(Field14);
         if (options.Version >= 3)
         {
             writer.Align(8);
@@ -102,9 +102,9 @@ public class CharData : IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Code);
-        writer.Write(TextureListIndex);
-        writer.Write(TextureIndex);
-        writer.Write(CropIndex);
+        writer.WriteUInt16(Code);
+        writer.WriteUInt16(TextureListIndex);
+        writer.WriteUInt16(TextureIndex);
+        writer.WriteUInt16(CropIndex);
     }
 }

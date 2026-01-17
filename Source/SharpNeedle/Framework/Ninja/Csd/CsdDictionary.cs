@@ -87,13 +87,13 @@ public class CsdDictionary<T> : IBinarySerializable, IDictionary<string?, T> whe
     {
         if (Items?.Count is null or 0)
         {
-            writer.Write(0);
+            writer.WriteInt32(0);
             writer.WriteOffsetValue(0);
             writer.WriteOffsetValue(0);
             return;
         }
 
-        writer.Write(NameTable.Count);
+        writer.WriteInt32(NameTable.Count);
         writer.WriteObjectCollectionOffset(Items);
         writer.WriteObjectCollectionOffset(NameTable);
     }
@@ -242,9 +242,9 @@ public class CsdDictionary<T> : IBinarySerializable, IDictionary<string?, T> whe
             writer.WriteOffset(() => 
             {
                 writer.WriteString(StringBinaryFormat.NullTerminated, name);
-                writer.Write<byte>(0);
+                writer.WriteByte(0);
             });
-            writer.Write(ref Index);
+            writer.WriteInt32(Index);
         }
 
         internal class Comparer : IComparer<NameIndexPair>

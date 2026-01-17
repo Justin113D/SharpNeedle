@@ -13,10 +13,6 @@ public class ColorCorrectionParam : BaseParam
     public float[] CurveData { get; set; } = new float[32];
 
     public ColorCorrectionParam() { }
-    public ColorCorrectionParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -33,14 +29,14 @@ public class ColorCorrectionParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
-        writer.Write(Field0C);
-        writer.Write(Field10);
-        writer.Write(Field14);
-        writer.Write(Field18);
-        writer.Write(Field1C);
+        writer.WriteSingle(Field00);
+        writer.WriteSingle(Field04);
+        writer.WriteSingle(Field08);
+        writer.WriteSingle(Field0C);
+        writer.WriteSingle(Field10);
+        writer.WriteSingle(Field14);
+        writer.WriteSingle(Field18);
+        writer.WriteSingle(Field1C);
         writer.WriteArrayFixedLength(CurveData, 32);
     }
 

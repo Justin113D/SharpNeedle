@@ -68,7 +68,7 @@ public abstract class ModelBase : SampleChunkResource
     {
         if (DataVersion >= 5)
         {
-            writer.Write(Groups.Count);
+            writer.WriteInt32(Groups.Count);
             writer.WriteOffset(() =>
             {
                 foreach (MeshGroup group in Groups)

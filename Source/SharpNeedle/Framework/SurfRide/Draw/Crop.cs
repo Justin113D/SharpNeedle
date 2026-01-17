@@ -17,9 +17,9 @@ public class Crop : IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Left);
-        writer.Write(Top);
-        writer.Write(Right);
-        writer.Write(Bottom);
+        writer.WriteSingle(Left);
+        writer.WriteSingle(Top);
+        writer.WriteSingle(Right);
+        writer.WriteSingle(Bottom);
     }
 }

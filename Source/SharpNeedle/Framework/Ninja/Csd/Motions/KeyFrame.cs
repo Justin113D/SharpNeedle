@@ -16,7 +16,7 @@ public class KeyFrame : IBinarySerializable
     {
         Frame = reader.ReadInt32();
         Value = reader.ReadUInt32();
-        Interpolation = reader.Read<InterpolationType>();
+        Interpolation = (InterpolationType)reader.ReadUInt32();
         InTangent = reader.ReadSingle();
         OutTangent = reader.ReadSingle();
         Field14 = reader.ReadUInt32();
@@ -24,12 +24,12 @@ public class KeyFrame : IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Frame);
-        writer.Write(Value.Uint);
-        writer.Write(Interpolation);
-        writer.Write(InTangent);
-        writer.Write(OutTangent);
-        writer.Write(Field14);
+        writer.WriteInt32(Frame);
+        writer.WriteUInt32(Value.Uint);
+        writer.WriteUInt32((uint)Interpolation);
+        writer.WriteSingle(InTangent);
+        writer.WriteSingle(OutTangent);
+        writer.WriteUInt32(Field14);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 4)]

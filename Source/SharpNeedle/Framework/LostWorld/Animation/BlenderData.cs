@@ -23,10 +23,10 @@ public class BlenderData : List<Blender>, IComplexData
     {
         if (writeType)
         {
-            writer.Write(1);
+            writer.WriteInt32(1);
         }
 
-        writer.Write(Count);
+        writer.WriteInt32(Count);
         writer.WriteOffset(() =>
         {
             foreach (Blender blender in this)
@@ -53,9 +53,9 @@ public class Blender : IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(0);
+        writer.WriteInt32(0);
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(Weight);
+        writer.WriteSingle(Weight);
         writer.WriteObject<BinaryList<Node>>(Nodes);
     }
 
@@ -75,8 +75,8 @@ public class Blender : IBinarySerializable
         public readonly void Write(BinaryObjectWriter writer)
         {
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-            writer.Write(Weight);
-            writer.Write(Priority);
+            writer.WriteSingle(Weight);
+            writer.WriteInt32(Priority);
         }
     }
 }

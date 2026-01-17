@@ -95,13 +95,13 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
     {
         Name = reader.ReadStringOffset();
 
-        ParticleType = reader.Read<EParticleType>();
+        ParticleType = (EParticleType)reader.ReadInt32();
 
         LifeTime = reader.ReadSingle();
 
         ZOffset = reader.ReadInt32();
 
-        DirectionType = reader.Read<EDirectionType>();
+        DirectionType = (EDirectionType)reader.ReadInt32();
 
         Field14 = reader.ReadSingle();
 
@@ -118,13 +118,13 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
         long colorTableOffset = reader.ReadOffsetValue();
         if (colorTableOffset != 0)
         {
-            ColorTables.AddRange(reader.ReadArrayAtOffset<Color<float>>(colorTableOffset, reader.ReadInt32()));
+            ColorTables.AddRange(reader.ReadObjectArrayAtOffset<Color<float>>(colorTableOffset, reader.ReadInt32()));
         }
 
         long colorTable2Offset = reader.ReadOffsetValue();
         if (colorTable2Offset != 0)
         {
-            ColorTable2s.AddRange(reader.ReadArrayAtOffset<Color<float>>(colorTable2Offset, reader.ReadInt32()));
+            ColorTable2s.AddRange(reader.ReadObjectArrayAtOffset<Color<float>>(colorTable2Offset, reader.ReadInt32()));
         }
 
         reader.Align(16);
@@ -166,7 +166,7 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
         Field138 = reader.ReadInt32();
         Field13C = reader.ReadInt32();
 
-        TextureIndexType = reader.Read<ETextureIndexType>();
+        TextureIndexType = (ETextureIndexType)reader.ReadInt32();
         TextureIndex = reader.ReadInt32();
         TextureIndexRangeStart = reader.ReadInt32();
         TextureIndexRangeEnd = reader.ReadInt32();
@@ -199,11 +199,11 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
             Material = reader.ReadObjectAtOffset<MaterialParameter>(materialOffset);
         }
 
-        BlendMode = reader.Read<EBlendMode>();
-        CompositeMode = reader.Read<ECompositeMode>();
-        SecondaryBlendMode = reader.Read<ESecondaryBlendMode>();
+        BlendMode = (EBlendMode)reader.ReadInt32();
+        CompositeMode = (ECompositeMode)reader.ReadInt32();
+        SecondaryBlendMode = (ESecondaryBlendMode)reader.ReadInt32();
         SecondaryBlend = reader.ReadInt32();
-        TextureAddressMode = reader.Read<ETextureAddressMode>();
+        TextureAddressMode = (ETextureAddressMode)reader.ReadInt32();
 
         Field1BC = (int)reader.ReadOffsetValue();
         if (ParticleType == EParticleType.Mesh && Field1BC != 0)
@@ -248,109 +248,97 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
     {
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
 
-        writer.Write(ParticleType);
+        writer.WriteInt32((int)ParticleType);
 
-        writer.Write(LifeTime);
+        writer.WriteSingle(LifeTime);
 
-        writer.Write(ZOffset);
+        writer.WriteSingle(ZOffset);
 
-        writer.Write(DirectionType);
+        writer.WriteInt32((int)DirectionType);
 
-        writer.Write(Field14);
+        writer.WriteSingle(Field14);
 
-        writer.Write(InitialSpeed);
-        writer.Write(InitialSpeedRandomMargin);
-        writer.Write(Deceleration);
-        writer.Write(DecelerationRandomMargin);
-        writer.Write(FollowEmitterTranslationRatio);
-        writer.Write(FollowEmitterTranslationYRatio);
+        writer.WriteSingle(InitialSpeed);
+        writer.WriteSingle(InitialSpeedRandomMargin);
+        writer.WriteSingle(Deceleration);
+        writer.WriteSingle(DecelerationRandomMargin);
+        writer.WriteSingle(FollowEmitterTranslationRatio);
+        writer.WriteSingle(FollowEmitterTranslationYRatio);
 
-        writer.Write(BaseColor);
-        writer.Write(MultiPurposeColor);
+        writer.WriteObject(BaseColor);
+        writer.WriteObject(MultiPurposeColor);
 
-        writer.WriteOffset(() =>
-        {
-            foreach (Color<float> colorTable in ColorTables)
-            {
-                writer.Write(colorTable);
-            }
-        });
-        writer.Write(ColorTables.Count);
+        writer.WriteObjectCollectionOffset(ColorTables);
+        writer.WriteSingle(ColorTables.Count);
 
-        writer.WriteOffset(() =>
-        {
-            foreach (Color<float> colorTable2 in ColorTable2s)
-            {
-                writer.Write(colorTable2);
-            }
-        });
-        writer.Write(ColorTable2s.Count);
+        writer.WriteObjectCollectionOffset(ColorTable2s);
+        writer.WriteSingle(ColorTable2s.Count);
 
         writer.Align(16);
-        writer.Write(InitialSize);
+        writer.WriteVector3(InitialSize);
         writer.Align(16);
-        writer.Write(InitialSizeRandomMargin);
+        writer.WriteVector3(InitialSizeRandomMargin);
         writer.Align(16);
-        writer.Write(InitialRotation.ToRadians());
+        writer.WriteVector3(InitialRotation.ToRadians());
         writer.Align(16);
-        writer.Write(InitialRotationRandomMargin.ToRadians());
+        writer.WriteVector3(InitialRotationRandomMargin.ToRadians());
         writer.Align(16);
-        writer.Write(Rotation.ToRadians());
+        writer.WriteVector3(Rotation.ToRadians());
         writer.Align(16);
-        writer.Write(RotationRandomMargin.ToRadians());
+        writer.WriteVector3(RotationRandomMargin.ToRadians());
         writer.Align(16);
-        writer.Write(InitialDirection);
+        writer.WriteVector3(InitialDirection);
         writer.Align(16);
-        writer.Write(InitialDirectionRandomMargin);
+        writer.WriteVector3(InitialDirectionRandomMargin);
         writer.Align(16);
-        writer.Write(GravitionalAcceleration);
+        writer.WriteVector3(GravitionalAcceleration);
         writer.Align(16);
-        writer.Write(ExternalAcceleration);
+        writer.WriteVector3(ExternalAcceleration);
         writer.Align(16);
-        writer.Write(ExternalAccelerationRandomMargin);
+        writer.WriteVector3(ExternalAccelerationRandomMargin);
         writer.Align(16);
 
-        writer.Write(EmitterTranslationEffectRatio);
+        writer.WriteSingle(EmitterTranslationEffectRatio);
 
-        writer.Write(LocusInterval);
+        writer.WriteSingle(LocusInterval);
 
-        writer.Write(Field118);
-        writer.Write(Field11C);
-        writer.Write(Field120);
-        writer.Write(Field124);
-        writer.Write(Field128);
-        writer.Write(Field12C);
-        writer.Write(Field130);
-        writer.Write(Field134);
-        writer.Write(Field138);
-        writer.Write(Field13C);
+        writer.WriteSingle(Field118);
+        writer.WriteSingle(Field11C);
+        writer.WriteSingle(Field120);
+        writer.WriteSingle(Field124);
+        writer.WriteSingle(Field128);
+        writer.WriteSingle(Field12C);
+        writer.WriteSingle(Field130);
+        writer.WriteSingle(Field134);
+        writer.WriteSingle(Field138);
+        writer.WriteSingle(Field13C);
 
-        writer.Write(TextureIndexType);
-        writer.Write(TextureIndex);
-        writer.Write(TextureIndexRangeStart);
-        writer.Write(TextureIndexRangeEnd);
+        writer.WriteInt32((int)TextureIndexType);
+        writer.WriteSingle(TextureIndex);
+        writer.WriteSingle(TextureIndexRangeStart);
+        writer.WriteSingle(TextureIndexRangeEnd);
 
-        writer.Write(Field150);
-        writer.Write(Field154);
-        writer.Write(Field158);
-        writer.Write(Field15C);
-        writer.Write(Field160);
-        writer.Write(Field164);
-        writer.Write(Field168);
-        writer.Write(Field16C);
-        writer.Write(Field170);
-        writer.Write(Field174);
-        writer.Write(Field178);
-        writer.Write(Field17C);
-        writer.Write(Field180);
-        writer.Write(Field184);
-        writer.Write(Field188);
-        writer.Write(Field18C);
-        writer.Write(Field190);
-        writer.Write(Field194);
-        writer.Write(Field198);
-        writer.Write(Field19C);
-        writer.Write(Field1A0);
+        writer.WriteSingle(Field150);
+        writer.WriteSingle(Field154);
+        writer.WriteSingle(Field158);
+        writer.WriteSingle(Field15C);
+        writer.WriteSingle(Field160);
+        writer.WriteSingle(Field164);
+        writer.WriteSingle(Field168);
+        writer.WriteSingle(Field16C);
+        writer.WriteSingle(Field170);
+        writer.WriteSingle(Field174);
+        writer.WriteSingle(Field178);
+        writer.WriteSingle(Field17C);
+        writer.WriteSingle(Field180);
+        writer.WriteSingle(Field184);
+        writer.WriteSingle(Field188);
+        writer.WriteSingle(Field18C);
+        writer.WriteSingle(Field190);
+        writer.WriteSingle(Field194);
+        writer.WriteSingle(Field198);
+        writer.WriteSingle(Field19C);
+        writer.WriteSingle(Field1A0);
 
         if (Material != null)
         {
@@ -361,11 +349,11 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
             writer.WriteOffsetValue(0);
         }
 
-        writer.Write(BlendMode);
-        writer.Write(CompositeMode);
-        writer.Write(SecondaryBlendMode);
-        writer.Write(SecondaryBlend);
-        writer.Write(TextureAddressMode);
+        writer.WriteInt32((int)BlendMode);
+        writer.WriteInt32((int)CompositeMode);
+        writer.WriteInt32((int)SecondaryBlendMode);
+        writer.WriteSingle(SecondaryBlend);
+        writer.WriteInt32((int)TextureAddressMode);
 
         if (ParticleType == EParticleType.Mesh && Mesh != null)
         {
@@ -376,20 +364,20 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
             writer.WriteOffsetValue(Field1BC);
         }
 
-        writer.Write(Field1C0);
-        writer.Write(Field1C4);
-        writer.Write(Field1C8);
-        writer.Write(Field1CC);
-        writer.Write(Field1D0);
-        writer.Write(Field1D4);
-        writer.Write(Field1D8);
-        writer.Write(Field1DC);
-        writer.Write(Field1E0);
-        writer.Write(Field1E4);
-        writer.Write(Field1E8);
-        writer.Write(Field1EC);
+        writer.WriteSingle(Field1C0);
+        writer.WriteSingle(Field1C4);
+        writer.WriteSingle(Field1C8);
+        writer.WriteSingle(Field1CC);
+        writer.WriteSingle(Field1D0);
+        writer.WriteSingle(Field1D4);
+        writer.WriteSingle(Field1D8);
+        writer.WriteSingle(Field1DC);
+        writer.WriteSingle(Field1E0);
+        writer.WriteSingle(Field1E4);
+        writer.WriteSingle(Field1E8);
+        writer.WriteSingle(Field1EC);
 
-        writer.Write(Flags);
+        writer.WriteSingle(Flags);
 
         foreach (AnimationParameter animation in Animations)
         {

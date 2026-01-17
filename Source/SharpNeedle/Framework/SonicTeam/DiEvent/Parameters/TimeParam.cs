@@ -14,10 +14,6 @@ public class TimeParam : BaseParam
     public float[] DataCurve { get; set; } = new float[32];
 
     public TimeParam() { }
-    public TimeParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -35,15 +31,15 @@ public class TimeParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
-        writer.Write(Field0C);
-        writer.Write(Field10);
-        writer.Write(Field14);
-        writer.Write(Field18);
-        writer.Write(Field1C);
-        writer.Write(Field20);
+        writer.WriteUInt32(Field00);
+        writer.WriteUInt32(Field04);
+        writer.WriteUInt32(Field08);
+        writer.WriteUInt32(Field0C);
+        writer.WriteUInt32(Field10);
+        writer.WriteUInt32(Field14);
+        writer.WriteUInt32(Field18);
+        writer.WriteUInt32(Field1C);
+        writer.WriteUInt32(Field20);
         writer.WriteArrayFixedLength(DataCurve, 32);
     }
 

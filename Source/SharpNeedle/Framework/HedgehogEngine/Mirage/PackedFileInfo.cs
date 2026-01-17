@@ -8,8 +8,8 @@ public class PackedFileInfo : SampleChunkResource
 
     public override void Read(BinaryObjectReader reader)
     {
-        reader.Read(out int fileCount);
-        Files = [];
+        int fileCount = reader.ReadInt32();
+        Files = new(fileCount);
 
         reader.ReadOffset(() =>
         {
@@ -22,7 +22,7 @@ public class PackedFileInfo : SampleChunkResource
 
     public override void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Files.Count);
+        writer.WriteInt32(Files.Count);
         writer.WriteOffset(() =>
         {
             foreach (File file in Files)
@@ -48,8 +48,8 @@ public class PackedFileInfo : SampleChunkResource
         public readonly void Write(BinaryObjectWriter writer)
         {
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-            writer.Write(Offset);
-            writer.Write(Size);
+            writer.WriteUInt32(Offset);
+            writer.WriteUInt32(Size);
         }
 
         public override readonly string ToString()

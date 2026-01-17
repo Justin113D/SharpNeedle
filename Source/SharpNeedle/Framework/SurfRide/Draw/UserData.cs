@@ -16,7 +16,7 @@ public class UserData : List<Data>, IBinarySerializable<ChunkBinaryOptions>
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions options)
     {
-        writer.Write(Count);
+        writer.WriteInt32(Count);
         if (options.Version >= 3)
         {
             writer.Align(8);
@@ -87,7 +87,7 @@ public class Data : IBinarySerializable<ChunkBinaryOptions>
         }
 
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(Type);
+        writer.WriteInt32(Type);
         if (options.Version >= 3)
         {
             writer.Align(8);

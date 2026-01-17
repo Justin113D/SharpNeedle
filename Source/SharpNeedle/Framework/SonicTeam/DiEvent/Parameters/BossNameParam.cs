@@ -6,10 +6,6 @@ public class BossNameParam : BaseParam
     public int NameType { get; set; }
 
     public BossNameParam() { }
-    public BossNameParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -19,8 +15,8 @@ public class BossNameParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(NameType);
+        writer.WriteInt32(Field00);
+        writer.WriteInt32(NameType);
     }
 
     public override int GetTypeID(GameType game)

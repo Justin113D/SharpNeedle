@@ -19,8 +19,8 @@ public class ShaderConstantUsage : IBinarySerializable
     public void Write(BinaryObjectWriter writer)
     {
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(Index);
-        writer.Write(Size);
+        writer.WriteByte(Index);
+        writer.WriteByte(Size);
 
         writer.Align(writer.GetOffsetSize());
     }

@@ -7,11 +7,6 @@ public class GeneralTriggerParam : BaseParam
 
     public GeneralTriggerParam() { }
 
-    public GeneralTriggerParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
-
     public override void Read(BinaryObjectReader reader, GameType game)
     {
         Field00 = reader.ReadUInt32();
@@ -20,7 +15,7 @@ public class GeneralTriggerParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
+        writer.WriteUInt32(Field00);
         writer.WriteString(StringBinaryFormat.FixedLength, TriggerName, 64);
     }
 

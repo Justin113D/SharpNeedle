@@ -16,6 +16,6 @@ public struct ChunkHeader : IBinarySerializable
     public readonly void Write(BinaryObjectWriter writer)
     {
         writer.WriteLittle(Signature);
-        writer.Write(Size);
+        writer.WriteInt32(Size);
     }
 }

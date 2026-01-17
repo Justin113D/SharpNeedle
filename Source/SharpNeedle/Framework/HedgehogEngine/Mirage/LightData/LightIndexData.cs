@@ -8,18 +8,18 @@ public class LightIndexData : IBinarySerializable
     public void Read(BinaryObjectReader reader)
     {
         int lightsCount = reader.ReadInt32();
-        reader.ReadOffset(() => LightIndices = reader.ReadArray<uint>(lightsCount));
+        LightIndices = reader.ReadArrayOffset<uint>(lightsCount);
 
         int verticesCount = reader.ReadInt32();
-        reader.ReadOffset(() => VertexIndices = reader.ReadArray<ushort>(verticesCount));
+        VertexIndices = reader.ReadArrayOffset<ushort>(verticesCount);
     }
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(LightIndices.Length);
+        writer.WriteInt32(LightIndices.Length);
         writer.WriteArrayOffset(LightIndices);
 
-        writer.Write(VertexIndices.Length);
+        writer.WriteInt32(VertexIndices.Length);
         writer.WriteArrayOffset(VertexIndices);
     }
 }

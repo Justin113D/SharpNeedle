@@ -10,6 +10,7 @@ public class LightIndexMesh : List<LightIndexData>, IBinarySerializable
     {
         int dataCount = reader.ReadInt32();
         Capacity = dataCount;
+        
         reader.ReadOffset(() =>
         {
             for (int i = 0; i < dataCount; i++)
@@ -21,7 +22,7 @@ public class LightIndexMesh : List<LightIndexData>, IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Count);
+        writer.WriteInt32(Count);
         writer.WriteOffset(() =>
         {
             foreach (LightIndexData mesh in this)

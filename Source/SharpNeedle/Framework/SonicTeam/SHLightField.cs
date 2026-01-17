@@ -29,10 +29,10 @@ public class SHLightField : BinaryResource
     {
         bool inMeters = Path.GetExtension(BaseFile?.Name) == ".lf";
 
-        writer.Write(FormatVersion);
+        writer.WriteUInt32(FormatVersion);
         writer.WriteArrayFixedLength(DefaultProbeLightingData, 36);
 
-        writer.Write(Nodes.Count);
+        writer.WriteInt32(Nodes.Count);
         writer.WriteObjectCollectionOffset(inMeters, Nodes);
     }
 
@@ -65,13 +65,13 @@ public class SHLightField : BinaryResource
         {
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name, -1, 1);
 
-            writer.Write(ProbeCountX);
-            writer.Write(ProbeCountY);
-            writer.Write(ProbeCountZ);
+            writer.WriteInt32(ProbeCountX);
+            writer.WriteInt32(ProbeCountY);
+            writer.WriteInt32(ProbeCountZ);
 
-            writer.Write(inMeters ? Position : Position * 10);
-            writer.Write(Rotation);
-            writer.Write(inMeters ? Scale : Scale * 10);
+            writer.WriteVector3(inMeters ? Position : Position * 10);
+            writer.WriteVector3(Rotation);
+            writer.WriteVector3(inMeters ? Scale : Scale * 10);
         }
     }
 }

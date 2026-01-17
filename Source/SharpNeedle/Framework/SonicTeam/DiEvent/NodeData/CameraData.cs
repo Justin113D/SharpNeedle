@@ -10,10 +10,6 @@ public class CameraData : BaseNodeData
     public List<float> FrameData { get; set; } = [];
 
     public CameraData() { }
-    public CameraData(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -31,10 +27,10 @@ public class CameraData : BaseNodeData
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(FrameCount);
-        writer.Write(Field08);
-        writer.Write(Field0C);
+        writer.WriteInt32(Field00);
+        writer.WriteInt32(FrameCount);
+        writer.WriteInt32(Field08);
+        writer.WriteInt32(Field0C);
 
         if (FrameCount > 0)
         {

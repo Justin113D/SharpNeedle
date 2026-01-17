@@ -17,7 +17,7 @@ public class TransitionTable : Dictionary<string, string>, IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Count);
+        writer.WriteInt32(Count);
 
         writer.WriteOffset(() =>
         {

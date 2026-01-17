@@ -19,10 +19,6 @@ public class DOFParam : BaseParam
     public float[] CurveData { get; set; } = new float[32];
 
     public DOFParam() { }
-    public DOFParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -45,20 +41,20 @@ public class DOFParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
+        writer.WriteInt32(Field00);
         writer.WriteObject(EndpointA);
         writer.WriteObject(EndpointB);
-        writer.Write(Field24);
-        writer.Write(Field28);
-        writer.Write(Field2C);
-        writer.Write(Field30);
-        writer.Write(Field34);
-        writer.Write(Field38);
-        writer.Write(Field3C);
-        writer.Write(Field40);
-        writer.Write(Field44);
-        writer.Write(Field48);
-        writer.Write(Field4C);
+        writer.WriteSingle(Field24);
+        writer.WriteSingle(Field28);
+        writer.WriteInt32(Field2C);
+        writer.WriteInt32(Field30);
+        writer.WriteSingle(Field34);
+        writer.WriteInt32(Field38);
+        writer.WriteInt32(Field3C);
+        writer.WriteInt32(Field40);
+        writer.WriteInt32(Field44);
+        writer.WriteInt32(Field48);
+        writer.WriteInt32(Field4C);
         writer.WriteArrayFixedLength(CurveData, 32);
     }
 
@@ -71,11 +67,6 @@ public class DOFParam : BaseParam
 
         public Endpoint() { }
 
-        public Endpoint(BinaryObjectReader reader)
-        {
-            Read(reader);
-        }
-
         public void Read(BinaryObjectReader reader)
         {
             Focus = reader.ReadSingle();
@@ -86,10 +77,10 @@ public class DOFParam : BaseParam
 
         public void Write(BinaryObjectWriter writer)
         {
-            writer.Write(Focus);
-            writer.Write(FocusRange);
-            writer.Write(Near);
-            writer.Write(Far);
+            writer.WriteSingle(Focus);
+            writer.WriteSingle(FocusRange);
+            writer.WriteSingle(Near);
+            writer.WriteSingle(Far);
         }
     }
 

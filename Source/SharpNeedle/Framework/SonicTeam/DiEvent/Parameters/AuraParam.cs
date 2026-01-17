@@ -24,10 +24,6 @@ public class AuraParam : BaseParam
     public float[] ValuesTimeline { get; set; } = new float[32];
 
     public AuraParam() { }
-    public AuraParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -55,25 +51,25 @@ public class AuraParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
-        writer.Write(Field0C);
-        writer.Write(Field10);
-        writer.Write(Field14);
-        writer.Write(Field18);
-        writer.Write(Field1C);
-        writer.Write(Field20);
-        writer.Write(Field24);
-        writer.Write(Field28);
-        writer.Write(Field2C);
-        writer.Write(Field30);
-        writer.Write(Field34);
-        writer.Write(Field38);
-        writer.Write(Field3C);
-        writer.Write(Field40);
-        writer.Write(Field44);
-        writer.Write(Field48);
+        writer.WriteInt32(Field00);
+        writer.WriteInt32(Field04);
+        writer.WriteInt32(Field08);
+        writer.WriteInt32(Field0C);
+        writer.WriteSingle(Field10);
+        writer.WriteSingle(Field14);
+        writer.WriteSingle(Field18);
+        writer.WriteSingle(Field1C);
+        writer.WriteSingle(Field20);
+        writer.WriteInt32(Field24);
+        writer.WriteInt32(Field28);
+        writer.WriteInt32(Field2C);
+        writer.WriteInt32(Field30);
+        writer.WriteSingle(Field34);
+        writer.WriteSingle(Field38);
+        writer.WriteSingle(Field3C);
+        writer.WriteSingle(Field40);
+        writer.WriteSingle(Field44);
+        writer.WriteInt32(Field48);
         writer.WriteArrayFixedLength(ValuesTimeline, 32);
     }
 

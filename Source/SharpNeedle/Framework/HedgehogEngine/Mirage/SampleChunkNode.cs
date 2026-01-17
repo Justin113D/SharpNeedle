@@ -341,14 +341,14 @@ public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
     {
         long start = writer.Position;
         SeekToken flagsToken = writer.At();
-        writer.Write(0u);
+        writer.WriteUInt32(0u);
 
         Flags flags = default;
         if (Parent == null)
         {
             flags = Flags.Root;
-            writer.Write(RootSignature);
-            writer.Write(0ul);
+            writer.WriteUInt32(RootSignature);
+            writer.WriteUInt64(0ul);
             writer.PushOffsetOrigin();
         }
         else
@@ -358,7 +358,7 @@ public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
                 flags = Flags.LastChild;
             }
 
-            writer.Write(Value);
+            writer.WriteUInt32(Value);
             writer.WriteLittle(BinaryHelper.MakeSignature<ulong>(Name, 0x20));
         }
 
@@ -403,11 +403,11 @@ public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
                 long nodeContentOffset = start + 0x10;
                 foreach (long offset in offsets)
                 {
-                    writer.Write((uint)(offset - nodeContentOffset));
+                    writer.WriteUInt32((uint)(offset - nodeContentOffset));
                 }
             });
 
-            writer.Write(offsets.Length);
+            writer.WriteInt32(offsets.Length);
         }
         else if (lastNode && Parent.Parent == null)
         {
@@ -427,7 +427,7 @@ public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
 
         using SeekToken endToken = writer.At();
         flagsToken.Dispose();
-        writer.Write((uint)((long)endToken - start) | (uint)flags);
+        writer.WriteUInt32((uint)((long)endToken - start) | (uint)flags);
     }
 
 

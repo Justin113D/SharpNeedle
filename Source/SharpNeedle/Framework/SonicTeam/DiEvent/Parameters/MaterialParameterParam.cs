@@ -9,11 +9,6 @@ public class MaterialParameterParam : BaseParam
 
     public MaterialParameterParam() { }
 
-    public MaterialParameterParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
-
     public override void Read(BinaryObjectReader reader, GameType game)
     {
         MaterialName = reader.ReadString(StringBinaryFormat.FixedLength, 64);
@@ -26,7 +21,7 @@ public class MaterialParameterParam : BaseParam
     {
         writer.WriteString(StringBinaryFormat.FixedLength, MaterialName, 64);
         writer.WriteString(StringBinaryFormat.FixedLength, ParamName, 64);
-        writer.Write(Type);
+        writer.WriteUInt32(Type);
         writer.WriteArrayFixedLength(UnknownData, 40);
     }
 

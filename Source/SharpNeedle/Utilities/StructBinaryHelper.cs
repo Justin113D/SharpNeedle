@@ -24,6 +24,26 @@ public static class StructBinaryHelper
         writer.WriteSingle(value.Y);
     }
 
+    public static Vector2[] ReadVector2Array(this BinaryValueReader reader, int count)
+    {
+        Vector2[] result = new Vector2[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            result[i] = reader.ReadVector2();
+        }
+
+        return result;
+    }
+
+    public static void WriteVector2Array(this BinaryValueWriter writer, Vector2[] array)
+    {
+        foreach (Vector2 value in array)
+        {
+            writer.WriteVector2(value);
+        }
+    }
+
     public static Vector3 ReadVector3(this BinaryValueReader reader)
     {
         return new Vector3(
@@ -38,6 +58,26 @@ public static class StructBinaryHelper
         writer.WriteSingle(value.X);
         writer.WriteSingle(value.Y);
         writer.WriteSingle(value.Z);
+    }
+
+    public static Vector3[] ReadVector3Array(this BinaryValueReader reader, int count)
+    {
+        Vector3[] result = new Vector3[count];
+
+        for(int i = 0; i < count; i++)
+        {
+            result[i] = reader.ReadVector3();
+        }
+
+        return result;
+    }
+
+    public static void WriteVector3Array(this BinaryValueWriter writer, Vector3[] array)
+    {
+        foreach (Vector3 value in array)
+        {
+            writer.WriteVector3(value);
+        }
     }
 
     public static Vector4 ReadVector4(this BinaryValueReader reader)
@@ -98,7 +138,7 @@ public static class StructBinaryHelper
         );
     }
 
-    public static void WriteVector4(this BinaryValueWriter writer, Matrix4x4 value)
+    public static void WriteMatrix4x4(this BinaryValueWriter writer, Matrix4x4 value)
     {
         writer.WriteSingle(value.M11);
         writer.WriteSingle(value.M12);
@@ -116,5 +156,15 @@ public static class StructBinaryHelper
         writer.WriteSingle(value.M42);
         writer.WriteSingle(value.M43);
         writer.WriteSingle(value.M44);
+    }
+
+    public static Guid ReadGuid(this BinaryValueReader reader)
+    {
+        return new Guid(reader.ReadArray<byte>(16), reader.Endianness == Endianness.Big);
+    }
+
+    public static void WriteGuid(this BinaryValueWriter writer, Guid guid)
+    {
+        writer.WriteBytes(guid.ToByteArray(writer.Endianness == Endianness.Big));
     }
 }

@@ -63,11 +63,11 @@ public class Texture : List<Crop>, IBinarySerializable<ChunkBinaryOptions>
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, TextureFileName);
         }
 
-        writer.Write(ID);
-        writer.Write(Width);
-        writer.Write(Height);
-        writer.Write(Flags);
-        writer.Write(Count);
+        writer.WriteInt32(ID);
+        writer.WriteUInt16(Width);
+        writer.WriteUInt16(Height);
+        writer.WriteUInt32(Flags);
+        writer.WriteInt32(Count);
         if (Count != 0)
         {
             writer.WriteObjectCollectionOffset(this);

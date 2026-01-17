@@ -21,7 +21,7 @@ public class Texset : SampleChunkResource
 
     public override void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Textures.Count);
+        writer.WriteInt32(Textures.Count);
         writer.WriteOffset(() =>
         {
             foreach (Texture texture in Textures)

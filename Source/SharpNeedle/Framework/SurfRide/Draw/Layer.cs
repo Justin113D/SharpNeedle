@@ -70,9 +70,9 @@ public class Layer : IBinarySerializable<ChunkBinaryOptions>
         }
 
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(ID);
-        writer.Write(Flags);
-        writer.Write(Nodes.Count);
+        writer.WriteInt32(ID);
+        writer.WriteUInt32(Flags);
+        writer.WriteInt32(Nodes.Count);
         if (options.Version >= 3)
         {
             writer.Align(8);
@@ -102,7 +102,7 @@ public class Layer : IBinarySerializable<ChunkBinaryOptions>
             writer.WriteOffsetValue(0);
         }
 
-        writer.Write(Animations.Count);
+        writer.WriteInt32(Animations.Count);
         if (options.Version >= 3)
         {
             writer.Align(8);
@@ -117,7 +117,7 @@ public class Layer : IBinarySerializable<ChunkBinaryOptions>
             writer.WriteOffsetValue(0);
         }
 
-        writer.Write(CurrentAnimationIndex);
+        writer.WriteUInt32(CurrentAnimationIndex);
         if (options.Version >= 3)
         {
             writer.Align(8);

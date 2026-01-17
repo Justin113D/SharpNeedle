@@ -6,12 +6,12 @@ public class Font : List<CharacterMapping>, IBinarySerializable
     {
         Clear();
         Capacity = reader.ReadInt32();
-        AddRange(reader.ReadArrayOffset<CharacterMapping>(Capacity));
+        AddRange(reader.ReadObjectArrayOffset<CharacterMapping>(Capacity));
     }
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Count);
-        writer.WriteCollectionOffset(this);
+        writer.WriteInt32(Count);
+        writer.WriteObjectCollectionOffset(this);
     }
 }

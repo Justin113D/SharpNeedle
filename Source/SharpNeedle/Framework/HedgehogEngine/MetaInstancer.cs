@@ -51,14 +51,14 @@ public class MetaInstancer : ResourceBase, IBinarySerializable
     public void Write(BinaryObjectWriter writer)
     {
         writer.WriteNative(Signature);
-        writer.Write(FormatVersion);
+        writer.WriteUInt32(FormatVersion);
 
-        writer.Write(Instances.Count);
-        writer.Write(InstanceSize);
+        writer.WriteInt32(Instances.Count);
+        writer.WriteUInt32(InstanceSize);
 
         writer.Skip(12);
 
-        writer.Write(HeaderSize);
+        writer.WriteUInt32(HeaderSize);
         writer.WriteObjectCollection(Instances);
     }
 
@@ -94,20 +94,20 @@ public class MetaInstancer : ResourceBase, IBinarySerializable
 
         public void Write(BinaryObjectWriter writer)
         {
-            writer.Write(Position);
-            writer.Write(Type);
-            writer.Write(Sway);
+            writer.WriteVector3(Position);
+            writer.WriteByte(Type);
+            writer.WriteByte(Sway);
 
-            writer.Write(PitchAfterSway);
-            writer.Write(YawAfterSway);
+            writer.WriteByte(PitchAfterSway);
+            writer.WriteByte(YawAfterSway);
 
-            writer.Write(PitchBeforeSway);
-            writer.Write(YawBeforeSway);
+            writer.WriteInt32(PitchBeforeSway);
+            writer.WriteInt32(YawBeforeSway);
 
-            writer.Write(Color.A);
-            writer.Write(Color.R);
-            writer.Write(Color.G);
-            writer.Write(Color.B);
+            writer.WriteInt32(Color.A);
+            writer.WriteInt32(Color.R);
+            writer.WriteInt32(Color.G);
+            writer.WriteInt32(Color.B);
         }
     }
 }

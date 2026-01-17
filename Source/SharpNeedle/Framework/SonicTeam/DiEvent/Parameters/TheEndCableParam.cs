@@ -7,10 +7,6 @@ public class TheEndCableParam : BaseParam
     public float[] Field08 { get; set; } = new float[1024];
 
     public TheEndCableParam() { }
-    public TheEndCableParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -21,8 +17,8 @@ public class TheEndCableParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
+        writer.WriteInt32(Field00);
+        writer.WriteInt32(Field04);
         writer.WriteArrayFixedLength(Field08, 1024);
     }
 

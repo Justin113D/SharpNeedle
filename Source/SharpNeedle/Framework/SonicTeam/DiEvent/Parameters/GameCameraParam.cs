@@ -30,10 +30,6 @@ public class GameCameraParam : BaseParam
     public int Field64 { get; set; }
 
     public GameCameraParam() { }
-    public GameCameraParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -67,32 +63,32 @@ public class GameCameraParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
-        writer.Write(Field0C);
-        writer.Write(Field10);
-        writer.Write(Field14);
-        writer.Write(Field18);
-        writer.Write(Field1C);
-        writer.Write(Field20);
-        writer.Write(Field24);
-        writer.Write(Field28);
-        writer.Write(Field2C);
-        writer.Write(Field30);
-        writer.Write(Field34);
-        writer.Write(Field38);
-        writer.Write(Field3C);
-        writer.Write(Field40);
-        writer.Write(Field44);
-        writer.Write(Field48);
-        writer.Write(Field4C);
-        writer.Write(NearCullingPlane);
-        writer.Write(FarCullingPlane);
-        writer.Write(Field58);
-        writer.Write(Field5C);
-        writer.Write(Field60);
-        writer.Write(Field64);
+        writer.WriteInt32(Field00);
+        writer.WriteInt32(Field04);
+        writer.WriteInt32(Field08);
+        writer.WriteInt32(Field0C);
+        writer.WriteSingle(Field10);
+        writer.WriteSingle(Field14);
+        writer.WriteSingle(Field18);
+        writer.WriteInt32(Field1C);
+        writer.WriteInt32(Field20);
+        writer.WriteInt32(Field24);
+        writer.WriteSingle(Field28);
+        writer.WriteSingle(Field2C);
+        writer.WriteSingle(Field30);
+        writer.WriteInt32(Field34);
+        writer.WriteInt32(Field38);
+        writer.WriteInt32(Field3C);
+        writer.WriteInt32(Field40);
+        writer.WriteSingle(Field44);
+        writer.WriteInt32(Field48);
+        writer.WriteInt32(Field4C);
+        writer.WriteSingle(NearCullingPlane);
+        writer.WriteSingle(FarCullingPlane);
+        writer.WriteSingle(Field58);
+        writer.WriteInt32(Field5C);
+        writer.WriteInt32(Field60);
+        writer.WriteInt32(Field64);
     }
 
     public override int GetTypeID(GameType game) { return (int)ParameterType.GameCamera; }

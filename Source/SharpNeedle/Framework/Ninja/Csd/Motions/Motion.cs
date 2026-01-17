@@ -96,7 +96,7 @@ public class Motion : IBinarySerializable
     {
         writer.WriteOffset(() =>
         {
-            writer.Write(0);
+            writer.WriteInt32(0);
 
             writer.WriteOffset(() =>
             { 

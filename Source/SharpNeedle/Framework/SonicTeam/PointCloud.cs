@@ -33,8 +33,8 @@ public class PointCloud : BinaryResource
 
     public override void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Signature);
-        writer.Write(FormatVersion);
+        writer.WriteUInt32(Signature);
+        writer.WriteUInt32(FormatVersion);
 
         writer.WriteOffset(() =>
         {
@@ -44,7 +44,7 @@ public class PointCloud : BinaryResource
             }
         });
 
-        writer.Write<long>(Instances.Count);
+        writer.WriteInt64(Instances.Count);
     }
 
     public class InstanceData : IBinarySerializable<bool>
@@ -78,10 +78,10 @@ public class PointCloud : BinaryResource
         {
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name, -1, 1);
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, ResourceName, -1, 1);
-            writer.Write(Position);
-            writer.Write(Rotation);
-            writer.Write(Field28);
-            writer.Write(Scale);
+            writer.WriteVector3(Position);
+            writer.WriteVector3(Rotation);
+            writer.WriteInt32(Field28);
+            writer.WriteVector3(Scale);
 
             writer.Skip(4);
 

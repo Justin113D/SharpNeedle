@@ -23,7 +23,7 @@ public class Resource : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        GUID = reader.Read<Guid>();
+        GUID = reader.ReadGuid();
         ResType = (ResourceType)reader.ReadInt32();
         Flags = reader.ReadUInt32();
         Field18 = reader.ReadInt32();
@@ -32,10 +32,10 @@ public class Resource : IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(GUID);
-        writer.Write((int)ResType);
-        writer.Write(Flags);
-        writer.Write(Field18);
+        writer.WriteGuid(GUID);
+        writer.WriteInt32((int)ResType);
+        writer.WriteUInt32(Flags);
+        writer.WriteInt32(Field18);
         writer.WriteString(StringBinaryFormat.FixedLength, Name, 788);
     }
 }

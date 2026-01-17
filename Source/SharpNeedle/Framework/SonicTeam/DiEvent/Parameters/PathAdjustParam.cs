@@ -9,10 +9,6 @@ public class PathAdjustParam : BaseParam
     public int Field4C { get; set; }
 
     public PathAdjustParam() { }
-    public PathAdjustParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -25,11 +21,11 @@ public class PathAdjustParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(LocalTransform);
-        writer.Write(Field40);
-        writer.Write(Field44);
-        writer.Write(Field48);
-        writer.Write(Field4C);
+        writer.WriteMatrix4x4(LocalTransform);
+        writer.WriteInt32(Field40);
+        writer.WriteInt32(Field44);
+        writer.WriteInt32(Field48);
+        writer.WriteInt32(Field4C);
     }
 
     public override int GetTypeID(GameType game) { return (int)ParameterType.PathAdjust; }

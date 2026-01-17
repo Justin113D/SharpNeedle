@@ -26,14 +26,14 @@ public class ArchiveInfo : SampleChunkResource
 
     public override void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Entries.Count);
+        writer.WriteInt32(Entries.Count);
         writer.WriteObjectCollectionOffset(Entries);
 
         writer.WriteOffset(() =>
         {
             for (int i = 0; i < Entries.Count; i++)
             {
-                writer.Write(Entries[i].Field04);
+                writer.WriteByte(Entries[i].Field04);
             }
 
             writer.Align(4);

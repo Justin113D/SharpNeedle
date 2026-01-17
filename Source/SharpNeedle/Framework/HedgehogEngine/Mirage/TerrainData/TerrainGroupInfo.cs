@@ -13,7 +13,7 @@ public class TerrainGroupInfo : IBinarySerializable
 
     public void Read(BinaryObjectReader reader)
     {
-        Bounds = reader.ReadValueOffset<Sphere>();
+        Bounds = reader.ReadObjectOffset<Sphere>();
         Name = reader.ReadStringOffset();
         MemorySize = reader.ReadUInt32();
 
@@ -23,7 +23,7 @@ public class TerrainGroupInfo : IBinarySerializable
         {
             for (int i = 0; i < instancesCount; i++)
             {
-                Instances.Add(reader.ReadValueOffset<Sphere>());
+                Instances.Add(reader.ReadObjectOffset<Sphere>());
             }
         });
 
@@ -32,15 +32,15 @@ public class TerrainGroupInfo : IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.WriteValueOffset(Bounds);
+        writer.WriteObjectOffset(Bounds);
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(MemorySize);
-        writer.Write(Instances.Count);
+        writer.WriteUInt32(MemorySize);
+        writer.WriteInt32(Instances.Count);
         writer.WriteOffset(() =>
         {
             foreach (Sphere instance in Instances)
             {
-                writer.WriteValueOffset(instance);
+                writer.WriteObjectOffset(instance);
             }
         });
     }

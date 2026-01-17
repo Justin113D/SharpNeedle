@@ -107,7 +107,7 @@ public class MeshGroup : List<Mesh>, IBinarySerializable<uint>, IDisposable, ICl
             }
         }
 
-        writer.Write(specialGroups.Count);
+        writer.WriteInt32(specialGroups.Count);
         if (specialGroups.Count == 0)
         {
             writer.WriteUInt32(uint.MaxValue);
@@ -152,7 +152,7 @@ public class MeshGroup : List<Mesh>, IBinarySerializable<uint>, IDisposable, ICl
 
         void WriteMeshes(IEnumerable<Mesh> meshes)
         {
-            writer.Write(meshes.Count());
+            writer.WriteInt32(meshes.Count());
             writer.WriteOffset(() =>
             {
                 foreach (Mesh mesh in meshes)

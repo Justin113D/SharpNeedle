@@ -41,21 +41,21 @@ public struct CastInfo : IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(HideFlag);
-        writer.Write(Translation);
-        writer.Write(Rotation);
-        writer.Write(Scale);
-        writer.Write(SpriteIndex);
+        writer.WriteUInt32(HideFlag);
+        writer.WriteVector2(Translation);
+        writer.WriteSingle(Rotation);
+        writer.WriteVector2(Scale);
+        writer.WriteSingle(SpriteIndex);
 
         // Colours are handled as uints for endianness
-        writer.Write(Unsafe.As<Color<byte>, uint>(ref Color));
-        writer.Write(Unsafe.As<Color<byte>, uint>(ref GradientTopLeft));
-        writer.Write(Unsafe.As<Color<byte>, uint>(ref GradientBottomLeft));
-        writer.Write(Unsafe.As<Color<byte>, uint>(ref GradientTopRight));
-        writer.Write(Unsafe.As<Color<byte>, uint>(ref GradientBottomRight));
+        writer.WriteUInt32(Unsafe.As<Color<byte>, uint>(ref Color));
+        writer.WriteUInt32(Unsafe.As<Color<byte>, uint>(ref GradientTopLeft));
+        writer.WriteUInt32(Unsafe.As<Color<byte>, uint>(ref GradientBottomLeft));
+        writer.WriteUInt32(Unsafe.As<Color<byte>, uint>(ref GradientTopRight));
+        writer.WriteUInt32(Unsafe.As<Color<byte>, uint>(ref GradientBottomRight));
 
-        writer.Write(UserData0);
-        writer.Write(UserData1);
-        writer.Write(UserData2);
+        writer.WriteUInt32(UserData0);
+        writer.WriteUInt32(UserData1);
+        writer.WriteUInt32(UserData2);
     }
 }

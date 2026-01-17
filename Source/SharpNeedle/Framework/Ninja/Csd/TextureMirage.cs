@@ -33,7 +33,7 @@ public class TextureMirage : IBinarySerializable, ITexture
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
         }
 
-        writer.Write(MemoryDataIndex);
+        writer.WriteInt32(MemoryDataIndex);
     }
 
     public override string ToString()

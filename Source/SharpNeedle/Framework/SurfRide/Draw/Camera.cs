@@ -33,7 +33,7 @@ public class Camera : IBinarySerializable<ChunkBinaryOptions>
             reader.Align(16);
             Target = reader.ReadVector3();
             reader.Align(16);
-            Field30 = reader.ReadInt32();
+            Field30 = reader.ReadInt64();
         }
         else
         {
@@ -61,27 +61,27 @@ public class Camera : IBinarySerializable<ChunkBinaryOptions>
             }
 
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-            writer.Write(ID);
+            writer.WriteInt32(ID);
         }
 
         if (options.Version >= 4)
         {
             writer.Align(16);
-            writer.Write(Position);
+            writer.WriteVector3(Position);
             writer.Align(16);
-            writer.Write(Target);
+            writer.WriteVector3(Target);
             writer.Align(16);
-            writer.Write(Field30);
+            writer.WriteInt64(Field30);
         }
         else
         {
-            writer.Write(Position);
-            writer.Write(Target);
+            writer.WriteVector3(Position);
+            writer.WriteVector3(Target);
         }
 
-        writer.Write(FieldOfView);
-        writer.Write(NearPlane);
-        writer.Write(FarPlane);
+        writer.WriteUInt32(FieldOfView);
+        writer.WriteSingle(NearPlane);
+        writer.WriteSingle(FarPlane);
         if (options.Version >= 1)
         {
             writer.WriteOffsetValue(Field48);

@@ -46,7 +46,7 @@ public class Scene : IBinarySerializable<ChunkBinaryOptions>
         }
 
         Cameras.AddRange(reader.ReadObjectArrayOffset<Camera, ChunkBinaryOptions>(options, camCount));
-        BackgroundColor = reader.Read<Color<byte>>();
+        BackgroundColor = reader.ReadObject<Color<byte>>();
         Resolution = reader.ReadVector2();
         if (options.Version >= 3)
         {
@@ -68,14 +68,14 @@ public class Scene : IBinarySerializable<ChunkBinaryOptions>
         }
 
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(ID);
-        writer.Write(Flags);
+        writer.WriteInt32(ID);
+        writer.WriteUInt32(Flags);
         if (options.Version >= 4)
         {
-            writer.Write(Field10);
+            writer.WriteUInt32(Field10);
         }
 
-        writer.Write(Layers.Count);
+        writer.WriteInt32(Layers.Count);
         if (Layers.Count != 0)
         {
             writer.WriteObjectCollectionOffset(options, Layers);
@@ -85,8 +85,8 @@ public class Scene : IBinarySerializable<ChunkBinaryOptions>
             writer.WriteOffsetValue(0);
         }
 
-        writer.Write((short)Cameras.Count);
-        writer.Write(CurrentCameraIndex);
+        writer.WriteInt16((short)Cameras.Count);
+        writer.WriteInt16(CurrentCameraIndex);
         if (options.Version >= 3)
         {
             writer.Align(8);
@@ -114,8 +114,8 @@ public class Scene : IBinarySerializable<ChunkBinaryOptions>
             writer.WriteOffsetValue(0);
         }
 
-        writer.Write(BackgroundColor);
-        writer.Write(Resolution);
+        writer.WriteObject(BackgroundColor);
+        writer.WriteVector2(Resolution);
         if (options.Version >= 3)
         {
             writer.Align(8);

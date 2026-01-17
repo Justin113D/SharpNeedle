@@ -19,11 +19,11 @@ public class TextureListChunk : List<TextureList>, IChunk
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions options)
     {
         writer.WriteLittle(Signature);
-        writer.Write(0); // Size
+        writer.WriteInt32(0); // Size
 
         SeekToken start = writer.At();
-        writer.Write(0x10); // List Offset, untracked
-        writer.Write(Count);
+        writer.WriteInt32(0x10); // List Offset, untracked
+        writer.WriteInt32(Count);
 
         writer.WriteObjectCollection(options, this);
 
@@ -33,7 +33,7 @@ public class TextureListChunk : List<TextureList>, IChunk
 
         long size = (long)end - (long)start;
         writer.At((long)start - sizeof(int), SeekOrigin.Begin);
-        writer.Write((int)size);
+        writer.WriteInt32((int)size);
 
         end.Dispose();
     }
@@ -95,10 +95,10 @@ public class TextureList : List<Texture>, IBinarySerializable<ChunkBinaryOptions
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
         if (options.Version >= 4)
         {
-            writer.Write(Field08);
+            writer.WriteUInt32(Field08);
         }
 
-        writer.Write(Count);
+        writer.WriteInt32(Count);
         writer.WriteObjectCollectionOffset(options, this);
         if (UserData != null)
         {
@@ -111,7 +111,7 @@ public class TextureList : List<Texture>, IBinarySerializable<ChunkBinaryOptions
 
         if (options.Version == 0)
         {
-            writer.Write(Field14);
+            writer.WriteUInt32(Field14);
         }
     }
 

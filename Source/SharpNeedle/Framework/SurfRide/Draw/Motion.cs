@@ -19,8 +19,8 @@ public class Motion : IBinarySerializable<ChunkBinaryOptions>
 
     public void Write(BinaryObjectWriter writer, ChunkBinaryOptions options)
     {
-        writer.Write(CastID);
-        writer.Write((ushort)Tracks.Count);
+        writer.WriteUInt16(CastID);
+        writer.WriteUInt16((ushort)Tracks.Count);
         if (options.Version >= 3)
         {
             writer.Align(8);

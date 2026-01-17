@@ -8,10 +8,6 @@ public class TimescaleParam : BaseParam
     public int Field0C { get; set; }
 
     public TimescaleParam() { }
-    public TimescaleParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -23,10 +19,10 @@ public class TimescaleParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Scale);
-        writer.Write(Field08);
-        writer.Write(Field0C);
+        writer.WriteInt32(Field00);
+        writer.WriteSingle(Scale);
+        writer.WriteInt32(Field08);
+        writer.WriteInt32(Field0C);
     }
 
     public override int GetTypeID(GameType game)

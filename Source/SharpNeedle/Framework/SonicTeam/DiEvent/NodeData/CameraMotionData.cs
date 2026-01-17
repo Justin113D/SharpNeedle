@@ -8,10 +8,6 @@ public class CameraMotionData : BaseNodeData
     public int Field0C { get; set; }
 
     public CameraMotionData() { }
-    public CameraMotionData(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -23,9 +19,9 @@ public class CameraMotionData : BaseNodeData
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
-        writer.Write(Field0C);
+        writer.WriteInt32(Field00);
+        writer.WriteInt32(Field04);
+        writer.WriteInt32(Field08);
+        writer.WriteInt32(Field0C);
     }
 }

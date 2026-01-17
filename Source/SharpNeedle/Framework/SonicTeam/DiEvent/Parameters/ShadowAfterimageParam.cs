@@ -15,14 +15,10 @@ public class ShadowAfterimageParam : BaseParam
     public int Field2C { get; set; }
 
     public ShadowAfterimageParam() { }
-    public ShadowAfterimageParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
-        Color = reader.Read<Color<int>>();
+        Color = reader.ReadObject<Color<int>>();
         Field10 = reader.ReadInt32();
         Field14 = reader.ReadInt32();
         Field18 = reader.ReadInt32();
@@ -35,15 +31,15 @@ public class ShadowAfterimageParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Color);
-        writer.Write(Field10);
-        writer.Write(Field14);
-        writer.Write(Field18);
-        writer.Write(Field1C);
-        writer.Write(Field20);
-        writer.Write(Field24);
-        writer.Write(Field28);
-        writer.Write(Field2C);
+        writer.WriteObject(Color);
+        writer.WriteInt32(Field10);
+        writer.WriteInt32(Field14);
+        writer.WriteInt32(Field18);
+        writer.WriteInt32(Field1C);
+        writer.WriteInt32(Field20);
+        writer.WriteSingle(Field24);
+        writer.WriteSingle(Field28);
+        writer.WriteInt32(Field2C);
     }
 
     public override int GetTypeID(GameType game)

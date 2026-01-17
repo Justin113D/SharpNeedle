@@ -52,8 +52,8 @@ public class SplinePath : BinaryResource
 
     public override void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Signature);
-        writer.Write(Version);
+        writer.WriteUInt32(Signature);
+        writer.WriteUInt32(Version);
 
         writer.WriteOffsetValue(Paths.Count);
 
@@ -64,12 +64,12 @@ public class SplinePath : BinaryResource
                 for (int i = 0; i < Paths.Count; i++)
                 {
                     writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Paths[i].Name);
-                    writer.Write(i);
+                    writer.WriteInt32(i);
                 }
             });
         }
 
-        writer.Write(Paths.Count);
+        writer.WriteInt32(Paths.Count);
 
         if (Paths.Count != 0)
         {
@@ -134,7 +134,7 @@ public class SplinePath : BinaryResource
 
             foreach (List<PathObject> list in paths)
             {
-                writer.Write(list.Count);
+                writer.WriteInt32(list.Count);
                 if (list.Count != 0)
                 {
                     writer.WriteOffset(() =>
@@ -216,7 +216,7 @@ public class PathObject : IBinarySerializable<uint>
 
             if (doubleKnotCount != 0)
             {
-                DoubleKnots.AddRange(reader.ReadArrayOffset<DoubleKnot>(doubleKnotCount));
+                DoubleKnots.AddRange(reader.ReadObjectArrayOffset<DoubleKnot>(doubleKnotCount));
             }
             else
             {
@@ -248,9 +248,9 @@ public class PathObject : IBinarySerializable<uint>
                     }
                 });
                 KnotDistances.AddRange(reader.ReadArrayOffset<float>(knotCount));
-                Knots.AddRange(reader.ReadArrayOffset<Vector3>(knotCount));
-                KnotTangentIns.AddRange(reader.ReadArrayOffset<Vector3>(knotCount));
-                KnotTangentOuts.AddRange(reader.ReadArrayOffset<Vector3>(knotCount));
+                reader.ReadOffset(() => Knots.AddRange(reader.ReadVector3Array(knotCount)));
+                reader.ReadOffset(() => KnotTangentIns.AddRange(reader.ReadVector3Array(knotCount)));
+                reader.ReadOffset(() => KnotTangentOuts.AddRange(reader.ReadVector3Array(knotCount)));
             }
             else
             {
@@ -266,14 +266,14 @@ public class PathObject : IBinarySerializable<uint>
 
             if (doubleKnotCount != 0)
             {
-                DoubleKnots.AddRange(reader.ReadArrayOffset<DoubleKnot>(doubleKnotCount));
+                DoubleKnots.AddRange(reader.ReadObjectArrayOffset<DoubleKnot>(doubleKnotCount));
             }
             else
             {
                 reader.Skip(reader.OffsetBinaryFormat == OffsetBinaryFormat.U32 ? 4 : 8);
             }
 
-            Bounds = reader.Read<AABB>();
+            Bounds = reader.ReadObject<AABB>();
 
             int userDataCount = reader.ReadInt32();
 
@@ -303,12 +303,12 @@ public class PathObject : IBinarySerializable<uint>
 
         if (version == 1)
         {
-            writer.Write(0); // Always 0?
-            writer.Write(1); // Always 1?
+            writer.WriteInt32(0); // Always 0?
+            writer.WriteInt32(1); // Always 1?
 
-            writer.Write(Distance);
+            writer.WriteSingle(Distance);
 
-            writer.Write(Knots.Count);
+            writer.WriteInt32(Knots.Count);
 
             writer.Align(writer.GetOffsetSize());
 
@@ -318,12 +318,12 @@ public class PathObject : IBinarySerializable<uint>
                 {
                     for (int i = 0; i < Knots.Count; i++)
                     {
-                        writer.Write(KnotDistances[i]);
-                        writer.Write(KnotFlags[i]);
-                        writer.Write(Knots[i]);
-                        writer.Write(KnotTangentIns[i]);
-                        writer.Write(KnotTangentOuts[i]);
-                        writer.Write(KnotField2Cs[i]);
+                        writer.WriteSingle(KnotDistances[i]);
+                        writer.WriteInt32(KnotFlags[i]);
+                        writer.WriteVector3(Knots[i]);
+                        writer.WriteVector3(KnotTangentIns[i]);
+                        writer.WriteVector3(KnotTangentOuts[i]);
+                        writer.WriteSingle(KnotField2Cs[i]);
                     }
                 });
             }
@@ -332,7 +332,7 @@ public class PathObject : IBinarySerializable<uint>
                 writer.WriteOffsetValue(0);
             }
 
-            writer.Write(DoubleKnots.Count * 2);
+            writer.WriteInt32(DoubleKnots.Count * 2);
 
             writer.Align(writer.GetOffsetSize());
 
@@ -347,12 +347,12 @@ public class PathObject : IBinarySerializable<uint>
         }
         else
         {
-            writer.Write(Field04);
-            writer.Write((byte)0);
+            writer.WriteInt32(Field04);
+            writer.WriteByte(0);
 
-            writer.Write((short)Knots.Count);
+            writer.WriteInt16((short)Knots.Count);
 
-            writer.Write(Distance);
+            writer.WriteSingle(Distance);
 
             writer.Align(writer.GetOffsetSize());
 
@@ -362,13 +362,13 @@ public class PathObject : IBinarySerializable<uint>
                 {
                     for (int i = 0; i < Knots.Count; i++)
                     {
-                        writer.Write((byte)KnotFlags[i]);
+                        writer.WriteByte((byte)KnotFlags[i]);
                     }
                 });
                 writer.WriteArrayOffset(KnotDistances.ToArray());
-                writer.WriteArrayOffset(Knots.ToArray());
-                writer.WriteArrayOffset(KnotTangentIns.ToArray());
-                writer.WriteArrayOffset(KnotTangentOuts.ToArray());
+                writer.WriteOffset(() => writer.WriteVector3Array(Knots.ToArray()));
+                writer.WriteOffset(() => writer.WriteVector3Array(KnotTangentIns.ToArray()));
+                writer.WriteOffset(() => writer.WriteVector3Array(KnotTangentOuts.ToArray()));
             }
             else
             {
@@ -390,7 +390,7 @@ public class PathObject : IBinarySerializable<uint>
                 writer.WriteOffsetValue(0);
             }
 
-            writer.Write(Bounds);
+            writer.WriteObject(Bounds);
             writer.WriteOffsetValue(UserDatas.Count);
 
             if (UserDatas.Count != 0)
@@ -418,10 +418,22 @@ public class PathObject : IBinarySerializable<uint>
         return Name ?? string.Empty;
     }
 
-    public struct DoubleKnot
+    public struct DoubleKnot : IBinarySerializable
     {
         public Vector3 Left { get; set; }
         public Vector3 Right { get; set; }
+
+        public void Read(BinaryObjectReader reader)
+        {
+            Left = reader.ReadVector3();
+            Right = reader.ReadVector3();
+        }
+
+        public void Write(BinaryObjectWriter writer)
+        {
+            writer.WriteVector3(Left);
+            writer.WriteVector3(Right);
+        }
     }
 
     public class UserData : IBinarySerializable
@@ -451,7 +463,7 @@ public class PathObject : IBinarySerializable<uint>
 
             Name = reader.ReadStringOffset();
 
-            Type = reader.Read<DataType>();
+            Type = (DataType)reader.ReadByte();
             reader.Align(reader.GetOffsetSize());
 
             if (reader.OffsetBinaryFormat == OffsetBinaryFormat.U64)
@@ -480,18 +492,18 @@ public class PathObject : IBinarySerializable<uint>
             writer.Align(writer.GetOffsetSize());
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
 
-            writer.Write(Type);
+            writer.WriteByte((byte)Type);
             writer.Align(writer.GetOffsetSize());
 
             switch (Type)
             {
                 case DataType.Integer:
                 case DataType.Float:
-                    writer.Write(Value);
+                    writer.WriteUInt32(Value);
 
                     if (writer.OffsetBinaryFormat == OffsetBinaryFormat.U64)
                     {
-                        writer.Write(0);
+                        writer.WriteInt32(0);
                     }
 
                     break;
@@ -533,8 +545,8 @@ public class PathObject : IBinarySerializable<uint>
 
             public readonly void Write(BinaryObjectWriter writer)
             {
-                writer.Write(Field00);
-                writer.Write(Field04);
+                writer.WriteSingle(Field00);
+                writer.WriteSingle(Field04);
             }
         }
 
@@ -551,8 +563,8 @@ public class PathObject : IBinarySerializable<uint>
 
             public readonly void Write(BinaryObjectWriter writer)
             {
-                writer.Write(Field00);
-                writer.Write(Field04);
+                writer.WriteInt32(Field00);
+                writer.WriteInt32(Field04);
             }
         }
 
@@ -578,7 +590,7 @@ public class PathObject : IBinarySerializable<uint>
 
         public void Write(BinaryObjectWriter writer)
         {
-            writer.Write(Field00);
+            writer.WriteInt32(Field00);
 
             writer.WriteOffsetValue(SubUnknown1s.Count);
 

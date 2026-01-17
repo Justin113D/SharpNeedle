@@ -16,10 +16,6 @@ public class EffectParam : BaseParam
     public float[] AnimationData { get; set; } = new float[128];
 
     public EffectParam() { }
-    public EffectParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -39,17 +35,17 @@ public class EffectParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(LocalTransform);
-        writer.Write(Field40);
+        writer.WriteMatrix4x4(LocalTransform);
+        writer.WriteInt32(Field40);
         writer.WriteDiString(Name);
-        writer.Write(Field84);
-        writer.Write(Field88);
-        writer.Write(Field8C);
-        writer.Write(Field90);
-        writer.Write(Field94);
-        writer.Write(Field98);
-        writer.Write(Field9C);
-        writer.Write(FieldA0);
+        writer.WriteInt32(Field84);
+        writer.WriteInt32(Field88);
+        writer.WriteInt32(Field8C);
+        writer.WriteInt32(Field90);
+        writer.WriteInt32(Field94);
+        writer.WriteInt32(Field98);
+        writer.WriteInt32(Field9C);
+        writer.WriteInt32(FieldA0);
         writer.WriteArrayFixedLength(AnimationData, 128);
     }
 

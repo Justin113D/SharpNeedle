@@ -48,51 +48,67 @@ public class MaterialParameter<T> : IBinarySerializable where T : unmanaged
         if (valueCount != 0)
         {
             using SeekToken token = reader.ReadOffset();
-            for (byte i = 0; i < valueCount; i++)
+            switch (Values)
             {
-                // Handle booleans
-                if (typeof(T) == typeof(bool))
-                {
-                    Unsafe.As<List<bool>>(Values)!.Add(reader.ReadInt32() != 0);
-                }
-                else if(typeof(T) == typeof(Vector4))
-                {
-                    Unsafe.As<List<Vector4>>(Values)!.Add(reader.ReadVector4());
-                }
-                else if (typeof(T) == typeof(Vector4Int))
-                {
-                    Unsafe.As<List<Vector4Int>>(Values)!.Add(reader.ReadObject<Vector4Int>());
-                }
-                else
-                {
-                    Values!.Add(reader.Read<T>());
-                }
+                case List<bool> booleanValues:
+                    for (int i = 0; i < valueCount; i++)
+                    {
+                        booleanValues.Add(reader.ReadInt32() != 0);
+                    }
+                    break;
+                case List<Vector3> vector3Values:
+                    for (int i = 0; i < valueCount; i++)
+                    {
+                        vector3Values.Add(reader.ReadVector3());
+                    }
+                    break;
+                case List<Vector4Int> vector4IntValues:
+                    for (int i = 0; i < valueCount; i++)
+                    {
+                        vector4IntValues.Add(reader.ReadObject<Vector4Int>());
+                    }
+                    break;
+
+                default:
+                    throw new NotSupportedException($"Type {typeof(T)} is not a valid material parameter type!");
             }
         }
     }
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write((byte)(typeof(T) == typeof(bool) ? 0 : 2));
-        writer.Write((byte)0);
-        writer.Write((byte)Values.Count);
-        writer.Write((byte)0);
+        writer.WriteByte((byte)(typeof(T) == typeof(bool) ? 0 : 2));
+        writer.WriteByte(0);
+        writer.WriteByte((byte)Values.Count);
+        writer.WriteByte(0);
 
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        if (typeof(T) != typeof(bool))
+        writer.WriteOffset(() =>
         {
-            writer.WriteCollectionOffset(Values, 4);
-        }
-        else
-        {
-            List<bool> values = Unsafe.As<List<bool>>(Values);
-            writer.WriteOffset(() =>
+            switch (Values)
             {
-                foreach (bool value in values!)
-                {
-                    writer.Write(value ? 1 : 0);
-                }
-            });
-        }
+                case List<bool> booleanValues:
+                    foreach (bool value in booleanValues)
+                    {
+                        writer.WriteInt32(value ? 1 : 0);
+                    }
+                    break;
+                case List<Vector3> vector3Values:
+                    foreach (Vector3 value in vector3Values)
+                    {
+                        writer.WriteVector3(value);
+                    }
+                    break;
+                case List<Vector4Int> vector4IntValues:
+                    foreach (Vector4Int value in vector4IntValues)
+                    {
+                        writer.WriteObject(value);
+                    }
+                    break;
+                default:
+                    throw new NotSupportedException($"Type {typeof(T)} is not a valid material parameter type!");
+            }
+
+        });
     }
 }

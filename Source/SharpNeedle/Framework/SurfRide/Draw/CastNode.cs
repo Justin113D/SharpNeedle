@@ -53,8 +53,8 @@ public class CastNode : IBinarySerializable<ChunkBinaryOptions>
         }
 
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(ID);
-        writer.Write(Flags);
+        writer.WriteInt32(ID);
+        writer.WriteUInt32(Flags);
         if (Data != null)
         {
             writer.WriteObjectOffset(Data, options);
@@ -64,8 +64,8 @@ public class CastNode : IBinarySerializable<ChunkBinaryOptions>
             writer.WriteOffsetValue(0);
         }
 
-        writer.Write(ChildIndex);
-        writer.Write(SiblingIndex);
+        writer.WriteInt16(ChildIndex);
+        writer.WriteInt16(SiblingIndex);
         if (options.Version >= 3)
         {
             writer.Align(8);

@@ -31,12 +31,12 @@ public class TextureNN : ITexture, IBinarySerializable
 
     public void Write(BinaryObjectWriter writer)
     {
-        writer.Write(Field00);
+        writer.WriteUInt32(Field00);
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-        writer.Write(Field08);
-        writer.Write(Field0A);
-        writer.Write(Field0C);
-        writer.Write(Field10);
+        writer.WriteUInt16(Field08);
+        writer.WriteUInt16(Field0A);
+        writer.WriteUInt32(Field0C);
+        writer.WriteUInt32(Field10);
     }
 
     public override string ToString()

@@ -65,16 +65,16 @@ public class DataChunk<T> : DataChunk, IChunk where T : IBinarySerializable
 
         writer.WriteNative(Signature);
 
-        writer.Write((int)(baseSize + table.Length + 0x34)); // Size
-        writer.Write((int)baseSize); // String Table
-        writer.Write(0); // String Table Size
-        writer.Write(table.Length); // Offset Table Size
+        writer.WriteInt32((int)(baseSize + table.Length + 0x34)); // Size
+        writer.WriteInt32((int)baseSize); // String Table
+        writer.WriteInt32(0); // String Table Size
+        writer.WriteInt32(table.Length); // Offset Table Size
 
-        writer.Write((short)0x18);
-        writer.Write((short)0x00);
+        writer.WriteInt16(0x18);
+        writer.WriteInt16(0x00);
 
         // Reserved
-        writer.WriteCollection(Enumerable.Repeat<long>(0, 3));
+        writer.Skip(24);
 
         // Slice the buffer because the capacity can be bigger
         writer.WriteArray(dataStream.GetBuffer().AsSpan()[..(int)dataStream.Length]);

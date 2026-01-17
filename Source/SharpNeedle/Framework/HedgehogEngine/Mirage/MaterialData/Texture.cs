@@ -19,8 +19,8 @@ public class Texture : SampleChunkResource
     {
         PictureName = reader.ReadStringOffset();
         TexCoordIndex = reader.ReadByte();
-        WrapModeU = reader.Read<WrapMode>();
-        WrapModeV = reader.Read<WrapMode>();
+        WrapModeU = (WrapMode)reader.ReadByte();
+        WrapModeV = (WrapMode)reader.ReadByte();
         reader.Skip(1); // Padding
         Type = reader.ReadStringOffset();
     }
@@ -28,9 +28,9 @@ public class Texture : SampleChunkResource
     public override void Write(BinaryObjectWriter writer)
     {
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, PictureName);
-        writer.Write(TexCoordIndex);
-        writer.Write(WrapModeU);
-        writer.Write(WrapModeV);
+        writer.WriteByte(TexCoordIndex);
+        writer.WriteByte((byte)WrapModeU);
+        writer.WriteByte((byte)WrapModeV);
         writer.Align(4);
         writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Type);
     }

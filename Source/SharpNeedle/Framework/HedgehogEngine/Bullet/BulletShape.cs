@@ -48,7 +48,7 @@ public class BulletShape : IBinarySerializable<int>
             Unknown2 = reader.ReadUInt32();
         }
 
-        Vertices = reader.ReadArrayOffset<Vector3>((int)vertexCount);
+        reader.ReadOffset(() => Vertices = reader.ReadVector3Array((int)vertexCount));
 
         if (IsConvex)
         {
@@ -125,7 +125,7 @@ public class BulletShape : IBinarySerializable<int>
             writer.WriteUInt32(Unknown2);
         }
 
-        writer.WriteArrayOffset(Vertices, 0x10);
+        writer.WriteOffset(() => writer.WriteVector3Array(Vertices), 0x10);
 
         if (IsConvex)
         {

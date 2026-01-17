@@ -35,9 +35,9 @@ public class ReferenceCastData : ICastData
         }
 
         writer.WriteObjectOffset(Layer, options);
-        writer.Write(Field04);
-        writer.Write(AnimationID);
-        writer.Write(AnimationFrame);
-        writer.Write(Field10);
+        writer.WriteInt32(Field04);
+        writer.WriteInt32(AnimationID);
+        writer.WriteInt32(AnimationFrame);
+        writer.WriteInt32(Field10);
     }
 }

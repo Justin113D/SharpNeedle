@@ -13,10 +13,6 @@ public class CameraExposureParam : BaseParam
     public float[] CurveData { get; set; } = new float[32];
 
     public CameraExposureParam() { }
-    public CameraExposureParam(BinaryObjectReader reader, GameType game)
-    {
-        Read(reader, game);
-    }
 
     public override void Read(BinaryObjectReader reader, GameType game)
     {
@@ -33,14 +29,14 @@ public class CameraExposureParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.Write(Field00);
-        writer.Write(Field04);
-        writer.Write(Field08);
-        writer.Write(Field0C);
-        writer.Write(Field10);
-        writer.Write(Field14);
-        writer.Write(Field18);
-        writer.Write(Field1C);
+        writer.WriteUInt32(Field00);
+        writer.WriteSingle(Field04);
+        writer.WriteUInt32(Field08);
+        writer.WriteUInt32(Field0C);
+        writer.WriteUInt32(Field10);
+        writer.WriteUInt32(Field14);
+        writer.WriteUInt32(Field18);
+        writer.WriteUInt32(Field1C);
         writer.WriteArrayFixedLength(CurveData, 32);
     }
 

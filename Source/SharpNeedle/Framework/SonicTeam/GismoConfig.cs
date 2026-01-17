@@ -39,9 +39,9 @@ public class GismoConfig : BinaryResource
                 writer.WriteNative(Signature));
         }
 
-        writer.Write(Version);
+        writer.WriteUInt32(Version);
 
-        writer.Write(Objects.Count);
+        writer.WriteInt32(Objects.Count);
         writer.WriteObjectCollectionOffset(base.Version.IsV1, Objects);
     }
 
@@ -116,7 +116,7 @@ public class GismoConfig : BinaryResource
             {
                 ModelName = reader.ReadStringOffset();
                 SkeletonName = reader.ReadStringOffset();
-                ShapeType = reader.Read<ShapeType>();
+                ShapeType = (ShapeType)reader.ReadByte();
                 CollisionRadius = reader.ReadSingle();
                 CollisionHeight = reader.ReadSingle();
 
@@ -133,42 +133,47 @@ public class GismoConfig : BinaryResource
 
             if (isV1)
             {
-                writer.Write(Field00);
-                writer.Write(Field04);
-                writer.Write(Field08);
-                writer.Write(Field0A);
-                writer.Write(Field0C);
+                writer.WriteInt32(Field00);
+                writer.WriteInt32(Field04);
+                writer.WriteInt16(Field08);
+                writer.WriteInt16(Field0A);
+                writer.WriteInt16(Field0C);
 
-                writer.Write((byte)ShapeType);
+                writer.WriteByte((byte)ShapeType);
 
-                writer.Write(Field0F);
-                writer.Write(Field10);
-                writer.Write(Field14);
-                writer.Write(Field18);
-                writer.Write(Field1C);
-                writer.Write(Field20);
-                writer.Write(Field24);
-                writer.Write(Field28);
+                writer.WriteByte(Field0F);
+                writer.WriteInt32(Field10);
+                writer.WriteInt32(Field14);
+                writer.WriteInt32(Field18);
+                writer.WriteInt32(Field1C);
+                writer.WriteSingle(Field20);
+                writer.WriteSingle(Field24);
+                writer.WriteSingle(Field28);
 
-                writer.Write(Size); // TODO: Unpack writing all 3 float values at once into individual reads based on ShapeType
+                writer.WriteVector3(Size); // TODO: Unpack writing all 3 float values at once into individual reads based on ShapeType
 
-                writer.Write(Field38);
+                writer.WriteInt32(Field38);
             }
 
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, Name);
-            writer.WriteStringOffset(StringBinaryFormat.NullTerminated, ModelName);
-            writer.WriteStringOffset(StringBinaryFormat.NullTerminated, SkeletonName);
 
-            if (!isV1)
+            if (isV1)
             {
-                writer.Write(ShapeType);
-                writer.Write(CollisionRadius);
-                writer.Write(CollisionHeight);
+                writer.WriteStringOffset(StringBinaryFormat.NullTerminated, ParticleName);
+                writer.WriteStringOffset(StringBinaryFormat.NullTerminated, SoundCueName);
+            }
+            else
+            {
+                writer.WriteStringOffset(StringBinaryFormat.NullTerminated, ModelName);
+                writer.WriteStringOffset(StringBinaryFormat.NullTerminated, SkeletonName);
+                writer.WriteByte((byte)ShapeType);
+                writer.WriteSingle(CollisionRadius);
+                writer.WriteSingle(CollisionHeight);
 
-                writer.Write(Convert.ToInt32(IsMotionOn));
+                writer.WriteInt32(Convert.ToInt32(IsMotionOn));
                 writer.WriteObjectOffset(Motion);
 
-                writer.Write(Convert.ToInt32(IsProgramMotionOn));
+                writer.WriteInt32(Convert.ToInt32(IsProgramMotionOn));
                 writer.WriteObjectOffset(ProgramMotion);
             }
         }
@@ -181,13 +186,13 @@ public class GismoConfig : BinaryResource
 
         public void Read(BinaryObjectReader reader)
         {
-            PlayPolicy = reader.Read<PlayPolicy>();
+            PlayPolicy = (PlayPolicy)reader.ReadInt32();
             AnimationName = reader.ReadStringOffset();
         }
 
         public void Write(BinaryObjectWriter writer)
         {
-            writer.Write(PlayPolicy);
+            writer.WriteInt32((int)PlayPolicy);
             writer.WriteStringOffset(StringBinaryFormat.NullTerminated, AnimationName);
         }
     }
@@ -205,7 +210,7 @@ public class GismoConfig : BinaryResource
         {
             Field00 = reader.ReadInt32();
 
-            MotionType = reader.Read<MotionType>();
+            MotionType = (MotionType)reader.ReadInt32();
 
             Axis = reader.ReadVector3();
 
@@ -216,15 +221,15 @@ public class GismoConfig : BinaryResource
 
         public void Write(BinaryObjectWriter writer)
         {
-            writer.Write(Field00);
+            writer.WriteInt32(Field00);
 
-            writer.Write(MotionType);
+            writer.WriteInt32((int)MotionType);
 
-            writer.Write(Axis);
+            writer.WriteVector3(Axis);
 
-            writer.Write(Power);
-            writer.Write(SpeedScale);
-            writer.Write(Time);
+            writer.WriteSingle(Power);
+            writer.WriteSingle(SpeedScale);
+            writer.WriteSingle(Time);
         }
     }
 }
