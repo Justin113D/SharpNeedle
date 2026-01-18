@@ -4,10 +4,10 @@ using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-[JsonConverter(typeof(JsonConverter))]
+[JsonConverter(typeof(SampleChunkNode.JsonConverter))]
 public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
 {
-    private class JsonConverter : JsonConverter<SampleChunkNode>
+    public class JsonConverter : JsonConverter<SampleChunkNode>
     {
         public override SampleChunkNode? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
