@@ -56,10 +56,10 @@ public class MaterialParameter<T> : IBinarySerializable where T : unmanaged
                         booleanValues.Add(reader.ReadInt32() != 0);
                     }
                     break;
-                case List<Vector3> vector3Values:
+                case List<Vector4> vector4Values:
                     for (int i = 0; i < valueCount; i++)
                     {
-                        vector3Values.Add(reader.ReadVector3());
+                        vector4Values.Add(reader.ReadVector4());
                     }
                     break;
                 case List<Vector4Int> vector4IntValues:
@@ -93,10 +93,10 @@ public class MaterialParameter<T> : IBinarySerializable where T : unmanaged
                         writer.WriteInt32(value ? 1 : 0);
                     }
                     break;
-                case List<Vector3> vector3Values:
-                    foreach (Vector3 value in vector3Values)
+                case List<Vector4> vector4Values:
+                    foreach (Vector4 value in vector4Values)
                     {
-                        writer.WriteVector3(value);
+                        writer.WriteVector4(value);
                     }
                     break;
                 case List<Vector4Int> vector4IntValues:
