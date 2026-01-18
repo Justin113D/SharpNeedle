@@ -128,7 +128,7 @@ public class EmitterParameter : IBinarySerializable<EffectParameter>
         writer.WriteInt32(Field78);
         writer.WriteInt32(Field7C);
 
-        writer.Write(ShapeParameter);
+        writer.WriteObject(ShapeParameter);
 
         writer.WriteInt32(Field94);
         writer.WriteInt32(Field98);

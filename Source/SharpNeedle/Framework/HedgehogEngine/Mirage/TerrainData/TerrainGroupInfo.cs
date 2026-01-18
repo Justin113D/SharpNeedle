@@ -17,7 +17,7 @@ public class TerrainGroupInfo : IBinarySerializable
         Name = reader.ReadStringOffset();
         MemorySize = reader.ReadUInt32();
 
-        reader.Read(out int instancesCount);
+        int instancesCount = reader.ReadInt32();
         Instances = new List<Sphere>(instancesCount);
         reader.ReadOffset(() =>
         {

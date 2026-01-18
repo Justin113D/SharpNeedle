@@ -46,14 +46,14 @@ public class SliceCastData : IImageDataBase
 
         if (Surface.CropRefs.Capacity != 0)
         {
-            Surface.CropRefs.AddRange(reader.ReadArrayOffset<CropRef>(Surface.CropRefs.Capacity));
+            Surface.CropRefs.AddRange(reader.ReadObjectArrayOffset<CropRef>(Surface.CropRefs.Capacity));
         }
         else
         {
             reader.ReadOffsetValue();
         }
 
-        EffectType type = reader.Read<EffectType>();
+        EffectType type = (EffectType)reader.ReadInt32();
         if (options.Version >= 3)
         {
             reader.Align(8);
