@@ -76,6 +76,7 @@ public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
 
                 writer.WriteEndArray();
             }
+
             writer.WriteEndObject();
         }
     }
@@ -183,11 +184,8 @@ public class SampleChunkNode : IBinarySerializable, IEnumerable<SampleChunkNode>
     /// </summary>
     public void Detach()
     {
-        if (Parent != null)
-        {
-            Parent._children.Remove(this);
-            Parent = null;
-        }
+        Parent?._children.Remove(this);
+        Parent = null;
     }
 
     /// <summary>
