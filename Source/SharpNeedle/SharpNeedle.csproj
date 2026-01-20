@@ -11,7 +11,6 @@
 	<ItemGroup>
 		<PackageReference Include="Nerdbank.GitVersioning" Version="3.9.50" PrivateAssets="all" />
 		<PackageReference Include="Amicitia.IO" Version="1.2.1" />
-		<PackageReference Include="RhuBulletSharp" Version="1.2.5" />
 	</ItemGroup>
 
 </Project>
