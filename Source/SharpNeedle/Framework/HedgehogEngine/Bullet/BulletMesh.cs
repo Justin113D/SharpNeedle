@@ -3,7 +3,6 @@
 using Amicitia.IO.Binary;
 using SharpNeedle.Framework.BINA;
 using SharpNeedle.Utilities;
-using System.Net;
 
 [NeedleResource("hh/btmesh", ResourceType.Model, @"\.btmesh$")]
 public class BulletMesh : BinaryResource

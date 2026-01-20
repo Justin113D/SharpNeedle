@@ -167,38 +167,4 @@ public class BulletShape : IBinarySerializable<int>
             }, 0x10);
         }
     }
-
-    public unsafe void GenerateBVH()
-    {
-        if (Faces == null || Faces.Length == 0 || Vertices.Length == 0)
-        {
-            BVH = [];
-            return;
-        }
-
-        Vector3 aabbMin = new(float.PositiveInfinity);
-        Vector3 aabbMax = new(float.NegativeInfinity);
-
-        foreach (Vector3 vertex in Vertices)
-        {
-            aabbMin = Vector3.Min(vertex, aabbMin);
-            aabbMax = Vector3.Max(vertex, aabbMax);
-        }
-
-        BulletSharp.TriangleIndexVertexArray vertexArray = new(
-            (int[])(object)Faces,
-            Vertices
-        );
-
-        BulletSharp.OptimizedBvh bvhBuider = new();
-        bvhBuider.Build(vertexArray, true, aabbMin, aabbMax);
-
-        uint size = bvhBuider.CalculateSerializeBufferSize();
-        BVH = new byte[size];
-
-        fixed (byte* bvh = BVH)
-        {
-            bvhBuider.SerializeInPlace((nint)bvh, (uint)BVH.Length, false);
-        }
-    }
 }
