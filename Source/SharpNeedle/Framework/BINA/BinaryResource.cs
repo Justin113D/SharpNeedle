@@ -167,7 +167,7 @@ public abstract class BinaryResource : ResourceBase, IBinarySerializable
         SeekToken sizeToken = writer.At();
         writer.WriteInt32(0);
         writer.WriteInt16((short)Chunks.Count);
-        writer.WriteInt32(4);
+        writer.Align(4);
 
         ChunkParseOptions options = new()
         {
