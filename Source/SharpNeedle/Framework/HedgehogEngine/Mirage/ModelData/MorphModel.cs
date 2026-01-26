@@ -43,7 +43,7 @@ public class MorphModel : IBinarySerializable<uint>
             }
         });
 
-        MeshGroup = reader.ReadObject<MeshGroup, uint>(version);
+        MeshGroup = reader.ReadObject<MeshGroup, MeshSerializeContext>(new(version, true));
 
         byte[] vertexData = [];
 
@@ -106,7 +106,7 @@ public class MorphModel : IBinarySerializable<uint>
             }
         });
 
-        writer.WriteObject(MeshGroup, version);
+        writer.WriteObject(MeshGroup, new MeshSerializeContext(version, true));
     }
 
     public void ResolveDependencies(IResourceResolver dir)
