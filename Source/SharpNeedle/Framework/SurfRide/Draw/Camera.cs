@@ -7,7 +7,7 @@ public class Camera : IBinarySerializable<ChunkBinaryOptions>
     public uint FieldOfView { get; set; }
     public float NearPlane { get; set; }
     public float FarPlane { get; set; }
-    public long Field30 { get; set; }
+    public int Field30 { get; set; }
     public long Field48 { get; set; }
     public long Field50 { get; set; }
     public Vector3 Position { get; set; }
@@ -33,7 +33,7 @@ public class Camera : IBinarySerializable<ChunkBinaryOptions>
             reader.Align(16);
             Target = reader.ReadVector3();
             reader.Align(16);
-            Field30 = reader.ReadInt64();
+            Field30 = reader.ReadInt32();
         }
         else
         {
@@ -71,7 +71,7 @@ public class Camera : IBinarySerializable<ChunkBinaryOptions>
             writer.Align(16);
             writer.WriteVector3(Target);
             writer.Align(16);
-            writer.WriteInt64(Field30);
+            writer.WriteInt32(Field30);
         }
         else
         {
