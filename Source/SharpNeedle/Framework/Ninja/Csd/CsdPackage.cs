@@ -72,7 +72,7 @@ public class CsdPackage : ResourceBase, IBinarySerializable
     public void Write(BinaryObjectWriter writer)
     {
         writer.Endianness = Endianness;
-        writer.WriteNative(Signature);
+        writer.WriteUInt32(Signature);
         foreach (byte[] file in Files)
         {
             writer.WriteInt32(file.Length);

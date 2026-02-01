@@ -135,7 +135,7 @@ public class Particle : IBinarySerializable
         DeflectionScale = reader.ReadSingle();
         SoftScale = reader.ReadSingle();
         VelocityOffset = reader.ReadSingle();
-        UserData = reader.ReadInt32();
+        UserData = reader.ReadSingle();
 
         MaterialName = reader.ReadStringPaddedByte(4);
 
@@ -166,22 +166,22 @@ public class Particle : IBinarySerializable
 
         writer.WriteSingle(ZOffset);
         writer.WriteSingle(LocusDiff);
-        writer.WriteSingle(NumDivision);
+        writer.WriteInt32(NumDivision);
         writer.WriteInt32((int)LocusUVType);
-        writer.WriteSingle(IsBillboard ? 1 : 0);
-        writer.WriteSingle(IsEmitterLocal ? 1 : 0);
+        writer.WriteInt32(IsBillboard ? 1 : 0);
+        writer.WriteInt32(IsEmitterLocal ? 1 : 0);
 
         writer.WriteInt32((int)LayerType);
         writer.WriteInt32((int)PivotType);
         writer.WriteInt32((int)UVDescType);
 
         writer.WriteInt32((int)TextureIndexType);
-        writer.WriteSingle(TextureIndexChangeInterval);
-        writer.WriteSingle(TextureIndexChangeIntervalBias);
-        writer.WriteSingle(InitialTextureIndex);
+        writer.WriteInt32(TextureIndexChangeInterval);
+        writer.WriteInt32(TextureIndexChangeIntervalBias);
+        writer.WriteInt32(InitialTextureIndex);
 
         writer.WriteInt32((int)DirectionType);
-        writer.WriteSingle(ParticleDataFlags);
+        writer.WriteInt32(ParticleDataFlags);
 
         writer.WriteObject(Color);
 
@@ -202,7 +202,7 @@ public class Particle : IBinarySerializable
         writer.WriteVector4(UVScrollParamAlpha);
 
         writer.WriteStringPaddedByte(RefEffectName, 4);
-        writer.WriteSingle(RefEffectEmitTimingType);
+        writer.WriteInt32(RefEffectEmitTimingType);
         writer.WriteSingle(RefEffectDelayTime);
 
         writer.WriteSingle(DirectionalVelocityRatio);
@@ -212,12 +212,12 @@ public class Particle : IBinarySerializable
         writer.WriteSingle(UserData);
         writer.WriteStringPaddedByte(MaterialName, 4);
 
-        writer.WriteSingle(FieldU1);
-        writer.WriteSingle(FieldU2);
-        writer.WriteSingle(FieldU3);
-        writer.WriteSingle(FieldU4);
+        writer.WriteInt32(FieldU1);
+        writer.WriteInt32(FieldU2);
+        writer.WriteInt32(FieldU3);
+        writer.WriteInt32(FieldU4);
 
-        writer.WriteSingle(AnimCount);
+        writer.WriteInt32(AnimCount);
         if (AnimCount > 0)
         {
             writer.WriteObject(ParticleAnim);

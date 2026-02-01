@@ -167,14 +167,14 @@ public class Cast : IBinarySerializable<Family>, IList<Cast>
 
         if (family.Scene.Version >= 3)
         {
-            writer.WriteSingle(Width);
-            writer.WriteSingle(Height);
-            writer.WriteSingle(Field58);
-            writer.WriteSingle(Field5C);
+            writer.WriteUInt32(Width);
+            writer.WriteUInt32(Height);
+            writer.WriteUInt32(Field58);
+            writer.WriteUInt32(Field5C);
 
             writer.WriteVector2(Origin);
             writer.WriteVector2(Position);
-            writer.WriteSingle(Field70);
+            writer.WriteUInt32(Field70);
         }
     }
 

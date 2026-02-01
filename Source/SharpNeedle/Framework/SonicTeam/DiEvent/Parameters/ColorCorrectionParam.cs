@@ -29,14 +29,14 @@ public class ColorCorrectionParam : BaseParam
 
     public override void Write(BinaryObjectWriter writer, GameType game)
     {
-        writer.WriteSingle(Field00);
+        writer.WriteUInt32(Field00);
         writer.WriteSingle(Field04);
         writer.WriteSingle(Field08);
         writer.WriteSingle(Field0C);
         writer.WriteSingle(Field10);
-        writer.WriteSingle(Field14);
+        writer.WriteUInt32(Field14);
         writer.WriteSingle(Field18);
-        writer.WriteSingle(Field1C);
+        writer.WriteUInt32(Field1C);
         writer.WriteArrayFixedLength(CurveData, 32);
     }
 

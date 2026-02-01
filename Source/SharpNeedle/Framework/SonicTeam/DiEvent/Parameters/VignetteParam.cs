@@ -123,7 +123,7 @@ public class VignetteParam : BaseParam
         writer.WriteSingle(Field18);
         writer.WriteSingle(Field1C);
         writer.WriteSingle(Field20);
-        writer.WriteSingle(Field24);
+        writer.WriteInt32(Field24);
         writer.WriteSingle(Field28);
         writer.WriteSingle(Field2C);
         writer.WriteSingle(Field30);

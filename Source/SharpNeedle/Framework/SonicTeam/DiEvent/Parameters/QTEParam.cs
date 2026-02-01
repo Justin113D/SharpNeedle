@@ -51,8 +51,8 @@ public class QTEParam : BaseParam
         Field10 = reader.ReadSingle();
         Field14 = reader.ReadSingle();
         Field18 = reader.ReadSingle();
-        Field1C = reader.ReadInt32();
-        Field20 = reader.ReadInt32();
+        Field1C = reader.ReadSingle();
+        Field20 = reader.ReadSingle();
         Field24 = reader.ReadInt32();
         Field28 = reader.ReadInt32();
         Field2C = reader.ReadInt32();

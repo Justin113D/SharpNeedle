@@ -20,7 +20,7 @@ public struct VertexElement : IBinarySerializable
         Method = (VertexMethod)reader.ReadByte();
         Type = (VertexType)reader.ReadByte();
         UsageIndex = reader.ReadByte();
-        reader.Align(4);
+        reader.ReadByte();
     }
 
     public readonly void Write(BinaryObjectWriter writer)
@@ -31,7 +31,7 @@ public struct VertexElement : IBinarySerializable
         writer.WriteByte((byte)Method);
         writer.WriteByte((byte)Type);
         writer.WriteByte(UsageIndex);
-        writer.Align(4);
+        writer.WriteByte(0);
     }
 
     public static unsafe void SwapEndianness(VertexElement[] elements, Span<byte> vertices, nint count, nint size)

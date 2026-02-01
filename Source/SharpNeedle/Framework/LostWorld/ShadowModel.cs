@@ -70,13 +70,7 @@ public class ShadowMesh : IBinarySerializable
         writer.WriteArrayOffset(Indices, 16);
         writer.WriteInt32(0);
         writer.WriteInt32(Vertices.Length);
-
-        writer.WriteOffset(() =>
-        {
-            writer.WriteObjectCollection(Vertices);
-            writer.Align(16);
-        });
-
+        writer.WriteOffset(() => writer.WriteObjectCollection(Vertices), 16);
         writer.WriteInt32(0);
         writer.WriteInt32(Buffers.Count);
         writer.WriteOffset(() =>

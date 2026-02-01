@@ -252,7 +252,7 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
 
         writer.WriteSingle(LifeTime);
 
-        writer.WriteSingle(ZOffset);
+        writer.WriteInt32(ZOffset);
 
         writer.WriteInt32((int)DirectionType);
 
@@ -269,10 +269,10 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
         writer.WriteObject(MultiPurposeColor);
 
         writer.WriteObjectCollectionOffset(ColorTables);
-        writer.WriteSingle(ColorTables.Count);
+        writer.WriteInt32(ColorTables.Count);
 
         writer.WriteObjectCollectionOffset(ColorTable2s);
-        writer.WriteSingle(ColorTable2s.Count);
+        writer.WriteInt32(ColorTable2s.Count);
 
         writer.Align(16);
         writer.WriteVector3(InitialSize);
@@ -302,43 +302,43 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
 
         writer.WriteSingle(LocusInterval);
 
-        writer.WriteSingle(Field118);
-        writer.WriteSingle(Field11C);
-        writer.WriteSingle(Field120);
-        writer.WriteSingle(Field124);
-        writer.WriteSingle(Field128);
-        writer.WriteSingle(Field12C);
-        writer.WriteSingle(Field130);
-        writer.WriteSingle(Field134);
-        writer.WriteSingle(Field138);
-        writer.WriteSingle(Field13C);
+        writer.WriteInt32(Field118);
+        writer.WriteInt32(Field11C);
+        writer.WriteInt32(Field120);
+        writer.WriteInt32(Field124);
+        writer.WriteInt32(Field128);
+        writer.WriteInt32(Field12C);
+        writer.WriteInt32(Field130);
+        writer.WriteInt32(Field134);
+        writer.WriteInt32(Field138);
+        writer.WriteInt32(Field13C);
 
         writer.WriteInt32((int)TextureIndexType);
-        writer.WriteSingle(TextureIndex);
-        writer.WriteSingle(TextureIndexRangeStart);
-        writer.WriteSingle(TextureIndexRangeEnd);
+        writer.WriteInt32(TextureIndex);
+        writer.WriteInt32(TextureIndexRangeStart);
+        writer.WriteInt32(TextureIndexRangeEnd);
 
-        writer.WriteSingle(Field150);
-        writer.WriteSingle(Field154);
-        writer.WriteSingle(Field158);
-        writer.WriteSingle(Field15C);
-        writer.WriteSingle(Field160);
+        writer.WriteInt32(Field150);
+        writer.WriteInt32(Field154);
+        writer.WriteInt32(Field158);
+        writer.WriteInt32(Field15C);
+        writer.WriteInt32(Field160);
         writer.WriteSingle(Field164);
-        writer.WriteSingle(Field168);
-        writer.WriteSingle(Field16C);
-        writer.WriteSingle(Field170);
-        writer.WriteSingle(Field174);
-        writer.WriteSingle(Field178);
-        writer.WriteSingle(Field17C);
-        writer.WriteSingle(Field180);
-        writer.WriteSingle(Field184);
-        writer.WriteSingle(Field188);
-        writer.WriteSingle(Field18C);
-        writer.WriteSingle(Field190);
-        writer.WriteSingle(Field194);
-        writer.WriteSingle(Field198);
-        writer.WriteSingle(Field19C);
-        writer.WriteSingle(Field1A0);
+        writer.WriteInt32(Field168);
+        writer.WriteInt32(Field16C);
+        writer.WriteInt32(Field170);
+        writer.WriteInt32(Field174);
+        writer.WriteInt32(Field178);
+        writer.WriteInt32(Field17C);
+        writer.WriteInt32(Field180);
+        writer.WriteInt32(Field184);
+        writer.WriteInt32(Field188);
+        writer.WriteInt32(Field18C);
+        writer.WriteInt32(Field190);
+        writer.WriteInt32(Field194);
+        writer.WriteInt32(Field198);
+        writer.WriteInt32(Field19C);
+        writer.WriteInt32(Field1A0);
 
         if (Material != null)
         {
@@ -352,7 +352,7 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
         writer.WriteInt32((int)BlendMode);
         writer.WriteInt32((int)CompositeMode);
         writer.WriteInt32((int)SecondaryBlendMode);
-        writer.WriteSingle(SecondaryBlend);
+        writer.WriteInt32(SecondaryBlend);
         writer.WriteInt32((int)TextureAddressMode);
 
         if (ParticleType == EParticleType.Mesh && Mesh != null)
@@ -364,20 +364,20 @@ public class ParticleParameter : IBinarySerializable<EmitterParameter>
             writer.WriteOffsetValue(Field1BC);
         }
 
-        writer.WriteSingle(Field1C0);
-        writer.WriteSingle(Field1C4);
-        writer.WriteSingle(Field1C8);
+        writer.WriteInt32(Field1C0);
+        writer.WriteInt32(Field1C4);
+        writer.WriteInt32(Field1C8);
         writer.WriteSingle(Field1CC);
         writer.WriteSingle(Field1D0);
-        writer.WriteSingle(Field1D4);
+        writer.WriteInt32(Field1D4);
         writer.WriteSingle(Field1D8);
-        writer.WriteSingle(Field1DC);
-        writer.WriteSingle(Field1E0);
-        writer.WriteSingle(Field1E4);
-        writer.WriteSingle(Field1E8);
-        writer.WriteSingle(Field1EC);
+        writer.WriteInt32(Field1DC);
+        writer.WriteInt32(Field1E0);
+        writer.WriteInt32(Field1E4);
+        writer.WriteInt32(Field1E8);
+        writer.WriteInt32(Field1EC);
 
-        writer.WriteSingle(Flags);
+        writer.WriteInt32(Flags);
 
         foreach (AnimationParameter animation in Animations)
         {
